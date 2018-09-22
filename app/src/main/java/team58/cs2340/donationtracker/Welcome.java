@@ -14,7 +14,7 @@ public class Welcome extends AppCompatActivity {
     }
 
     public void onLoginOptionPressed(View view) {
-        //Intent intent = new Intent(this, Login.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
     }
 }
