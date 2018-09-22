@@ -15,20 +15,24 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
-    public void onLoginPressed(View view) {
-        view.clearFocus();
-        EditText username = findViewById(R.id.username);
-        EditText password = findViewById(R.id.password);
-        if (username.getText().toString().equals("user") &&
-                password.getText().toString().equals("pass")) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            Toast.makeText(getApplicationContext(), "Welcome",Toast.LENGTH_SHORT).show();
-        } else {
-            username.setText("");
-            password.setText("");
-            Toast.makeText(getApplicationContext(), "Check your username and password",Toast.LENGTH_LONG).show();
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.logauthBtn:
+                v.clearFocus();
+                EditText username = findViewById(R.id.username);
+                EditText password = findViewById(R.id.password);
+                if (username.getText().toString().equals("user") &&
+                        password.getText().toString().equals("pass")) {
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Welcome",Toast.LENGTH_SHORT).show();
+                } else {
+                    username.setText("");
+                    password.setText("");
+                    Toast.makeText(getApplicationContext(), "Username and/or password incorrect!",Toast.LENGTH_LONG).show();
+                }
+                break;
         }
-
     }
 }
