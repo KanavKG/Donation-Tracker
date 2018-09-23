@@ -20,8 +20,8 @@ public class Login extends AppCompatActivity {
         switch (id) {
             case R.id.logauthBtn:
                 v.clearFocus();
-                EditText username = findViewById(R.id.username);
-                EditText password = findViewById(R.id.password);
+                EditText username = findViewById(R.id.usernameField);
+                EditText password = findViewById(R.id.passwordField);
                 if (username.getText().toString().equals("user") &&
                         password.getText().toString().equals("pass")) {
                     Intent intent = new Intent(this, MainActivity.class);
