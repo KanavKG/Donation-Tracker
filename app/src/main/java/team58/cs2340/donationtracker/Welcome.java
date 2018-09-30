@@ -22,6 +22,8 @@ public class Welcome extends AppCompatActivity {
                 startActivity(loginIntent);
                 break;
             case R.id.signupBtn:
+                Intent registrationIntent = new Intent(this, Registration.class);
+                startActivity(registrationIntent);
                 Toast.makeText(Welcome.this, "Register", Toast.LENGTH_SHORT).show();
                 break;
         }
