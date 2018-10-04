@@ -24,6 +24,14 @@ public class User {
         this.role = Role.USER;
     }
 
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
     public boolean equals(Object other) {
         if (null == other) return false;
         if (this == other) return true;
