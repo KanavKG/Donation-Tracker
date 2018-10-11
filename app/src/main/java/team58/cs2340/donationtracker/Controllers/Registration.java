@@ -1,4 +1,4 @@
-package team58.cs2340.donationtracker;
+package team58.cs2340.donationtracker.Controllers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import team58.cs2340.donationtracker.Models.Model;
 import team58.cs2340.donationtracker.Models.User;
 import team58.cs2340.donationtracker.Models.Role;
+import team58.cs2340.donationtracker.R;
 
 public class Registration extends AppCompatActivity {
 
