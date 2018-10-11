@@ -1,12 +1,15 @@
 package team58.cs2340.donationtracker.Models;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Model {
     private static final Model ourInstance = new Model();
 
     private HashMap<String, User> users;
     private User currentUser;
+    private List<Location> locations;
 
     public static Model getInstance() {
         return ourInstance;
@@ -14,6 +17,7 @@ public class Model {
 
     private Model() {
         this.users = new HashMap<>(5);
+        this.locations = new ArrayList<>();
     }
 
     public User getCurrentUser() {
@@ -38,5 +42,13 @@ public class Model {
         } else {
             return false;
         }
+    }
+
+    public List<Location> getLocations() {
+        return this.locations;
+    }
+
+    public void addLocation(Location location) {
+        locations.add(location);
     }
 }
