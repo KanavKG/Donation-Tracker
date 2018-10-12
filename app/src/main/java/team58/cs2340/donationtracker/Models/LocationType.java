@@ -4,9 +4,9 @@ package team58.cs2340.donationtracker.Models;
  * This class represents various location types
  */
 public enum LocationType {
-    DROPOFF("drop off"),
-    STORE("store"),
-    WAREHOUSE("warehouse");
+    DROPOFF("Drop Off"),
+    STORE("Store"),
+    WAREHOUSE("Warehouse");
 
     private String typeName;
 

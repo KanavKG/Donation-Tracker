@@ -36,7 +36,7 @@ public class Login extends AppCompatActivity {
                 v.clearFocus();
                 if (model.validLogin(this.email.getText().toString(),
                         this.password.getText().toString())) {
-                    Intent intent = new Intent(this, MainActivity.class);
+                    Intent intent = new Intent(this, DonationList.class);
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), "Welcome",Toast.LENGTH_SHORT).show();
                 } else {

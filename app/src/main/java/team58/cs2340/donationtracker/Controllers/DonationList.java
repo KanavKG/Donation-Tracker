@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -20,15 +21,20 @@ import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.LocationType;
 import team58.cs2340.donationtracker.R;
 
-public class MainActivity extends AppCompatActivity {
+public class DonationList extends AppCompatActivity {
 
     private List<Location> locations = new ArrayList<>();
+    private ListAdapter locationAdapter;
+    private ListView donationListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_donationlist);
         readLocationData();
-        ListAdapter locationAdapter = new ArrayAdapter<Location>(this, android.R.layout.simple_list_item_1, locations);
+        locationAdapter = new ArrayAdapter<Location>(this, android.R.layout.simple_list_item_1, locations);
+        donationListView = (ListView) findViewById(R.id.donationList);
+        donationListView.setAdapter(locationAdapter);
     }
 
     public void onClick(View v) {
@@ -61,9 +67,11 @@ public class MainActivity extends AppCompatActivity {
                 loc.setCity(tokens[5]);
                 loc.setState(tokens[6]);
                 loc.setZip(tokens[7]);
-                loc.setType(LocationType.valueOf(tokens[0]));
-                loc.setPhoneNumber(tokens[0]);
-                loc.setWebsite(tokens[0]);
+                if (tokens[8].equals("Drop Off")) loc.setType(LocationType.DROPOFF);
+                else if (tokens[8].equals("Store")) loc.setType(LocationType.STORE);
+                else if (tokens[8].equals("Warehouse")) loc.setType(LocationType.WAREHOUSE);
+                loc.setPhoneNumber(tokens[9]);
+                loc.setWebsite(tokens[10]);
                 locations.add(loc);
             }
         } catch (IOException e) {
