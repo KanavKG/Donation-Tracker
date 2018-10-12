@@ -23,8 +23,7 @@ import team58.cs2340.donationtracker.R;
 
 public class DonationList extends AppCompatActivity {
 
-    private List<Location> locations = new ArrayList<>();
-    private ListAdapter locationAdapter;
+    private ArrayList<Location> locations = new ArrayList<>();
     private ListView donationListView;
 
     @Override
@@ -32,19 +31,22 @@ public class DonationList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donationlist);
         readLocationData();
-        locationAdapter = new ArrayAdapter<Location>(this, android.R.layout.simple_list_item_1, locations);
         donationListView = (ListView) findViewById(R.id.donationList);
+        LocationListAdapter locationAdapter = new LocationListAdapter(this, R.layout.layout_listitem, locations);
+        for (Location l : locations) {
+            System.out.println(l);
+        }
         donationListView.setAdapter(locationAdapter);
     }
 
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.logoutBtn:
+            /*case R.id.logoutBtn:
                 Intent logoutIntent = new Intent(this, Welcome.class);
                 startActivity(logoutIntent);
                 Toast.makeText(getApplicationContext(), "Logout Successful!",Toast.LENGTH_SHORT).show();
-                break;
+                break;*/
         }
     }
 

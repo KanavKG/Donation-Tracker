@@ -9,7 +9,7 @@ public class Model {
 
     private HashMap<String, User> users;
     private User currentUser;
-    private List<Location> locations;
+    private ArrayList<Location> locations;
 
     public static Model getInstance() {
         return ourInstance;
@@ -44,7 +44,7 @@ public class Model {
         }
     }
 
-    public List<Location> getLocations() {
+    public ArrayList<Location> getLocations() {
         return this.locations;
     }
 

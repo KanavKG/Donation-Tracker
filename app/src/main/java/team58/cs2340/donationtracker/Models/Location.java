@@ -40,7 +40,9 @@ public class Location {
     public void setKey(int key) {
         this.key = key;
     }
-
+    public String getName() {
+        return name;
+    }
     public void setName(String name) {
         this.name = name;
     }
