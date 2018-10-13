@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -33,20 +34,36 @@ public class DonationList extends AppCompatActivity {
         readLocationData();
         donationListView = (ListView) findViewById(R.id.donationList);
         LocationListAdapter locationAdapter = new LocationListAdapter(this, R.layout.layout_listitem, locations);
-        for (Location l : locations) {
-            System.out.println(l);
-        }
         donationListView.setAdapter(locationAdapter);
+
+        donationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), DonationItemDetails.class);
+                intent.putExtra("name", locations.get(position).getName());
+                intent.putExtra("type", locations.get(position).getType().getTypeName());
+                intent.putExtra("coords", "Coordinates: " + Double.toString(
+                        locations.get(position).getLatitude()) + ", " + Double.toString(
+                                locations.get(position).getLongitude()));
+                intent.putExtra("address", "Address: " + locations.get(position).
+                        getStreetAddress() + ", " + locations.get(position).getCity() + ", " +
+                        locations.get(position).getZip());
+                intent.putExtra("phone", locations.get(position).getPhoneNumber());
+                intent.putExtra("website", locations.get(position).getWebsite());
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            /*case R.id.logoutBtn:
+            case R.id.logoutBtn:
                 Intent logoutIntent = new Intent(this, Welcome.class);
                 startActivity(logoutIntent);
                 Toast.makeText(getApplicationContext(), "Logout Successful!",Toast.LENGTH_SHORT).show();
-                break;*/
+                break;
         }
     }
 

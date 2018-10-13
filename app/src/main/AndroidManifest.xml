@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".Controllers.Login" />
         <activity android:name=".Controllers.DonationList" />
-        <activity android:name=".Controllers.Registration"></activity>
+        <activity android:name=".Controllers.Registration" />
+        <activity android:name=".Controllers.DonationItemDetails"></activity>
     </application>
 
 </manifest>

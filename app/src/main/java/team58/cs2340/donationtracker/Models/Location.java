@@ -63,6 +63,10 @@ public class Location {
         this.longitude = longitude;
     }
 
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
     }
@@ -97,6 +101,10 @@ public class Location {
 
     public void setType(LocationType type) {
         this.type = type;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {

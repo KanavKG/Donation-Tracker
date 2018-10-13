@@ -17,6 +17,7 @@
             android:layout_height="50dp"
             android:gravity="start"
             android:text="Location Name"
+            android:paddingLeft="30dip"
             android:textColor="#016180"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -27,6 +28,7 @@
             android:layout_height="30dp"
             android:gravity="end"
             android:text="Location City"
+            android:paddingRight="30dip"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="11sp"
             android:textStyle="italic" />
