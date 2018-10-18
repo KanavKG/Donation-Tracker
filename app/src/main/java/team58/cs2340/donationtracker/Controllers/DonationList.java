@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,7 +14,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.List;
 
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.LocationType;
@@ -32,7 +29,7 @@ public class DonationList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donationlist);
         readLocationData();
-        donationListView = (ListView) findViewById(R.id.donationList);
+        donationListView = findViewById(R.id.donationList);
         LocationListAdapter locationAdapter = new LocationListAdapter(this, R.layout.layout_listitem, locations);
         donationListView.setAdapter(locationAdapter);
 
@@ -68,7 +65,7 @@ public class DonationList extends AppCompatActivity {
     }
 
     private void readLocationData() {
-        InputStream instream = getResources().openRawResource(R.raw.locationdata);
+        InputStream instream = getResources().openRawResource(R.raw.location_data);
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(instream, Charset.forName("UTF-8")));
         String ln;
