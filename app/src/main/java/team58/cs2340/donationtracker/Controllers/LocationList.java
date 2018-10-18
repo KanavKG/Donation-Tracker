@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.LocationType;
+import team58.cs2340.donationtracker.Models.Model;
 import team58.cs2340.donationtracker.R;
 
 public class LocationList extends AppCompatActivity {
@@ -26,11 +27,11 @@ public class LocationList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Model model = Model.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locationlist);
-        readLocationData();
         donationListView = findViewById(R.id.donationList);
-        LocationListAdapter locationAdapter = new LocationListAdapter(this, R.layout.layout_locationitem, locations);
+        LocationListAdapter locationAdapter = new LocationListAdapter(this, R.layout.layout_locationitem, model.getLocations());
         donationListView.setAdapter(locationAdapter);
 
         donationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -64,34 +65,5 @@ public class LocationList extends AppCompatActivity {
         }
     }
 
-    private void readLocationData() {
-        InputStream instream = getResources().openRawResource(R.raw.location_data);
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(instream, Charset.forName("UTF-8")));
-        String ln;
-        try {
-            //skip header line
-            reader.readLine();
-            while ((ln = reader.readLine()) != null) {
-                String[] tokens = ln.split(",");
-                Location loc = new Location();
-                loc.setKey(Integer.parseInt(tokens[0]));
-                loc.setName(tokens[1]);
-                loc.setLatitude(Double.parseDouble(tokens[2]));
-                loc.setLongitude(Double.parseDouble(tokens[3]));
-                loc.setStreetAddress(tokens[4]);
-                loc.setCity(tokens[5]);
-                loc.setState(tokens[6]);
-                loc.setZip(tokens[7]);
-                if (tokens[8].equals("Drop Off")) loc.setType(LocationType.DROPOFF);
-                else if (tokens[8].equals("Store")) loc.setType(LocationType.STORE);
-                else if (tokens[8].equals("Warehouse")) loc.setType(LocationType.WAREHOUSE);
-                loc.setPhoneNumber(tokens[9]);
-                loc.setWebsite(tokens[10]);
-                locations.add(loc);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 }

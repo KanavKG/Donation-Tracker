@@ -9,6 +9,14 @@ import android.widget.TextView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+
+import team58.cs2340.donationtracker.Models.Location;
+import team58.cs2340.donationtracker.Models.LocationType;
 import team58.cs2340.donationtracker.Models.Model;
 import team58.cs2340.donationtracker.Models.User;
 import team58.cs2340.donationtracker.Models.Role;
@@ -27,6 +35,7 @@ public class Registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        readLocationData();
 
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
@@ -50,6 +59,38 @@ public class Registration extends AppCompatActivity {
         } else {
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
+        }
+    }
+
+    private void readLocationData() {
+        Model model = Model.getInstance();
+        InputStream instream = getResources().openRawResource(R.raw.location_data);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(instream, Charset.forName("UTF-8")));
+        String ln;
+        try {
+            //skip header line
+            reader.readLine();
+            while ((ln = reader.readLine()) != null) {
+                String[] tokens = ln.split(",");
+                Location loc = new Location();
+                loc.setKey(Integer.parseInt(tokens[0]));
+                loc.setName(tokens[1]);
+                loc.setLatitude(Double.parseDouble(tokens[2]));
+                loc.setLongitude(Double.parseDouble(tokens[3]));
+                loc.setStreetAddress(tokens[4]);
+                loc.setCity(tokens[5]);
+                loc.setState(tokens[6]);
+                loc.setZip(tokens[7]);
+                if (tokens[8].equals("Drop Off")) loc.setType(LocationType.DROPOFF);
+                else if (tokens[8].equals("Store")) loc.setType(LocationType.STORE);
+                else if (tokens[8].equals("Warehouse")) loc.setType(LocationType.WAREHOUSE);
+                loc.setPhoneNumber(tokens[9]);
+                loc.setWebsite(tokens[10]);
+                model.addLocation(loc);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
