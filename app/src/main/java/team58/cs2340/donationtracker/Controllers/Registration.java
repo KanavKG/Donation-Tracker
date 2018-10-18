@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Spinner;
@@ -22,12 +23,13 @@ import team58.cs2340.donationtracker.Models.User;
 import team58.cs2340.donationtracker.Models.Role;
 import team58.cs2340.donationtracker.R;
 
-public class Registration extends AppCompatActivity {
+public class Registration extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private TextView firstName;
     private TextView lastName;
     private TextView email;
     private Spinner roleSpinner;
+    private Spinner locationSpinner;
     private TextView password;
     private TextView confirmPassword;
 
@@ -41,12 +43,17 @@ public class Registration extends AppCompatActivity {
         lastName = findViewById(R.id.lastName);
         email = findViewById(R.id.email);
         roleSpinner = findViewById(R.id.roleSpinner);
+        locationSpinner = findViewById(R.id.locationSpinner);
         password = findViewById(R.id.password);
         confirmPassword = findViewById(R.id.confirmPassword);
 
         ArrayAdapter<Role> roleAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, Role.values());
         roleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roleSpinner.setAdapter(roleAdapter);
+
+        roleSpinner.setOnItemSelectedListener(this);
+
+        locationSpinner.setVisibility(View.GONE);
     }
 
     public void onRegisterClicked(View view) {
@@ -60,6 +67,19 @@ public class Registration extends AppCompatActivity {
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
         }
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        if (parent.getItemAtPosition(pos) == Role.LOCATIONEMPLOYEE) {
+            locationSpinner.setVisibility(View.VISIBLE);
+        } else {
+            locationSpinner.setVisibility(View.GONE);
+        }
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
     }
 
     private void readLocationData() {
