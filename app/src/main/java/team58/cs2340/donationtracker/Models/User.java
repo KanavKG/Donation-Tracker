@@ -7,21 +7,24 @@ public class User {
     private String email;
     private String password;
     private Role role;
+    private Location location;
 
-    public User(String firstName, String lastName, String email, String password, Role role) {
+    public User(String firstName, String lastName, String email, String password, Role role,
+                Location location) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.location = location;
+    }
+
+    public User(String firstName, String lastName, String email, String password, Role role) {
+        this(firstName, lastName, email, password, role, null);
     }
 
     public User(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.role = Role.USER;
+        this(firstName, lastName, email, password, Role.USER);
     }
 
     public String getEmail() {
@@ -30,6 +33,10 @@ public class User {
 
     public String getPassword() {
         return this.password;
+    }
+
+    public Location getLocation() {
+        return location;
     }
 
     public boolean equals(Object other) {
