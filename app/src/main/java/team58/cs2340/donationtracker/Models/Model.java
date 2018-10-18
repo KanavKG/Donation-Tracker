@@ -2,7 +2,6 @@ package team58.cs2340.donationtracker.Models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Model {
     private static final Model ourInstance = new Model();
@@ -10,6 +9,7 @@ public class Model {
     private HashMap<String, User> users;
     private User currentUser;
     private ArrayList<Location> locations;
+    private ArrayList<Donation> donations;
 
     public static Model getInstance() {
         return ourInstance;
@@ -18,6 +18,7 @@ public class Model {
     private Model() {
         this.users = new HashMap<>(5);
         this.locations = new ArrayList<>();
+        this.donations = new ArrayList<>();
     }
 
     public User getCurrentUser() {
@@ -26,6 +27,10 @@ public class Model {
 
     public void setCurrentUser(User user) {
         this.currentUser = user;
+    }
+
+    public void clearCurrentUser() {
+        this.currentUser = null;
     }
 
     public boolean addUser(String email, User user) {
@@ -50,5 +55,9 @@ public class Model {
 
     public void addLocation(Location location) {
         locations.add(location);
+    }
+
+    public void addDonation(Donation donation) {
+        donations.add(donation);
     }
 }

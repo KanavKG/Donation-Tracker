@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,13 +14,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.List;
 
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.LocationType;
 import team58.cs2340.donationtracker.R;
 
-public class DonationList extends AppCompatActivity {
+public class LocationList extends AppCompatActivity {
 
     private ArrayList<Location> locations = new ArrayList<>();
     private ListView donationListView;
@@ -30,16 +27,16 @@ public class DonationList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donationlist);
+        setContentView(R.layout.activity_locationlist);
         readLocationData();
-        donationListView = (ListView) findViewById(R.id.donationList);
-        LocationListAdapter locationAdapter = new LocationListAdapter(this, R.layout.layout_listitem, locations);
+        donationListView = findViewById(R.id.donationList);
+        LocationListAdapter locationAdapter = new LocationListAdapter(this, R.layout.layout_locationitem, locations);
         donationListView.setAdapter(locationAdapter);
 
         donationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), DonationItemDetails.class);
+                Intent intent = new Intent(getApplicationContext(), LocationItemDetails.class);
                 intent.putExtra("name", locations.get(position).getName());
                 intent.putExtra("type", locations.get(position).getType().getTypeName());
                 intent.putExtra("coords", "Coordinates: " + Double.toString(

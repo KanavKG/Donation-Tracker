@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import team58.cs2340.donationtracker.R;
 
-public class DonationItemDetails extends AppCompatActivity {
+public class LocationItemDetails extends AppCompatActivity {
 
     private TextView locationTitle;
     private TextView locationType;
@@ -19,7 +19,7 @@ public class DonationItemDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donation_item_details);
+        setContentView(R.layout.activity_location_item_details);
 
         locationTitle = findViewById(R.id.locationTitleTxt);
         locationType = findViewById(R.id.typeTxt);
