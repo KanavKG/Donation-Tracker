@@ -5,6 +5,7 @@ public class Donation {
 
     private Date timeStamp;
     Location location;
+    String name;
     String shortDescription;
     String fullDescription;
     Double value;
@@ -12,7 +13,7 @@ public class Donation {
     String comment;
     //String picture;
 
-    public Donation(Date timeStamp, Location location, String shortDescription,
+    public Donation(Date timeStamp, Location location, String name, String shortDescription,
                     String fullDescription, Double value, String comment) {
         this.timeStamp = timeStamp;
         this.location = location;
@@ -22,9 +23,9 @@ public class Donation {
         this.comment = comment;
     }
 
-    public Donation(Location location, String shortDescription, String fullDescription,
+    public Donation(Location location, String name, String shortDescription, String fullDescription,
                     Double value, String comment) {
-        this(new Date(), location, shortDescription, fullDescription, value, comment);
+        this(new Date(), location, name, shortDescription, fullDescription, value, comment);
     }
 
     public Date getTimeStamp() {
@@ -33,6 +34,10 @@ public class Donation {
 
     public Location getLocation() {
         return location;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getShortDescription() {
@@ -53,6 +58,10 @@ public class Donation {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setShortDescription(String shortDescription) {
