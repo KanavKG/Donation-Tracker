@@ -19,7 +19,8 @@
         <activity android:name=".Controllers.Login" />
         <activity android:name=".Controllers.LocationList" />
         <activity android:name=".Controllers.Registration" />
-        <activity android:name=".Controllers.LocationItemDetails"></activity>
+        <activity android:name=".Controllers.LocationItemDetails" />
+        <activity android:name=".Models.AddDonation"></activity>
     </application>
 
 </manifest>
