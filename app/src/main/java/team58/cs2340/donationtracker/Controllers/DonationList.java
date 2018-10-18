@@ -68,7 +68,7 @@ public class DonationList extends AppCompatActivity {
     }
 
     private void readLocationData() {
-        InputStream instream = getResources().openRawResource(R.raw.locationdata);
+        InputStream instream = getResources().openRawResource(R.raw.location_data);
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(instream, Charset.forName("UTF-8")));
         String ln;
