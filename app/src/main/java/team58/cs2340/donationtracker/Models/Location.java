@@ -121,8 +121,6 @@ public class Location {
 
     @Override
     public String toString() {
-        return "Location{" +
-                "name='" + name + '\'' +
-                '}';
+        return this.name;
     }
 }
