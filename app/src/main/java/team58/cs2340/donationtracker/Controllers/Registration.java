@@ -33,10 +33,15 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     private TextView password;
     private TextView confirmPassword;
 
+    private Model model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+
+        this.model = Model.getInstance();
         readLocationData();
 
         firstName = findViewById(R.id.firstName);
@@ -51,13 +56,15 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         roleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roleSpinner.setAdapter(roleAdapter);
 
+        ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, model.getLocations());
+        locationSpinner.setAdapter(locationAdapter);
+
         roleSpinner.setOnItemSelectedListener(this);
 
         locationSpinner.setVisibility(View.GONE);
     }
 
     public void onRegisterClicked(View view) {
-        Model model = Model.getInstance();
         User user = new User(firstName.getText().toString(), lastName.getText().toString(),
                 email.getText().toString(), password.getText().toString(),
                 (Role) roleSpinner.getSelectedItem());
@@ -83,7 +90,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void readLocationData() {
-        Model model = Model.getInstance();
         InputStream instream = getResources().openRawResource(R.raw.location_data);
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(instream, Charset.forName("UTF-8")));
