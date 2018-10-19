@@ -6,26 +6,27 @@ public class Donation {
     private Date timeStamp;
     Location location;
     String name;
+    Double value;
     String shortDescription;
     String fullDescription;
-    Double value;
     //String category;
     String comment;
     //String picture;
 
-    public Donation(Date timeStamp, Location location, String name, String shortDescription,
-                    String fullDescription, Double value, String comment) {
+    public Donation(Date timeStamp, String name, Location location, Double value, String shortDescription,
+                    String fullDescription, String comment) {
         this.timeStamp = timeStamp;
+        this.name = name;
         this.location = location;
+        this.value = value;
         this.shortDescription = shortDescription;
         this.fullDescription = fullDescription;
-        this.value = value;
         this.comment = comment;
     }
 
-    public Donation(Location location, String name, String shortDescription, String fullDescription,
-                    Double value, String comment) {
-        this(new Date(), location, name, shortDescription, fullDescription, value, comment);
+    public Donation(String name, Location location, Double value, String shortDescription,
+                    String fullDescription, String comment) {
+        this(new Date(), name, location, value, shortDescription, fullDescription, comment);
     }
 
     public Date getTimeStamp() {
