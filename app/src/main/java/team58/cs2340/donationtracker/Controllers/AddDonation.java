@@ -1,10 +1,11 @@
-package team58.cs2340.donationtracker.Models;
+package team58.cs2340.donationtracker.Controllers;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import team58.cs2340.donationtracker.Models.Model;
 import team58.cs2340.donationtracker.R;
 
 public class AddDonation extends AppCompatActivity {
