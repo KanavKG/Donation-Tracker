@@ -60,6 +60,7 @@ public class LocationList extends AppCompatActivity {
             case R.id.logoutBtn:
                 Intent logoutIntent = new Intent(this, Welcome.class);
                 startActivity(logoutIntent);
+                Model.getInstance().clearCurrentUser();
                 Toast.makeText(getApplicationContext(), "Logout Successful!",Toast.LENGTH_SHORT).show();
                 break;
         }
