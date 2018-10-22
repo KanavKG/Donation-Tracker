@@ -1,6 +1,7 @@
 package team58.cs2340.donationtracker.Controllers;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,16 +39,7 @@ public class LocationList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), LocationItemDetails.class);
-                intent.putExtra("name", locations.get(position).getName());
-                intent.putExtra("type", locations.get(position).getType().getTypeName());
-                intent.putExtra("coords", "Coordinates: " + Double.toString(
-                        locations.get(position).getLatitude()) + ", " + Double.toString(
-                                locations.get(position).getLongitude()));
-                intent.putExtra("address", "Address: " + locations.get(position).
-                        getStreetAddress() + ", " + locations.get(position).getCity() + ", " +
-                        locations.get(position).getZip());
-                intent.putExtra("phone", locations.get(position).getPhoneNumber());
-                intent.putExtra("website", locations.get(position).getWebsite());
+                //intent.putExtra("location", (Parcelable) locations.get(position));
                 startActivity(intent);
             }
         });

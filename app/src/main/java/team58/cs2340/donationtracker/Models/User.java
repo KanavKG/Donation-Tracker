@@ -9,6 +9,7 @@ public class User {
     private Role role;
     private Location location;
 
+
     public User(String firstName, String lastName, String email, String password, Role role,
                 Location location) {
         this.firstName = firstName;
@@ -19,24 +20,60 @@ public class User {
         this.location = location;
     }
 
-    public User(String firstName, String lastName, String email, String password, Role role) {
-        this(firstName, lastName, email, password, role, null);
+    public String getFirstName() {
+        return firstName;
     }
 
-    public User(String firstName, String lastName, String email, String password) {
-        this(firstName, lastName, email, password, Role.USER);
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
         return this.email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return this.password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public Location getLocation() {
         return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public User(String firstName, String lastName, String email, String password, Role role) {
+        this(firstName, lastName, email, password, role, null);
+    }
+
+    public User(String firstName, String lastName, String email, String password) {
+        this(firstName, lastName, email, password, Role.USER);
     }
 
     public boolean equals(Object other) {
