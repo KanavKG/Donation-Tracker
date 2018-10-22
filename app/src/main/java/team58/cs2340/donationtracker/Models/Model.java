@@ -57,6 +57,10 @@ public class Model {
         locations.add(location);
     }
 
+    public ArrayList<Donation> getDonations() {
+        return donations;
+    }
+
     public void addDonation(Donation donation) {
         donations.add(donation);
     }
