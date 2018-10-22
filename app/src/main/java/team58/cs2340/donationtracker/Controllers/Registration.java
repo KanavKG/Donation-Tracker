@@ -65,11 +65,9 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void onRegisterClicked(View view) {
-        Location location = (roleSpinner.getSelectedItem() == Role.LOCATIONEMPLOYEE) ?
-                (Location) locationSpinner.getSelectedItem() : null;
         User user = new User(firstName.getText().toString(), lastName.getText().toString(),
                 email.getText().toString(), password.getText().toString(),
-                (Role) roleSpinner.getSelectedItem(), location);
+                (Role) roleSpinner.getSelectedItem());
         if (model.addUser(email.getText().toString(), user)) {
             Toast.makeText(getApplicationContext(), "An account with that email already exists",Toast.LENGTH_LONG).show();
         } else {
