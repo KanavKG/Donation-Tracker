@@ -37,6 +37,12 @@ public class AddDonation extends AppCompatActivity {
 
         ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, model.getLocations());
         locationSpinner.setAdapter(locationAdapter);
+
+        if (model.getCurrentUser().getLocation() != null) {
+            int spinnerPosition = locationAdapter.getPosition(model.getCurrentUser().getLocation());
+            locationSpinner.setSelection(spinnerPosition);
+            locationSpinner.setEnabled(false);
+        }
     }
 
     public void onAddClicked(View view) {
