@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Spinner;
@@ -22,38 +23,53 @@ import team58.cs2340.donationtracker.Models.User;
 import team58.cs2340.donationtracker.Models.Role;
 import team58.cs2340.donationtracker.R;
 
-public class Registration extends AppCompatActivity {
+public class Registration extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private TextView firstName;
     private TextView lastName;
     private TextView email;
     private Spinner roleSpinner;
+    private Spinner locationSpinner;
     private TextView password;
     private TextView confirmPassword;
+
+    private Model model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+
+        this.model = Model.getInstance();
         readLocationData();
 
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         email = findViewById(R.id.email);
         roleSpinner = findViewById(R.id.roleSpinner);
+        locationSpinner = findViewById(R.id.locationSpinner);
         password = findViewById(R.id.password);
         confirmPassword = findViewById(R.id.confirmPassword);
 
         ArrayAdapter<Role> roleAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, Role.values());
         roleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roleSpinner.setAdapter(roleAdapter);
+
+        ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, model.getLocations());
+        locationSpinner.setAdapter(locationAdapter);
+
+        roleSpinner.setOnItemSelectedListener(this);
+
+        locationSpinner.setVisibility(View.GONE);
     }
 
     public void onRegisterClicked(View view) {
-        Model model = Model.getInstance();
+        Location location = (roleSpinner.getSelectedItem() == Role.LOCATIONEMPLOYEE) ?
+                (Location) locationSpinner.getSelectedItem() : null;
         User user = new User(firstName.getText().toString(), lastName.getText().toString(),
                 email.getText().toString(), password.getText().toString(),
-                (Role) roleSpinner.getSelectedItem());
+                (Role) roleSpinner.getSelectedItem(), location);
         if (model.addUser(email.getText().toString(), user)) {
             Toast.makeText(getApplicationContext(), "An account with that email already exists",Toast.LENGTH_LONG).show();
         } else {
@@ -62,8 +78,20 @@ public class Registration extends AppCompatActivity {
         }
     }
 
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        if (parent.getItemAtPosition(pos) == Role.LOCATIONEMPLOYEE) {
+            locationSpinner.setVisibility(View.VISIBLE);
+        } else {
+            locationSpinner.setVisibility(View.GONE);
+        }
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    }
+
     private void readLocationData() {
-        Model model = Model.getInstance();
         InputStream instream = getResources().openRawResource(R.raw.location_data);
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(instream, Charset.forName("UTF-8")));
