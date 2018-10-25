@@ -20,7 +20,8 @@
         <activity android:name=".Controllers.LocationList" />
         <activity android:name=".Controllers.Registration" />
         <activity android:name=".Controllers.LocationItemDetails" />
-        <activity android:name=".Controllers.AddDonation"></activity>
+        <activity android:name=".Controllers.AddDonation" />
+        <activity android:name=".Controllers.PageLocation"></activity>
     </application>
 
 </manifest>

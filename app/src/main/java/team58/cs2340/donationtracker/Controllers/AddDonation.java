@@ -1,5 +1,6 @@
 package team58.cs2340.donationtracker.Controllers;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -55,5 +56,9 @@ public class AddDonation extends AppCompatActivity {
 
         Donation donation = new Donation(n, loc, val, sDes, fDes, com);
         model.addDonation(donation);
+
+        Intent backtoLocationPageIntent = new Intent(this, PageLocation.class);
+        backtoLocationPageIntent.putExtra("location", loc);
+        startActivity(backtoLocationPageIntent);
     }
 }
