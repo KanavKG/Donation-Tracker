@@ -27,7 +27,7 @@ public class PageLocation extends AppCompatActivity {
     private Location location;
     ArrayList<Donation> donationsAtLocation = new ArrayList<>();
     ArrayAdapter<Donation> adapter;
-    ListView donationList;
+    ListView donationListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +43,9 @@ public class PageLocation extends AppCompatActivity {
                 donationsAtLocation.add(donation);
             }
         }
-        
+        donationListView = findViewById(R.id.donationList);
+        DonationListAdapter locationAdapter = new DonationListAdapter(this, R.layout.layout_donationitem, donationsAtLocation);
+        donationListView.setAdapter(locationAdapter);
         
 
         addItem = findViewById(R.id.addItemBtn);
