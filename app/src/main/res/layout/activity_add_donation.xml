@@ -73,11 +73,23 @@
         android:ems="10"
         android:hint="Full Description"
         android:inputType="textLongMessage"
-        app:layout_constraintBottom_toTopOf="@+id/comment"
+        app:layout_constraintBottom_toTopOf="@+id/categorySpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shortDescription" />
+
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/comment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fullDescription" />
 
     <EditText
         android:id="@+id/comment"
