@@ -4,16 +4,16 @@ import java.util.Date;
 public class Donation {
 
     private Date timeStamp;
-    Location location;
-    String name;
-    Double value;
-    String shortDescription;
-    String fullDescription;
+    private Location location;
+    private String name;
+    private double value;
+    private String shortDescription;
+    private String fullDescription;
     //String category;
-    String comment;
+    private String comment;
     //String picture;
 
-    public Donation(Date timeStamp, String name, Location location, Double value, String shortDescription,
+    public Donation(Date timeStamp, String name, Location location, double value, String shortDescription,
                     String fullDescription, String comment) {
         this.timeStamp = timeStamp;
         this.name = name;
@@ -24,7 +24,7 @@ public class Donation {
         this.comment = comment;
     }
 
-    public Donation(String name, Location location, Double value, String shortDescription,
+    public Donation(String name, Location location, double value, String shortDescription,
                     String fullDescription, String comment) {
         this(new Date(), name, location, value, shortDescription, fullDescription, comment);
     }
@@ -49,7 +49,7 @@ public class Donation {
         return fullDescription;
     }
 
-    public Double getValue() {
+    public double getValue() {
         return value;
     }
 

@@ -49,13 +49,6 @@ public class Model {
         }
     }
 
-    public ArrayList<Location> getLocations() {
-        return this.locations;
-    }
-
-    public void addLocation(Location location) {
-        locations.add(location);
-    }
 
     public ArrayList<Donation> getDonations() {
         return donations;
@@ -63,5 +56,13 @@ public class Model {
 
     public void addDonation(Donation donation) {
         donations.add(donation);
+    }
+
+    public ArrayList<Location> getLocations() {
+        return this.locations;
+    }
+
+    public void addLocation(Location location) {
+        locations.add(location);
     }
 }

@@ -1,6 +1,9 @@
 package team58.cs2340.donationtracker.Models;
 
-public class Location {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Location implements Serializable{
 
     private int key;
     private String name;
@@ -118,6 +121,7 @@ public class Location {
     public void setWebsite(String website) {
         this.website = website;
     }
+
 
     @Override
     public String toString() {
