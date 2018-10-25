@@ -7,9 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+import team58.cs2340.donationtracker.Models.Donation;
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.Model;
 import team58.cs2340.donationtracker.Models.Role;
@@ -19,6 +25,9 @@ public class PageLocation extends AppCompatActivity {
     private Button addItem;
     private Button locationDetails;
     private Location location;
+    ArrayList<Donation> donationsAtLocation = new ArrayList<>();
+    ArrayAdapter<Donation> adapter;
+    ListView donationList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +36,15 @@ public class PageLocation extends AppCompatActivity {
 
         Intent intent = getIntent();
         location = (Location) intent.getSerializableExtra("location");
+        
+        ArrayList<Donation> donations = model.getDonations();
+        for (Donation donation : donations) {
+            if (donation.getLocation().getKey() == location.getKey()) {
+                donationsAtLocation.add(donation);
+            }
+        }
+        
+        
 
         addItem = findViewById(R.id.addItemBtn);
         if ((model.getCurrentUser().getRole() == Role.LOCATIONEMPLOYEE && model.getCurrentUser().getLocation().getKey() == location.getKey())
