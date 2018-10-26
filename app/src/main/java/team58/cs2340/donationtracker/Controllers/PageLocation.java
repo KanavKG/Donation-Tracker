@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import team58.cs2340.donationtracker.Models.Donation;
@@ -28,16 +29,21 @@ public class PageLocation extends AppCompatActivity {
     ArrayList<Donation> donationsAtLocation = new ArrayList<>();
     ArrayAdapter<Donation> adapter;
     ListView donationListView;
+
+    private Model model;
+    private ArrayList<Donation> donations;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_location);
-        Model model = Model.getInstance();
+        this.model = Model.getInstance();
+
+
 
         Intent intent = getIntent();
         location = (Location) intent.getSerializableExtra("location");
         
-        ArrayList<Donation> donations = model.getDonations();
+        this.donations = model.getDonations();
         for (Donation donation : donations) {
             if (donation.getLocation().getKey() == location.getKey()) {
                 donationsAtLocation.add(donation);
@@ -46,6 +52,15 @@ public class PageLocation extends AppCompatActivity {
         donationListView = findViewById(R.id.donationList);
         DonationListAdapter locationAdapter = new DonationListAdapter(this, R.layout.layout_donationitem, donationsAtLocation);
         donationListView.setAdapter(locationAdapter);
+
+        donationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(PageLocation.this, DonationItemDetail.class);
+                intent.putExtra("donation", donations.get(position));
+                startActivity(intent);
+            }
+        });
         
 
         addItem = findViewById(R.id.addItemBtn);
