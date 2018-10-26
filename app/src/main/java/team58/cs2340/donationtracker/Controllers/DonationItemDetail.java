@@ -3,6 +3,7 @@ package team58.cs2340.donationtracker.Controllers;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import team58.cs2340.donationtracker.Models.Donation;
@@ -17,6 +18,7 @@ public class DonationItemDetail extends AppCompatActivity {
     private TextView fullDescription;
     private TextView comment;
     private TextView timeStamp;
+    ImageView photoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class DonationItemDetail extends AppCompatActivity {
         this.value = findViewById(R.id.value);
         this.comment = findViewById(R.id.comment);
         this.timeStamp = findViewById(R.id.timeStamp);
+        this.photoView = findViewById(R.id.photoImage);
 
         Intent intent = getIntent();
         Donation donation  = (Donation) intent.getSerializableExtra("donation");
@@ -41,5 +44,6 @@ public class DonationItemDetail extends AppCompatActivity {
         fullDescription.setText("Full Description: " + donation.getFullDescription());
         comment.setText("Comment: " + donation.getComment());
         timeStamp.setText("Time Stamp: " + donation.getTimeStamp());
+        photoView.setImageBitmap(donation.getPhoto());
     }
 }

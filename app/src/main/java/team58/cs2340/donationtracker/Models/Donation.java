@@ -1,4 +1,6 @@
 package team58.cs2340.donationtracker.Models;
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,12 +14,12 @@ public class Donation implements Serializable{
     private String fullDescription;
     //String category;
     private String comment;
-    //String picture;
+    private Bitmap photo;
 
     public Donation() { }
 
     public Donation( Date timeStamp, String name, Location location, double value,
-                    String shortDescription, String fullDescription, String comment) {
+                    String shortDescription, String fullDescription, String comment, Bitmap photo) {
         this.timeStamp = timeStamp;
         this.location = location;
         this.name = name;
@@ -25,11 +27,12 @@ public class Donation implements Serializable{
         this.shortDescription = shortDescription;
         this.fullDescription = fullDescription;
         this.comment = comment;
+        this.photo = photo;
     }
 
     public Donation(String name, Location location, double value, String shortDescription,
-                    String fullDescription, String comment) {
-        this(new Date(), name, location, value, shortDescription, fullDescription, comment);
+                    String fullDescription, String comment, Bitmap photo) {
+        this(new Date(), name, location, value, shortDescription, fullDescription, comment, photo);
     }
 
     public Date getTimeStamp() {
@@ -84,6 +87,13 @@ public class Donation implements Serializable{
         return comment;
     }
 
+    public Bitmap getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Bitmap photo) {
+        this.photo = photo;
+    }
 
     public void setComment(String comment) {
         this.comment = comment;

@@ -29,6 +29,7 @@ public class AddDonation extends AppCompatActivity {
     private TextView shortDescription;
     private TextView fullDescription;
     private TextView comment;
+    private Bitmap photo;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     ImageView photoView;
@@ -72,7 +73,7 @@ public class AddDonation extends AppCompatActivity {
         String fDes = fullDescription.getText().toString();
         String com = comment.getText().toString();
 
-        Donation donation = new Donation(n, loc, val, sDes, fDes, com);
+        Donation donation = new Donation(n, loc, val, sDes, fDes, com, photo);
         model.addDonation(donation);
 
         Intent backtoLocationPageIntent = new Intent(this, PageLocation.class);
@@ -92,7 +93,7 @@ public class AddDonation extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap photo = (Bitmap) extras.get("data");
+            photo = (Bitmap) extras.get("data");
             photoView.setImageBitmap(photo);
         }
     }
