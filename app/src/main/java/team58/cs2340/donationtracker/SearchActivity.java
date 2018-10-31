@@ -7,6 +7,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.List;
+
 import team58.cs2340.donationtracker.Models.Category;
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.Model;
@@ -18,6 +20,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private TextView name;
     private Spinner locationSpinner;
+    private List<Location> locations;
     private Spinner categorySpinner;
 
     @Override
@@ -31,7 +34,9 @@ public class SearchActivity extends AppCompatActivity {
         this.locationSpinner = findViewById(R.id.locationSpinner);
         this.categorySpinner = findViewById(R.id.categorySpinner);
 
-        ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, model.getLocations());
+        locations = model.getLocations();
+        locations.add(0, model.getDefaultAllLocation());
+        ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locations);
         locationSpinner.setAdapter(locationAdapter);
 
         ArrayAdapter<Category> categoryArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, Category.values());
@@ -39,7 +44,11 @@ public class SearchActivity extends AppCompatActivity {
         categorySpinner.setAdapter(categoryArrayAdapter);
     }
 
-    public void onSearchClicked(View view) {
+    public void onSearchByCategory(View view) {
+
+    }
+
+    public void onSearchByName(View view) {
 
     }
 }
