@@ -65,4 +65,9 @@ public class Model {
     public void addLocation(Location location) {
         locations.add(location);
     }
+
+    public Location getDefaultAllLocation () {
+        return new Location(-1, "All Locations", -1, -1,
+                "", "", "", "", null, "", "");
+    }
 }

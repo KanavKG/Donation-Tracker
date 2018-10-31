@@ -7,12 +7,12 @@ import java.util.Date;
 public class Donation implements Serializable{
 
     private Date timeStamp;
-    private Location location;
     private String name;
+    private Location location;
     private double value;
     private String shortDescription;
     private String fullDescription;
-    //String category;
+    Category category;
     private String comment;
     private Bitmap photo;
 
@@ -21,11 +21,12 @@ public class Donation implements Serializable{
     public Donation( Date timeStamp, String name, Location location, double value,
                     String shortDescription, String fullDescription, String comment, Bitmap photo) {
         this.timeStamp = timeStamp;
-        this.location = location;
         this.name = name;
+        this.location = location;
         this.value = value;
         this.shortDescription = shortDescription;
         this.fullDescription = fullDescription;
+        this.category = category;
         this.comment = comment;
         this.photo = photo;
     }
@@ -81,6 +82,14 @@ public class Donation implements Serializable{
 
     public void setValue(double value) {
         this.value = value;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getComment() {

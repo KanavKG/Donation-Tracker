@@ -27,4 +27,17 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_alignParentBottom="true"  />
 
+    <Button
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onClick"
+        android:text="Search"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </RelativeLayout>

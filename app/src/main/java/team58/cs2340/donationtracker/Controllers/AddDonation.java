@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import team58.cs2340.donationtracker.Models.Category;
 import team58.cs2340.donationtracker.Models.Model;
 import team58.cs2340.donationtracker.Models.Donation;
 import team58.cs2340.donationtracker.Models.Location;
@@ -28,6 +29,7 @@ public class AddDonation extends AppCompatActivity {
     private TextView value;
     private TextView shortDescription;
     private TextView fullDescription;
+    private Spinner categorySpinner;
     private TextView comment;
     private Bitmap photo;
 
@@ -45,6 +47,7 @@ public class AddDonation extends AppCompatActivity {
         this.shortDescription = findViewById(R.id.shortDescription);
         this.fullDescription = findViewById(R.id.fullDescription);
         this.value = findViewById(R.id.value);
+        this.categorySpinner = findViewById(R.id.categorySpinner);
         this.comment = findViewById(R.id.comment);
         this.takePhoto = findViewById(R.id.takePhotoBtn);
         this.photoView = findViewById(R.id.photo);
@@ -57,6 +60,10 @@ public class AddDonation extends AppCompatActivity {
 
         ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, model.getLocations());
         locationSpinner.setAdapter(locationAdapter);
+
+        ArrayAdapter<Category> categoryArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, Category.values());
+        categoryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(categoryArrayAdapter);
 
         if (model.getCurrentUser().getLocation() != null) {
             int spinnerPosition = locationAdapter.getPosition(model.getCurrentUser().getLocation());
@@ -71,9 +78,11 @@ public class AddDonation extends AppCompatActivity {
         Double val = Double.parseDouble(value.getText().toString());
         String sDes = shortDescription.getText().toString();
         String fDes = fullDescription.getText().toString();
+        Category cat = (Category) categorySpinner.getSelectedItem();
         String com = comment.getText().toString();
 
         Donation donation = new Donation(n, loc, val, sDes, fDes, com, photo);
+        Donation donation = new Donation(n, loc, val, sDes, fDes, cat, com);
         model.addDonation(donation);
 
         Intent backtoLocationPageIntent = new Intent(this, PageLocation.class);
