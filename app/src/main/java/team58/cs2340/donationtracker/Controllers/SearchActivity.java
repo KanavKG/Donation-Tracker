@@ -1,4 +1,4 @@
-package team58.cs2340.donationtracker;
+package team58.cs2340.donationtracker.Controllers;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import java.util.List;
 import team58.cs2340.donationtracker.Models.Category;
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.Model;
+import team58.cs2340.donationtracker.R;
 
 public class SearchActivity extends AppCompatActivity {
 

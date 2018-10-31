@@ -22,7 +22,7 @@
         <activity android:name=".Controllers.LocationItemDetails" />
         <activity android:name=".Controllers.AddDonation" />
         <activity android:name=".Controllers.PageLocation" />
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".Controllers.SearchActivity"></activity>
     </application>
 
 </manifest>

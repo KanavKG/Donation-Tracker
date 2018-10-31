@@ -1,7 +1,6 @@
 package team58.cs2340.donationtracker.Controllers;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,16 +8,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import team58.cs2340.donationtracker.Models.Location;
-import team58.cs2340.donationtracker.Models.LocationType;
 import team58.cs2340.donationtracker.Models.Model;
 import team58.cs2340.donationtracker.R;
 
@@ -55,6 +47,10 @@ public class LocationList extends AppCompatActivity{
                 startActivity(logoutIntent);
                 Model.getInstance().clearCurrentUser();
                 Toast.makeText(getApplicationContext(), "Logout Successful!",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.search:
+                Intent searchIntent = new Intent(this, SearchActivity.class);
+                startActivity(searchIntent);
                 break;
         }
     }
