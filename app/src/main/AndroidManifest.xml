@@ -22,6 +22,8 @@
         <activity android:name=".Controllers.LocationItemDetails" />
         <activity android:name=".Controllers.AddDonation" />
         <activity android:name=".Controllers.PageLocation" />
+        <activity android:name=".Controllers.DonationItemDetail"></activity>
+        <activity android:name=".Controllers.PageLocation" />
         <activity android:name=".Controllers.SearchActivity"></activity>
     </application>
 
