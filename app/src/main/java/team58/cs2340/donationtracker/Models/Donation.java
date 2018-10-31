@@ -5,8 +5,8 @@ import java.util.Date;
 public class Donation implements Serializable{
 
     private Date timeStamp;
-    private Location location;
     private String name;
+    private Location location;
     private double value;
     private String shortDescription;
     private String fullDescription;
@@ -16,15 +16,15 @@ public class Donation implements Serializable{
 
     public Donation() { }
 
-    public Donation( Date timeStamp, String name, Location location, double value,
-                    String shortDescription, String fullDescription, String comment) {
+    public Donation(Date timeStamp, String name, Location location, double value,
+                    String shortDescription, String fullDescription, Category category, String comment) {
         this.timeStamp = timeStamp;
-        this.location = location;
         this.name = name;
         this.location = location;
         this.value = value;
         this.shortDescription = shortDescription;
         this.fullDescription = fullDescription;
+        this.category = category;
         this.comment = comment;
     }
 
@@ -85,28 +85,12 @@ public class Donation implements Serializable{
         return category;
     }
 
-    public String getComment() {
-        return comment;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
-    public void setFullDescription(String fullDescription) {
-        this.fullDescription = fullDescription;
-    }
-
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getComment() {
+        return comment;
     }
 
     public void setComment(String comment) {
