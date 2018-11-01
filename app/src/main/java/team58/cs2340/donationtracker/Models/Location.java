@@ -23,7 +23,6 @@ public class Location implements Serializable{
                     String zip, LocationType type, String phoneNumber,
                     String website) {
         this.key = key;
-
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -43,9 +42,11 @@ public class Location implements Serializable{
     public void setKey(int key) {
         this.key = key;
     }
+
     public String getName() {
         return name;
     }
+    
     public void setName(String name) {
         this.name = name;
     }
