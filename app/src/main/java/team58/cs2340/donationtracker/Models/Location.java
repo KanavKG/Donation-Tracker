@@ -127,4 +127,19 @@ public class Location implements Serializable{
     public String toString() {
         return this.name;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Location)) {
+            return false;
+        }
+        Location that = (Location) obj;
+        return this.name.equals(that.name);
+    }
 }
