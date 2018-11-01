@@ -5,34 +5,40 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import team58.cs2340.donationtracker.Models.Location;
+import team58.cs2340.donationtracker.Models.LocationManager;
 import team58.cs2340.donationtracker.Models.Model;
+import team58.cs2340.donationtracker.Models.User;
+import team58.cs2340.donationtracker.Models.UserManager;
 import team58.cs2340.donationtracker.R;
 
 public class LocationList extends AppCompatActivity{
 
-    private ArrayList<Location> locations = new ArrayList<>();
+    private LocationManager locationManager;
+    private UserManager userManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Model model = Model.getInstance();
-        locations = model.getLocations();
+        this.locationManager = LocationManager.getInstance();
+        this.userManager = UserManager.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locationlist);
         ListView locationListView = findViewById(R.id.locationList);
-        LocationListAdapter locationAdapter = new LocationListAdapter(this, R.layout.layout_locationitem, locations);
+        LocationListAdapter locationAdapter = new LocationListAdapter(this, R.layout.layout_locationitem, (ArrayList<Location>) locationManager.getLocations());
         locationListView.setAdapter(locationAdapter);
 
         locationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(LocationList.this, PageLocation.class);
-                intent.putExtra("location", locations.get(position));
+                intent.putExtra("location", locationManager.getLocations().get(position));
                 startActivity(intent);
             }
         });
@@ -45,7 +51,7 @@ public class LocationList extends AppCompatActivity{
             case R.id.logoutBtn:
                 Intent logoutIntent = new Intent(this, Welcome.class);
                 startActivity(logoutIntent);
-                Model.getInstance().clearCurrentUser();
+                userManager.clearCurrentUser();
                 Toast.makeText(getApplicationContext(), "Logout Successful!",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.search:

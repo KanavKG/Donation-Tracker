@@ -18,7 +18,8 @@ import java.nio.charset.Charset;
 
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.LocationType;
-import team58.cs2340.donationtracker.Models.Model;
+import team58.cs2340.donationtracker.Models.UserManager;
+import team58.cs2340.donationtracker.Models.LocationManager;
 import team58.cs2340.donationtracker.Models.User;
 import team58.cs2340.donationtracker.Models.Role;
 import team58.cs2340.donationtracker.R;
@@ -33,7 +34,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     private TextView password;
     private TextView confirmPassword;
 
-    private Model model;
+    private UserManager userManager;
+    private LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_registration);
 
 
-        this.model = Model.getInstance();
+        this.userManager = UserManager.getInstance();
+        this.locationManager = LocationManager.getInstance();
         readLocationData();
 
         firstName = findViewById(R.id.firstName);
@@ -56,7 +59,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         roleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roleSpinner.setAdapter(roleAdapter);
 
-        ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, model.getLocations());
+        ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationManager.getLocations());
         locationSpinner.setAdapter(locationAdapter);
 
         roleSpinner.setOnItemSelectedListener(this);
@@ -70,7 +73,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         User user = new User(firstName.getText().toString(), lastName.getText().toString(),
                 email.getText().toString(), password.getText().toString(),
                 (Role) roleSpinner.getSelectedItem(), location);
-        if (model.addUser(email.getText().toString(), user)) {
+        if (userManager.addUser(email.getText().toString(), user)) {
             Toast.makeText(getApplicationContext(), "An account with that email already exists",Toast.LENGTH_LONG).show();
         } else {
             Intent intent = new Intent(this, Login.class);
@@ -115,7 +118,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 else if (tokens[8].equals("Warehouse")) loc.setType(LocationType.WAREHOUSE);
                 loc.setPhoneNumber(tokens[9]);
                 loc.setWebsite(tokens[10]);
-                model.addLocation(loc);
+                locationManager.addLocation(loc);
             }
         } catch (IOException e) {
             e.printStackTrace();

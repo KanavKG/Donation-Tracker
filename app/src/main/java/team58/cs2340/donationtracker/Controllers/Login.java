@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import team58.cs2340.donationtracker.Models.Model;
+import team58.cs2340.donationtracker.Models.UserManager;
 import team58.cs2340.donationtracker.R;
 
 public class Login extends AppCompatActivity {
@@ -15,7 +16,7 @@ public class Login extends AppCompatActivity {
     private TextView email;
     private TextView password;
 
-    private Model model;
+    private UserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class Login extends AppCompatActivity {
         this.email = findViewById(R.id.email);
         this.password = findViewById(R.id.password);
 
-        this.model = Model.getInstance();
+        this.userManager = UserManager.getInstance();
 
     }
 
@@ -34,7 +35,7 @@ public class Login extends AppCompatActivity {
         switch (id) {
             case R.id.login:
                 v.clearFocus();
-                if (model.validLogin(this.email.getText().toString(),
+                if (userManager.validLogin(this.email.getText().toString(),
                         this.password.getText().toString())) {
                     Intent intent = new Intent(this, LocationList.class);
                     startActivity(intent);

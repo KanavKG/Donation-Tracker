@@ -15,14 +15,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import team58.cs2340.donationtracker.Models.Category;
+import team58.cs2340.donationtracker.Models.DonationManager;
+import team58.cs2340.donationtracker.Models.LocationManager;
 import team58.cs2340.donationtracker.Models.Model;
 import team58.cs2340.donationtracker.Models.Donation;
 import team58.cs2340.donationtracker.Models.Location;
+import team58.cs2340.donationtracker.Models.UserManager;
 import team58.cs2340.donationtracker.R;
 
 public class AddDonation extends AppCompatActivity {
 
-    private Model model;
+    private DonationManager donationManager;
+    private LocationManager locationManager;
+    private UserManager userManager;
 
     private TextView name;
     private Spinner locationSpinner;
@@ -41,7 +46,9 @@ public class AddDonation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_donation);
-        this.model = Model.getInstance();
+        this.donationManager = DonationManager.getInstance();
+        this.locationManager = LocationManager.getInstance();
+        this.userManager = UserManager.getInstance();
         this.name = findViewById(R.id.name);
         this.locationSpinner = findViewById(R.id.locationSpinner);
         this.shortDescription = findViewById(R.id.shortDescription);
@@ -58,15 +65,15 @@ public class AddDonation extends AppCompatActivity {
             takePhoto.setVisibility(View.GONE);
         }
 
-        ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, model.getLocations());
+        ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationManager.getLocations());
         locationSpinner.setAdapter(locationAdapter);
 
         ArrayAdapter<Category> categoryArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, Category.values());
         categoryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryArrayAdapter);
 
-        if (model.getCurrentUser().getLocation() != null) {
-            int spinnerPosition = locationAdapter.getPosition(model.getCurrentUser().getLocation());
+        if (userManager.getCurrentUser().getLocation() != null) {
+            int spinnerPosition = locationAdapter.getPosition(userManager.getCurrentUser().getLocation());
             locationSpinner.setSelection(spinnerPosition);
             locationSpinner.setEnabled(false);
         }
@@ -82,7 +89,7 @@ public class AddDonation extends AppCompatActivity {
         String com = comment.getText().toString();
 
         Donation donation = new Donation(n, loc, val, sDes, fDes, com, photo);
-        model.addDonation(donation);
+        donationManager.addDonation(donation);
 
         Intent backtoLocationPageIntent = new Intent(this, PageLocation.class);
         backtoLocationPageIntent.putExtra("location", loc);
