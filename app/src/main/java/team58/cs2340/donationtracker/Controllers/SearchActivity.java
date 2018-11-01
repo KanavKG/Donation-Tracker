@@ -1,15 +1,20 @@
 package team58.cs2340.donationtracker.Controllers;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import team58.cs2340.donationtracker.Models.Category;
+import team58.cs2340.donationtracker.Models.Donation;
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.LocationManager;
 import team58.cs2340.donationtracker.Models.Model;
@@ -24,6 +29,9 @@ public class SearchActivity extends AppCompatActivity {
     private Spinner locationSpinner;
     private List<Location> locations;
     private Spinner categorySpinner;
+    private ListView donationList;
+
+    private ArrayList<Donation> result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +52,20 @@ public class SearchActivity extends AppCompatActivity {
         ArrayAdapter<Category> categoryArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, Category.values());
         categoryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryArrayAdapter);
+
+        donationList = findViewById(R.id.donationList);
+        result = new ArrayList<>();
+        DonationListAdapter donationAdapter = new DonationListAdapter(this, R.layout.layout_donationitem, result);
+        donationList.setAdapter(donationAdapter);
+
+        donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SearchActivity.this, DonationItemDetail.class);
+                intent.putExtra("donation", result.get(position));
+                startActivity(intent);
+            }
+        });
     }
 
     public void onSearchByCategory(View view) {
