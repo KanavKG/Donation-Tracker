@@ -5,6 +5,7 @@ import android.graphics.pdf.PdfDocument;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -87,6 +88,14 @@ public class PageLocation extends AppCompatActivity {
                 startActivity(detailsIntent);
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent a = new Intent(this, LocationList.class);
+        a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(a);
     }
 
 }

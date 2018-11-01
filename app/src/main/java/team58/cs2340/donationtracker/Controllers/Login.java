@@ -47,4 +47,11 @@ public class Login extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent a = new Intent(this, Welcome.class);
+        a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(a);
+    }
 }

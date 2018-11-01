@@ -61,5 +61,10 @@ public class LocationList extends AppCompatActivity{
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
 
 }
