@@ -20,6 +20,10 @@ public class User {
         this.location = location;
     }
 
+    public boolean checkPassword(String password) {
+        return this.password.equals(password);
+    }
+
     public String getFirstName() {
         return firstName;
     }
