@@ -12,14 +12,14 @@ public class Donation implements Serializable{
     private double value;
     private String shortDescription;
     private String fullDescription;
-    Category category;
+    private Category category;
     private String comment;
     private Bitmap photo;
 
     public Donation() { }
 
     public Donation( Date timeStamp, String name, Location location, double value,
-                    String shortDescription, String fullDescription, String comment, Bitmap photo) {
+                    String shortDescription, String fullDescription, Category category, String comment, Bitmap photo) {
         this.timeStamp = timeStamp;
         this.name = name;
         this.location = location;
@@ -32,8 +32,20 @@ public class Donation implements Serializable{
     }
 
     public Donation(String name, Location location, double value, String shortDescription,
-                    String fullDescription, String comment, Bitmap photo) {
-        this(new Date(), name, location, value, shortDescription, fullDescription, comment, photo);
+                    String fullDescription, Category category, String comment, Bitmap photo) {
+        this(new Date(), name, location, value, shortDescription, fullDescription, category, comment, photo);
+    }
+
+    public boolean checkCategory(Category category) {
+        return this.category.equals(category);
+    }
+
+    public boolean checkLocation(Location location) {
+        return this.location.equals(location);
+    }
+
+    public boolean checkName(String name) {
+        return this.name.equals(name);
     }
 
     public Date getTimeStamp() {
