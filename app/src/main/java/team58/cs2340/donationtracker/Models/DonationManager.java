@@ -1,6 +1,8 @@
 package team58.cs2340.donationtracker.Models;
 
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -26,7 +28,10 @@ public class DonationManager {
         return donations;
     }
 
-    public void addDonation(Donation donation) {
+    public void addDonation(String name, Location location, double value, String shortDescription,
+                            String fullDescription, Category category, String comment, Bitmap photo) {
+        Donation donation = new Donation(name, location, value, shortDescription, fullDescription,
+                category, comment, photo);
         donations.add(donation);
     }
 

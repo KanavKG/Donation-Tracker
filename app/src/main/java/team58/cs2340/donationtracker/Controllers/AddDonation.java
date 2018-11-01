@@ -80,19 +80,19 @@ public class AddDonation extends AppCompatActivity {
     }
 
     public void onAddClicked(View view) {
-        String n = name.getText().toString();
-        Location loc = (Location) locationSpinner.getSelectedItem();
-        Double val = Double.parseDouble(value.getText().toString());
-        String sDes = shortDescription.getText().toString();
-        String fDes = fullDescription.getText().toString();
-        Category cat = (Category) categorySpinner.getSelectedItem();
-        String com = comment.getText().toString();
+        String name = this.name.getText().toString();
+        Location location = (Location) locationSpinner.getSelectedItem();
+        Double value = getValue();
+        String shortDescription = this.shortDescription.getText().toString();
+        String fullDescription = this.fullDescription.getText().toString();
+        Category category = (Category) categorySpinner.getSelectedItem();
+        String comment = this.comment.getText().toString();
 
-        Donation donation = new Donation(n, loc, val, sDes, fDes, cat, com, photo);
-        donationManager.addDonation(donation);
+        donationManager.addDonation(name, location, value, shortDescription, fullDescription,
+                category, comment, photo);
 
         Intent backtoLocationPageIntent = new Intent(this, PageLocation.class);
-        backtoLocationPageIntent.putExtra("location", loc);
+        backtoLocationPageIntent.putExtra("location", location);
         startActivity(backtoLocationPageIntent);
     }
 
@@ -110,6 +110,18 @@ public class AddDonation extends AppCompatActivity {
             Bundle extras = data.getExtras();
             photo = (Bitmap) extras.get("data");
             photoView.setImageBitmap(photo);
+        }
+    }
+
+    public double getValue() {
+        if (this.value.getText().toString() == null || this.value.getText().toString().equals("")) {
+            return 0;
+        }
+        double value = Double.parseDouble(this.value.getText().toString());
+        if (value < 0) {
+            return 0;
+        } else {
+            return value;
         }
     }
 }
