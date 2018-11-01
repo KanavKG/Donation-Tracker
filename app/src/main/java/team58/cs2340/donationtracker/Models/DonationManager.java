@@ -24,4 +24,14 @@ public class DonationManager {
     public void addDonation(Donation donation) {
         donations.add(donation);
     }
+
+    public ArrayList<Donation> searchByCategory(Location location, Category category) {
+        return null;
+    }
+
+    public ArrayList<Donation> searchByName(Location location, String name) {
+        return null;
+    }
+
+
 }
