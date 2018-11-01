@@ -24,6 +24,10 @@ public class UserManager {
         this.currentUser = currentUser;
     }
 
+    public void clearCurrentUser() {
+        this.currentUser = null;
+    }
+
     public boolean addUser(String email, User user) {
         return users.put(user.getEmail(), user) != null;
     }
@@ -33,7 +37,7 @@ public class UserManager {
         if (user == null) {
             return false;
         } else if (user.checkPassword(password)) {
-            this.currentUser = user;
+            setCurrentUser(user);
             return true;
         } else {
             return false;
