@@ -17,9 +17,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import team58.cs2340.donationtracker.Models.Donation;
+import team58.cs2340.donationtracker.Models.DonationManager;
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.Model;
 import team58.cs2340.donationtracker.Models.Role;
+import team58.cs2340.donationtracker.Models.UserManager;
 import team58.cs2340.donationtracker.R;
 
 public class PageLocation extends AppCompatActivity {
@@ -30,21 +32,21 @@ public class PageLocation extends AppCompatActivity {
     ArrayAdapter<Donation> adapter;
     ListView donationListView;
 
-    private Model model;
-    private ArrayList<Donation> donations;
+    private UserManager userManager;
+    private DonationManager donationManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_location);
-        this.model = Model.getInstance();
+        this.userManager = UserManager.getInstance();
 
 
 
         Intent intent = getIntent();
         location = (Location) intent.getSerializableExtra("location");
         
-        this.donations = model.getDonations();
-        for (Donation donation : donations) {
+        this.donationManager = DonationManager.getInstance();
+        for (Donation donation : donationManager.getDonations()) {
             if (donation.getLocation().getKey() == location.getKey()) {
                 donationsAtLocation.add(donation);
             }
@@ -57,15 +59,15 @@ public class PageLocation extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(PageLocation.this, DonationItemDetail.class);
-                intent.putExtra("donation", donations.get(position));
+                intent.putExtra("donation", donationManager.getDonations().get(position));
                 startActivity(intent);
             }
         });
         
 
         addItem = findViewById(R.id.addItemBtn);
-        if ((model.getCurrentUser().getRole() == Role.LOCATIONEMPLOYEE && model.getCurrentUser().getLocation().getKey() == location.getKey())
-                || model.getCurrentUser().getRole() == Role.ADMIN) {
+        if ((userManager.getCurrentUser().getRole() == Role.LOCATIONEMPLOYEE && userManager.getCurrentUser().getLocation().getKey() == location.getKey())
+                || userManager.getCurrentUser().getRole() == Role.ADMIN) {
             addItem.setVisibility(View.VISIBLE);
             addItem.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
