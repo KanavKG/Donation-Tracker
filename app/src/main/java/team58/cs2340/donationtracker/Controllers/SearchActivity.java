@@ -31,6 +31,7 @@ public class SearchActivity extends AppCompatActivity {
     private List<Location> locations;
     private Spinner categorySpinner;
     private ListView donationList;
+    private TextView message;
 
     private ArrayList<Donation> result;
     private ArrayAdapter<Donation> donationAdapter;
@@ -47,8 +48,9 @@ public class SearchActivity extends AppCompatActivity {
         this.locationSpinner = findViewById(R.id.locationSpinner);
         this.categorySpinner = findViewById(R.id.categorySpinner);
 
-        locations = locationManager.getLocations();
-        locations.add(0, locationManager.getDefaultAllLocation());
+        locations = new ArrayList<>();
+        locations.add(locationManager.getDefaultAllLocation());
+        locations.addAll(locationManager.getLocations());
         ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locations);
         locationSpinner.setAdapter(locationAdapter);
 
@@ -70,19 +72,30 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        this.message = findViewById(R.id.message);
+        message.setVisibility(View.GONE);
     }
 
     public void onSearchByCategory(View view) {
+        message.setVisibility(View.GONE);
         result = donationManager.searchByCategory((Location) locationSpinner.getSelectedItem(),
                 (Category) categorySpinner.getSelectedItem());
         DonationListAdapter donationAdapter = new DonationListAdapter(this, R.layout.layout_donationitem, result);
         donationList.setAdapter(donationAdapter);
+        if (result.size() == 0) {
+            message.setVisibility(View.VISIBLE);
+        }
     }
 
     public void onSearchByName(View view) {
+        message.setVisibility(View.GONE);
         result = donationManager.searchByName((Location) locationSpinner.getSelectedItem(),
                 name.getText().toString());
         DonationListAdapter donationAdapter = new DonationListAdapter(this, R.layout.layout_donationitem, result);
         donationList.setAdapter(donationAdapter);
+        if (result.size() == 0) {
+            message.setVisibility(View.VISIBLE);
+        }
     }
 }
