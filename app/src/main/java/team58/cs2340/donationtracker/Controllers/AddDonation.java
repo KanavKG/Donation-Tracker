@@ -82,7 +82,6 @@ public class AddDonation extends AppCompatActivity {
         String com = comment.getText().toString();
 
         Donation donation = new Donation(n, loc, val, sDes, fDes, com, photo);
-        Donation donation = new Donation(n, loc, val, sDes, fDes, cat, com);
         model.addDonation(donation);
 
         Intent backtoLocationPageIntent = new Intent(this, PageLocation.class);
