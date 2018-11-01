@@ -108,16 +108,16 @@ public class Donation implements Serializable{
         return comment;
     }
 
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public Bitmap getPhoto() {
         return photo;
     }
 
     public void setPhoto(Bitmap photo) {
         this.photo = photo;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
     @Override
