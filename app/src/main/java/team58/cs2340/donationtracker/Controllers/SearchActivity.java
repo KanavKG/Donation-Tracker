@@ -11,13 +11,14 @@ import java.util.List;
 
 import team58.cs2340.donationtracker.Models.Category;
 import team58.cs2340.donationtracker.Models.Location;
+import team58.cs2340.donationtracker.Models.LocationManager;
 import team58.cs2340.donationtracker.Models.Model;
 import team58.cs2340.donationtracker.R;
 
 public class SearchActivity extends AppCompatActivity {
 
 
-    private Model model;
+    private LocationManager locationManager;
 
     private TextView name;
     private Spinner locationSpinner;
@@ -29,14 +30,14 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        this.model = Model.getInstance();
+        this.locationManager = LocationManager.getInstance();
 
         this.name = findViewById(R.id.name);
         this.locationSpinner = findViewById(R.id.locationSpinner);
         this.categorySpinner = findViewById(R.id.categorySpinner);
 
-        locations = model.getLocations();
-        locations.add(0, model.getDefaultAllLocation());
+        locations = locationManager.getLocations();
+        locations.add(0, locationManager.getDefaultAllLocation());
         ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locations);
         locationSpinner.setAdapter(locationAdapter);
 
@@ -46,10 +47,20 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void onSearchByCategory(View view) {
-
+        if (locationSpinner.getSelectedItem() != locationManager.getDefaultAllLocation()) {
+            //DonationManager.searchByCategory(locationSpinner.getSelectedItem(),
+            //    categorySpinner.getSelectedItem());
+        } else {
+            //DonationManager.searchByCategory(null, categorySpinner.getSelectedItem();
+        }
     }
 
     public void onSearchByName(View view) {
-
+        if (locationSpinner.getSelectedItem() != locationManager.getDefaultAllLocation()) {
+            //DonationManager.searchByName(locationSpinner.getSelectedItem(),
+            //    name.getText().toString());
+        } else {
+            //DonationManager.searchByName(null, name.getText().toString();
+        }
     }
 }
