@@ -15,15 +15,16 @@ import java.util.List;
 
 import team58.cs2340.donationtracker.Models.Category;
 import team58.cs2340.donationtracker.Models.Donation;
+import team58.cs2340.donationtracker.Models.DonationManager;
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.LocationManager;
-import team58.cs2340.donationtracker.Models.Model;
 import team58.cs2340.donationtracker.R;
 
 public class SearchActivity extends AppCompatActivity {
 
 
     private LocationManager locationManager;
+    private DonationManager donationManager;
 
     private TextView name;
     private Spinner locationSpinner;
@@ -32,6 +33,7 @@ public class SearchActivity extends AppCompatActivity {
     private ListView donationList;
 
     private ArrayList<Donation> result;
+    private ArrayAdapter<Donation> donationAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         this.locationManager = LocationManager.getInstance();
+        this.donationManager = DonationManager.getInstance();
 
         this.name = findViewById(R.id.name);
         this.locationSpinner = findViewById(R.id.locationSpinner);
@@ -55,6 +58,7 @@ public class SearchActivity extends AppCompatActivity {
 
         donationList = findViewById(R.id.donationList);
         result = new ArrayList<>();
+
         DonationListAdapter donationAdapter = new DonationListAdapter(this, R.layout.layout_donationitem, result);
         donationList.setAdapter(donationAdapter);
 
@@ -69,20 +73,16 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void onSearchByCategory(View view) {
-        if (locationSpinner.getSelectedItem() != locationManager.getDefaultAllLocation()) {
-            //DonationManager.searchByCategory(locationSpinner.getSelectedItem(),
-            //    categorySpinner.getSelectedItem());
-        } else {
-            //DonationManager.searchByCategory(null, categorySpinner.getSelectedItem();
-        }
+        result = donationManager.searchByCategory((Location) locationSpinner.getSelectedItem(),
+                (Category) categorySpinner.getSelectedItem());
+        DonationListAdapter donationAdapter = new DonationListAdapter(this, R.layout.layout_donationitem, result);
+        donationList.setAdapter(donationAdapter);
     }
 
     public void onSearchByName(View view) {
-        if (locationSpinner.getSelectedItem() != locationManager.getDefaultAllLocation()) {
-            //DonationManager.searchByName(locationSpinner.getSelectedItem(),
-            //    name.getText().toString());
-        } else {
-            //DonationManager.searchByName(null, name.getText().toString();
-        }
+        result = donationManager.searchByName((Location) locationSpinner.getSelectedItem(),
+                name.getText().toString());
+        DonationListAdapter donationAdapter = new DonationListAdapter(this, R.layout.layout_donationitem, result);
+        donationList.setAdapter(donationAdapter);
     }
 }
