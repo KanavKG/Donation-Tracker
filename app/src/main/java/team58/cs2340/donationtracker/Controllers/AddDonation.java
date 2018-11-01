@@ -88,7 +88,7 @@ public class AddDonation extends AppCompatActivity {
         Category cat = (Category) categorySpinner.getSelectedItem();
         String com = comment.getText().toString();
 
-        Donation donation = new Donation(n, loc, val, sDes, fDes, com, photo);
+        Donation donation = new Donation(n, loc, val, sDes, fDes, cat, com, photo);
         donationManager.addDonation(donation);
 
         Intent backtoLocationPageIntent = new Intent(this, PageLocation.class);
