@@ -17,7 +17,7 @@ public class DonationManager {
 
     private DonationManager() {
         this.donations = new ArrayList<>();
-        locationManager = LocationManager.getInstance();
+        this.locationManager = LocationManager.getInstance();
     }
 
     public static DonationManager getInstance() {
