@@ -20,6 +20,18 @@ public class User {
         this.location = location;
     }
 
+    public User(String firstName, String lastName, String email, String password, Role role) {
+        this(firstName, lastName, email, password, role, null);
+    }
+
+    public User(String firstName, String lastName, String email, String password) {
+        this(firstName, lastName, email, password, Role.USER);
+    }
+
+    public User() {
+
+    }
+
     public boolean checkPassword(String password) {
         return this.password.equals(password);
     }
@@ -70,14 +82,6 @@ public class User {
 
     public void setLocation(Location location) {
         this.location = location;
-    }
-
-    public User(String firstName, String lastName, String email, String password, Role role) {
-        this(firstName, lastName, email, password, role, null);
-    }
-
-    public User(String firstName, String lastName, String email, String password) {
-        this(firstName, lastName, email, password, Role.USER);
     }
 
     public boolean equals(Object other) {
