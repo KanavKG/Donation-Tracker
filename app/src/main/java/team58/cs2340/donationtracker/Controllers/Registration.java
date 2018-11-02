@@ -1,8 +1,10 @@
 package team58.cs2340.donationtracker.Controllers;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,11 +12,18 @@ import android.widget.TextView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.LocationType;
@@ -36,6 +45,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
     private UserManager userManager;
     private LocationManager locationManager;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,15 +75,40 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         roleSpinner.setOnItemSelectedListener(this);
 
         locationSpinner.setVisibility(View.GONE);
+
+        db = FirebaseFirestore.getInstance();
     }
 
     public void onRegisterClicked(View view) {
         Location location = (roleSpinner.getSelectedItem() == Role.LOCATIONEMPLOYEE) ?
                 (Location) locationSpinner.getSelectedItem() : null;
-        User user = new User(firstName.getText().toString(), lastName.getText().toString(),
+        Map<String, Object> user = new HashMap<>();
+        user.put("firstName", firstName.getText().toString());
+        user.put("lastName", lastName.getText().toString());
+        user.put("email", email.getText().toString());
+        user.put("password", password.getText().toString());
+        user.put("role", roleSpinner.getSelectedItem().toString());
+        user.put("location", location.toString());
+
+        db.collection("users")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("UPDATE", "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("UPDATE", "Error adding document", e);
+                    }
+                });
+
+        User user1 = new User(firstName.getText().toString(), lastName.getText().toString(),
                 email.getText().toString(), password.getText().toString(),
                 (Role) roleSpinner.getSelectedItem(), location);
-        if (userManager.addUser(email.getText().toString(), user)) {
+        if (userManager.addUser(email.getText().toString(), user1)) {
             Toast.makeText(getApplicationContext(), "An account with that email already exists",Toast.LENGTH_LONG).show();
         } else {
             Intent intent = new Intent(this, Login.class);
