@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,10 +13,18 @@ import android.widget.TextView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,7 +54,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
     private UserManager userManager;
     private LocationManager locationManager;
-    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,44 +85,76 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         locationSpinner.setVisibility(View.GONE);
 
-        db = FirebaseFirestore.getInstance();
+        FirebaseApp.initializeApp(this);
+        FirebaseInstanceId.getInstance().getToken();
+
+        mAuth = FirebaseAuth.getInstance();
     }
 
     public void onRegisterClicked(View view) {
-        Location location = (roleSpinner.getSelectedItem() == Role.LOCATIONEMPLOYEE) ?
-                (Location) locationSpinner.getSelectedItem() : null;
-        Map<String, Object> user = new HashMap<>();
-        user.put("firstName", firstName.getText().toString());
-        user.put("lastName", lastName.getText().toString());
-        user.put("email", email.getText().toString());
-        user.put("password", password.getText().toString());
-        user.put("role", roleSpinner.getSelectedItem().toString());
-        user.put("location", location.toString());
 
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        final Location location = (roleSpinner.getSelectedItem() == Role.LOCATIONEMPLOYEE) ?
+                (Location) locationSpinner.getSelectedItem() : null;
+
+        String useremail = email.getText().toString().trim();
+        String userpass = password.getText().toString().trim();
+
+        if (useremail.isEmpty()) {
+            email.setError("Email is required!");
+            email.requestFocus();
+            return;
+        }
+
+        if (userpass.isEmpty()) {
+            password.setError("Password is required!");
+            password.requestFocus();
+            return;
+        }
+
+        if (!userpass.equals(confirmPassword.getText().toString().trim())) {
+            confirmPassword.setError("Passwords do not match!");
+            password.requestFocus();
+            confirmPassword.requestFocus();
+            return;
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(useremail).matches()) {
+            email.setError("Please enter a valid email!");
+            email.requestFocus();
+            return;
+        }
+
+        if (userpass.length() < 6) {
+            password.setError("Password must be at least 6 characters long!");
+            password.requestFocus();
+            return;
+        }
+
+        mAuth.createUserWithEmailAndPassword(useremail, userpass)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("UPDATE", "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("UPDATE", "Error adding document", e);
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Registration.this, "Registered successfully! :)",
+                                    Toast.LENGTH_SHORT).show();
+                            User user = new User(firstName.getText().toString(), lastName.getText().toString(),
+                                    email.getText().toString(), password.getText().toString(),
+                                    (Role) roleSpinner.getSelectedItem(), location);
+                            userManager.addUser(email.getText().toString(), user);
+                            Intent intent = new Intent(Registration.this, Login.class);
+                            startActivity(intent);
+                        } else {
+                            if(task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                Toast.makeText(Registration.this, "An account with that email already exists",
+                                        Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(Registration.this, task.getException().getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
                     }
                 });
-
-        User user1 = new User(firstName.getText().toString(), lastName.getText().toString(),
-                email.getText().toString(), password.getText().toString(),
-                (Role) roleSpinner.getSelectedItem(), location);
-        if (userManager.addUser(email.getText().toString(), user1)) {
-            Toast.makeText(getApplicationContext(), "An account with that email already exists",Toast.LENGTH_LONG).show();
-        } else {
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
-        }
     }
 
     public void onItemSelected(AdapterView<?> parent, View view,

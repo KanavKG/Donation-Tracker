@@ -1,11 +1,19 @@
 package team58.cs2340.donationtracker.Controllers;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import team58.cs2340.donationtracker.Models.Model;
 import team58.cs2340.donationtracker.Models.UserManager;
@@ -15,7 +23,7 @@ public class Login extends AppCompatActivity {
 
     private TextView email;
     private TextView password;
-
+    private FirebaseAuth mAuth;
     private UserManager userManager;
 
     @Override
@@ -25,6 +33,7 @@ public class Login extends AppCompatActivity {
 
         this.email = findViewById(R.id.email);
         this.password = findViewById(R.id.password);
+        this.mAuth = FirebaseAuth.getInstance();
 
         this.userManager = UserManager.getInstance();
 
@@ -35,15 +44,47 @@ public class Login extends AppCompatActivity {
         switch (id) {
             case R.id.login:
                 v.clearFocus();
-                if (userManager.validLogin(this.email.getText().toString(),
-                        this.password.getText().toString())) {
-                    Intent intent = new Intent(this, LocationList.class);
-                    startActivity(intent);
-                    Toast.makeText(getApplicationContext(), "Welcome",Toast.LENGTH_SHORT).show();
-                } else {
-                    password.setText("");
-                    Toast.makeText(getApplicationContext(), "Username and/or password incorrect!",Toast.LENGTH_LONG).show();
+                String useremail = email.getText().toString().trim();
+                String userpass = password.getText().toString().trim();
+
+                if (useremail.isEmpty()) {
+                    email.setError("Email is required!");
+                    email.requestFocus();
+                    return;
                 }
+
+                if (userpass.isEmpty()) {
+                    password.setError("Password is required!");
+                    password.requestFocus();
+                    return;
+                }
+
+                if (!Patterns.EMAIL_ADDRESS.matcher(useremail).matches()) {
+                    email.setError("Please enter a valid email!");
+                    email.requestFocus();
+                    return;
+                }
+
+                if (userpass.length() < 6) {
+                    password.setError("Password must be at least 6 characters long!");
+                    password.requestFocus();
+                    return;
+                }
+
+                mAuth.signInWithEmailAndPassword(useremail, userpass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Login.this, "Sign in successful! :)",
+                                    Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Login.this, LocationList.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(Login.this, task.getException().getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
                 break;
         }
     }
