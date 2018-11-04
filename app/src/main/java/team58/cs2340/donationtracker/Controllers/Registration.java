@@ -22,6 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -55,6 +56,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     private UserManager userManager;
     private LocationManager locationManager;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         FirebaseInstanceId.getInstance().getToken();
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
     }
 
     public void onRegisterClicked(View view) {
@@ -130,6 +133,21 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             return;
         }
 
+        final String userfirst = firstName.getText().toString().trim();
+        final String userlast = lastName.getText().toString().trim();
+
+        if (userfirst.isEmpty()) {
+            firstName.setError("First name required!");
+            firstName.requestFocus();
+            return;
+        }
+
+        if (userlast.isEmpty()) {
+            lastName.setError("Last name required!");
+            lastName.requestFocus();
+            return;
+        }
+
         mAuth.createUserWithEmailAndPassword(useremail, userpass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -137,10 +155,38 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         if (task.isSuccessful()) {
                             Toast.makeText(Registration.this, "Registered successfully! :)",
                                     Toast.LENGTH_SHORT).show();
-                            User user = new User(firstName.getText().toString(), lastName.getText().toString(),
+                            User user1 = new User(firstName.getText().toString(), lastName.getText().toString(),
                                     email.getText().toString(), password.getText().toString(),
                                     (Role) roleSpinner.getSelectedItem(), location);
-                            userManager.addUser(email.getText().toString(), user);
+                            userManager.addUser(email.getText().toString(), user1);
+
+                            //FirebaseUser user = mAuth.getCurrentUser();
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("UID", mAuth.getCurrentUser().getUid());
+                            user.put("first", userfirst);
+                            user.put("last", userlast);
+                            user.put("role", ((Role) roleSpinner.getSelectedItem()).toString());
+                            if ((Role) roleSpinner.getSelectedItem() == Role.LOCATIONEMPLOYEE) {
+                                user.put("location", location.getName());
+                            }
+
+                            db.collection("users")
+                                    .add(user)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Toast.makeText(Registration.this, "Added user to database.",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(Registration.this, "Failed to add user to database.",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
                             Intent intent = new Intent(Registration.this, Login.class);
                             startActivity(intent);
                         } else {
