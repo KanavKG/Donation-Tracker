@@ -1,19 +1,32 @@
 package team58.cs2340.donationtracker.Models;
 
+import android.util.Log;
+
 import java.util.HashMap;
 
 public class UserManager {
     private static final UserManager instance = new UserManager();
 
+    private FireBaseDB db;
     private HashMap<String, User> users;
     private User currentUser;
 
     private UserManager() {
-        this.users = new HashMap<>(5);
+        this.db = FireBaseDB.getInstance();
+        this.users = db.loadUsers();
+        Log.d("FirebaseDB", "userManager getting users" + users.size());
     }
 
     public static UserManager getInstance() {
         return instance;
+    }
+
+    public void setUsers(HashMap<String, User> users) {
+        this.users = users;
+    }
+
+    public int getUserNum() {
+        return this.users.size();
     }
 
     public User getCurrentUser() {
@@ -29,7 +42,14 @@ public class UserManager {
     }
 
     public boolean addUser(String email, User user) {
-        return users.put(user.getEmail(), user) != null;
+        Log.d("FirebseDB", "adding user UserManager");
+        if (users.containsKey(email)) {
+            return false;
+        } else {
+            users.put(user.getEmail(), user);
+            db.addUser(user);
+            return true;
+        }
     }
 
     public boolean validLogin(String email, String password) {

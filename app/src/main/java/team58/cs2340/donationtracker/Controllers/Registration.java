@@ -73,7 +73,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         User user = new User(firstName.getText().toString(), lastName.getText().toString(),
                 email.getText().toString(), password.getText().toString(),
                 (Role) roleSpinner.getSelectedItem(), location);
-        if (userManager.addUser(email.getText().toString(), user)) {
+        if (!userManager.addUser(email.getText().toString(), user)) {
             Toast.makeText(getApplicationContext(), "An account with that email already exists",Toast.LENGTH_LONG).show();
         } else {
             Intent intent = new Intent(this, Login.class);

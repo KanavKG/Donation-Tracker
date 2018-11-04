@@ -13,11 +13,14 @@ public class DonationManager {
 
     private List<Donation> donations;
     private LocationManager locationManager;
+    private FireBaseDB db;
 
 
     private DonationManager() {
+        this.db = FireBaseDB.getInstance();
         this.donations = new ArrayList<>();
         this.locationManager = LocationManager.getInstance();
+        this.donations = db.loadDonations();
     }
 
     public static DonationManager getInstance() {
@@ -33,6 +36,7 @@ public class DonationManager {
         Donation donation = new Donation(name, location, value, shortDescription, fullDescription,
                 category, comment, photo);
         donations.add(donation);
+        db.addDonation(donation);
     }
 
     public ArrayList<Donation> search(Predicate<Donation> filter) {
@@ -80,6 +84,4 @@ public class DonationManager {
             });
         }
     }
-
-
 }

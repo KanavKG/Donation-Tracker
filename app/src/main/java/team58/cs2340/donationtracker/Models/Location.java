@@ -17,7 +17,10 @@ public class Location implements Serializable{
     private String phoneNumber;
     private String website;
 
-    public Location() { }
+    public Location() {
+
+    }
+
     public Location(int key, String name, double latitude, double longitude,
                     String streetAddress, String city, String state,
                     String zip, LocationType type, String phoneNumber,
