@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +22,6 @@ import java.util.stream.Collectors;
 import team58.cs2340.donationtracker.Models.Donation;
 import team58.cs2340.donationtracker.Models.DonationManager;
 import team58.cs2340.donationtracker.Models.Location;
-import team58.cs2340.donationtracker.Models.Model;
 import team58.cs2340.donationtracker.Models.Role;
 import team58.cs2340.donationtracker.Models.UserManager;
 import team58.cs2340.donationtracker.R;
@@ -32,14 +33,15 @@ public class PageLocation extends AppCompatActivity {
     ArrayList<Donation> donationsAtLocation = new ArrayList<>();
     ArrayAdapter<Donation> adapter;
     ListView donationListView;
+    UserManager userManager;
 
-    private UserManager userManager;
     private DonationManager donationManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_location);
-        this.userManager = UserManager.getInstance();
+
+        userManager = UserManager.getInstance();
 
 
 
@@ -67,12 +69,13 @@ public class PageLocation extends AppCompatActivity {
         
 
         addItem = findViewById(R.id.addItemBtn);
-        if ((userManager.getCurrentUser().getRole() == Role.LOCATIONEMPLOYEE && userManager.getCurrentUser().getLocation().getKey() == location.getKey())
-                || userManager.getCurrentUser().getRole() == Role.ADMIN) {
+        if ((userManager.getCurrentUser().getRole() == Role.LOCATIONEMPLOYEE && userManager.
+                getCurrentUser().getLocation().equals(location.getName()))) {
             addItem.setVisibility(View.VISIBLE);
             addItem.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent addItemIntent = new Intent(PageLocation.this, AddDonation.class);
+                    addItemIntent.putExtra("location", location);
                     startActivity(addItemIntent);
                 }
             });

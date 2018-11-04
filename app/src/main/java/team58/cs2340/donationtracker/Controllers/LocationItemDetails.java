@@ -28,8 +28,8 @@ public class LocationItemDetails extends AppCompatActivity {
 
         locationTitle.setText(location.getName());
         locationType.setText(location.getType().toString());
-        String coords = Double.toString(location.getLatitude()) + ", "
-                + Double.toString(location.getLatitude());
+        String coords = location.getLatitude() + ", "
+                + location.getLongitude();
         locationCoords.setText(coords);
         locationAddress.setText(location.getStreetAddress());
         locationPhone.setText(intent.getStringExtra(location.getPhoneNumber()));

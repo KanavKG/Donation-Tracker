@@ -66,7 +66,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
         this.userManager = UserManager.getInstance();
         this.locationManager = LocationManager.getInstance();
-        readLocationData();
 
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
@@ -210,36 +209,5 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
-    }
-
-    private void readLocationData() {
-        InputStream instream = getResources().openRawResource(R.raw.location_data);
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(instream, Charset.forName("UTF-8")));
-        String ln;
-        try {
-            //skip header line
-            reader.readLine();
-            while ((ln = reader.readLine()) != null) {
-                String[] tokens = ln.split(",");
-                Location loc = new Location();
-                loc.setKey(Integer.parseInt(tokens[0]));
-                loc.setName(tokens[1]);
-                loc.setLatitude(Double.parseDouble(tokens[2]));
-                loc.setLongitude(Double.parseDouble(tokens[3]));
-                loc.setStreetAddress(tokens[4]);
-                loc.setCity(tokens[5]);
-                loc.setState(tokens[6]);
-                loc.setZip(tokens[7]);
-                if (tokens[8].equals("Drop Off")) loc.setType(LocationType.DROPOFF);
-                else if (tokens[8].equals("Store")) loc.setType(LocationType.STORE);
-                else if (tokens[8].equals("Warehouse")) loc.setType(LocationType.WAREHOUSE);
-                loc.setPhoneNumber(tokens[9]);
-                loc.setWebsite(tokens[10]);
-                locationManager.addLocation(loc);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

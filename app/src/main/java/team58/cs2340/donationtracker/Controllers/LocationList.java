@@ -5,32 +5,36 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.LocationManager;
-import team58.cs2340.donationtracker.Models.Model;
-import team58.cs2340.donationtracker.Models.User;
 import team58.cs2340.donationtracker.Models.UserManager;
 import team58.cs2340.donationtracker.R;
 
 public class LocationList extends AppCompatActivity{
 
     private LocationManager locationManager;
-
+    private UserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.locationManager = LocationManager.getInstance();
+        this.userManager = UserManager.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locationlist);
         ListView locationListView = findViewById(R.id.locationList);
+
         LocationListAdapter locationAdapter = new LocationListAdapter(this, R.layout.layout_locationitem, (ArrayList<Location>) locationManager.getLocations());
         locationListView.setAdapter(locationAdapter);
 
@@ -50,6 +54,7 @@ public class LocationList extends AppCompatActivity{
         switch (id) {
             case R.id.logoutBtn:
                 FirebaseAuth.getInstance().signOut();
+                userManager.clearCurrentUser();
                 Intent logoutIntent = new Intent(this, Welcome.class);
                 startActivity(logoutIntent);
                 Toast.makeText(getApplicationContext(), "Logout Successful!",Toast.LENGTH_SHORT).show();

@@ -9,7 +9,7 @@ public class LocationManager {
 
     private List<Location> locations;
 
-    private static final Location defaultAllLocation = new Location(-1, "All Locations", -1, -1,
+    private static final Location defaultAllLocation = new Location(-1, "All Locations", "", "",
                                                                  "", "", "", "", null, "", "");
 
     private LocationManager() {

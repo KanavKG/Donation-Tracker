@@ -17,7 +17,6 @@ import android.widget.TextView;
 import team58.cs2340.donationtracker.Models.Category;
 import team58.cs2340.donationtracker.Models.DonationManager;
 import team58.cs2340.donationtracker.Models.LocationManager;
-import team58.cs2340.donationtracker.Models.Model;
 import team58.cs2340.donationtracker.Models.Donation;
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.UserManager;
@@ -72,8 +71,11 @@ public class AddDonation extends AppCompatActivity {
         categoryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryArrayAdapter);
 
+        Intent intent = getIntent();
+        Location location = (Location) intent.getSerializableExtra("location");
+
         if (userManager.getCurrentUser().getLocation() != null) {
-            int spinnerPosition = locationAdapter.getPosition(userManager.getCurrentUser().getLocation());
+            int spinnerPosition = locationAdapter.getPosition(location);
             locationSpinner.setSelection(spinnerPosition);
             locationSpinner.setEnabled(false);
         }

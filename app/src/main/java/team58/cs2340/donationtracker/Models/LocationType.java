@@ -17,4 +17,13 @@ public enum LocationType {
     public String getTypeName() {
         return this.typeName;
     }
+
+    public static LocationType fromString(String text) {
+        for (LocationType l : LocationType.values()) {
+            if (l.typeName.equalsIgnoreCase(text)) {
+                return l;
+            }
+        }
+        return null;
+    }
 }

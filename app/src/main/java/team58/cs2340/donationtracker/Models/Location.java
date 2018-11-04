@@ -7,8 +7,8 @@ public class Location implements Serializable{
 
     private int key;
     private String name;
-    private double latitude;
-    private double longitude;
+    private String latitude;
+    private String longitude;
     private String streetAddress;
     private String city;
     private String state;
@@ -18,7 +18,7 @@ public class Location implements Serializable{
     private String website;
 
     public Location() { }
-    public Location(int key, String name, double latitude, double longitude,
+    public Location(int key, String name, String latitude, String longitude,
                     String streetAddress, String city, String state,
                     String zip, LocationType type, String phoneNumber,
                     String website) {
@@ -51,19 +51,19 @@ public class Location implements Serializable{
         this.name = name;
     }
 
-    public double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
@@ -103,8 +103,8 @@ public class Location implements Serializable{
         return type;
     }
 
-    public void setType(LocationType type) {
-        this.type = type;
+    public void setType(String type) {
+        this.type = LocationType.valueOf(type);
     }
 
     public String getPhoneNumber() {

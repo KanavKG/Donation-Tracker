@@ -13,9 +13,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
-import team58.cs2340.donationtracker.Models.Model;
+import team58.cs2340.donationtracker.Models.Role;
+import team58.cs2340.donationtracker.Models.User;
 import team58.cs2340.donationtracker.Models.UserManager;
 import team58.cs2340.donationtracker.R;
 
@@ -25,6 +28,7 @@ public class Login extends AppCompatActivity {
     private TextView password;
     private FirebaseAuth mAuth;
     private UserManager userManager;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +38,8 @@ public class Login extends AppCompatActivity {
         this.email = findViewById(R.id.email);
         this.password = findViewById(R.id.password);
         this.mAuth = FirebaseAuth.getInstance();
-
         this.userManager = UserManager.getInstance();
+        this.db = FirebaseFirestore.getInstance();
 
     }
 
@@ -77,6 +81,28 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(Login.this, "Sign in successful! :)",
                                     Toast.LENGTH_SHORT).show();
+                            db.collection("users")
+                                    .whereEqualTo("UID", FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                for (DocumentSnapshot d : task.getResult()) {
+                                                    if (d.getString("role").equals("Location Employee")) {
+                                                        userManager.setCurrentUser(new User(d.getString("first"), d.getString("last"),
+                                                                Role.fromString(d.getString("role")), d.getString("location")));
+                                                    } else {
+                                                        userManager.setCurrentUser(new User());
+                                                    }
+                                                }
+                                            } else {
+                                                Toast.makeText(Login.this, task.getException().getMessage(),
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                            userManager.setCurrentUser(new User());
                             Intent intent = new Intent(Login.this, LocationList.class);
                             startActivity(intent);
                         } else {
