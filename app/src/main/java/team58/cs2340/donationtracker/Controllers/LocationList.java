@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 import team58.cs2340.donationtracker.Models.Location;
@@ -21,13 +23,11 @@ import team58.cs2340.donationtracker.R;
 public class LocationList extends AppCompatActivity{
 
     private LocationManager locationManager;
-    private UserManager userManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.locationManager = LocationManager.getInstance();
-        this.userManager = UserManager.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locationlist);
         ListView locationListView = findViewById(R.id.locationList);
@@ -49,9 +49,9 @@ public class LocationList extends AppCompatActivity{
         int id = v.getId();
         switch (id) {
             case R.id.logoutBtn:
+                FirebaseAuth.getInstance().signOut();
                 Intent logoutIntent = new Intent(this, Welcome.class);
                 startActivity(logoutIntent);
-                userManager.clearCurrentUser();
                 Toast.makeText(getApplicationContext(), "Logout Successful!",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.search:

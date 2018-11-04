@@ -155,10 +155,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                         if (task.isSuccessful()) {
                             Toast.makeText(Registration.this, "Registered successfully! :)",
                                     Toast.LENGTH_SHORT).show();
-                            User user1 = new User(firstName.getText().toString(), lastName.getText().toString(),
-                                    email.getText().toString(), password.getText().toString(),
-                                    (Role) roleSpinner.getSelectedItem(), location);
-                            userManager.addUser(email.getText().toString(), user1);
 
                             //FirebaseUser user = mAuth.getCurrentUser();
                             Map<String, Object> user = new HashMap<>();
