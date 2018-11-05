@@ -28,10 +28,10 @@ public class DonationManager {
         return donations;
     }
 
-    public void addDonation(String name, Location location, double value, String shortDescription,
-                            String fullDescription, Category category, String comment, Bitmap photo) {
+    public void addDonation(String name, String location, double value, String shortDescription,
+                            String fullDescription, Category category, String comment) {
         Donation donation = new Donation(name, location, value, shortDescription, fullDescription,
-                category, comment, photo);
+                category, comment);
         donations.add(donation);
     }
 

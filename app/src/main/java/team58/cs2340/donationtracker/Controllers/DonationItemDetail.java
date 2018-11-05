@@ -18,7 +18,7 @@ public class DonationItemDetail extends AppCompatActivity {
     private TextView fullDescription;
     private TextView comment;
     private TextView timeStamp;
-    ImageView photoView;
+    //ImageView photoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +31,8 @@ public class DonationItemDetail extends AppCompatActivity {
         this.fullDescription = findViewById(R.id.fullDescription);
         this.value = findViewById(R.id.value);
         this.comment = findViewById(R.id.comment);
-        this.timeStamp = findViewById(R.id.timeStamp);
-        this.photoView = findViewById(R.id.photoImage);
+        //this.timeStamp = findViewById(R.id.timeStamp);
+        //this.photoView = findViewById(R.id.photoImage);
 
         Intent intent = getIntent();
         Donation donation  = (Donation) intent.getSerializableExtra("donation");
@@ -43,7 +43,7 @@ public class DonationItemDetail extends AppCompatActivity {
         shortDescription.setText("Short Description: " + donation.getShortDescription());
         fullDescription.setText("Full Description: " + donation.getFullDescription());
         comment.setText("Comment: " + donation.getComment());
-        timeStamp.setText("Time Stamp: " + donation.getTimeStamp());
-        photoView.setImageBitmap(donation.getPhoto());
+        //timeStamp.setText("Time Stamp: " + donation.getTimeStamp());
+       // photoView.setImageBitmap(donation.getPhoto());
     }
 }

@@ -1,14 +1,16 @@
 package team58.cs2340.donationtracker.Models;
 import android.graphics.Bitmap;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class Donation implements Serializable{
 
-    private Date timeStamp;
+    @ServerTimestamp private Date timeStamp;
     private String name;
-    private Location location;
+    private String location;
     private double value;
     private String shortDescription;
     private String fullDescription;
@@ -18,8 +20,8 @@ public class Donation implements Serializable{
 
     public Donation() { }
 
-    public Donation( Date timeStamp, String name, Location location, double value,
-                    String shortDescription, String fullDescription, Category category, String comment, Bitmap photo) {
+    public Donation( Date timeStamp, String name, String location, double value,
+                    String shortDescription, String fullDescription, Category category, String comment) {
         this.timeStamp = timeStamp;
         this.name = name;
         this.location = location;
@@ -28,12 +30,12 @@ public class Donation implements Serializable{
         this.fullDescription = fullDescription;
         this.category = category;
         this.comment = comment;
-        this.photo = photo;
+        //this.photo = photo;
     }
 
-    public Donation(String name, Location location, double value, String shortDescription,
-                    String fullDescription, Category category, String comment, Bitmap photo) {
-        this(new Date(), name, location, value, shortDescription, fullDescription, category, comment, photo);
+    public Donation(String name, String location, double value, String shortDescription,
+                    String fullDescription, Category category, String comment) {
+        this(new Date(), name, location, value, shortDescription, fullDescription, category, comment);
     }
 
     public boolean checkCategory(Category category) {
@@ -56,11 +58,11 @@ public class Donation implements Serializable{
         this.timeStamp = timeStamp;
     }
 
-    public Location getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 

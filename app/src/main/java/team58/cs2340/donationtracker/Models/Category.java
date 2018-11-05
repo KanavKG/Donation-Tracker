@@ -24,4 +24,13 @@ public enum Category {
     public String toString() {
         return this.categoryName;
     }
+
+    public static Category fromString(String text) {
+        for (Category c : Category.values()) {
+            if (c.categoryName.equalsIgnoreCase(text)) {
+                return c;
+            }
+        }
+        return null;
+    }
 }

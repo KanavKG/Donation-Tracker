@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -103,17 +104,18 @@ public class AddDonation extends AppCompatActivity {
         Category category = (Category) categorySpinner.getSelectedItem();
         String comment = this.comment.getText().toString();
 
-        donationManager.addDonation(name, location, value, shortDescription, fullDescription,
-                category, comment, photo);
+        donationManager.addDonation(name, location.getName(), value, shortDescription, fullDescription,
+                category, comment);
 
         Map<String, Object> donation = new HashMap<>();
         donation.put("name", name);
-        donation.put("location", location.getName());
+        donation.put("location", location);
         donation.put("value", Double.toString(value));
         donation.put("shortDescription", shortDescription);
         donation.put("fullDescription", fullDescription);
         donation.put("category", category.toString());
         donation.put("comment", comment);
+        donation.put("timestamp", FieldValue.serverTimestamp());
 
 
         db.collection("donations")
