@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,12 +14,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import team58.cs2340.donationtracker.Models.Category;
 import team58.cs2340.donationtracker.Models.DonationManager;
 import team58.cs2340.donationtracker.Models.LocationManager;
 import team58.cs2340.donationtracker.Models.Donation;
 import team58.cs2340.donationtracker.Models.Location;
+import team58.cs2340.donationtracker.Models.Role;
 import team58.cs2340.donationtracker.Models.UserManager;
 import team58.cs2340.donationtracker.R;
 
@@ -35,7 +46,8 @@ public class AddDonation extends AppCompatActivity {
     private TextView fullDescription;
     private Spinner categorySpinner;
     private TextView comment;
-    private Bitmap photo;
+    private Bitmap photo = null;
+    private FirebaseFirestore db;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     ImageView photoView;
@@ -57,6 +69,7 @@ public class AddDonation extends AppCompatActivity {
         this.comment = findViewById(R.id.comment);
         this.takePhoto = findViewById(R.id.takePhotoBtn);
         this.photoView = findViewById(R.id.photo);
+        this.db = FirebaseFirestore.getInstance();
 
         //Disable button if user has no camera
         if (!hasCamera()) {
@@ -92,6 +105,34 @@ public class AddDonation extends AppCompatActivity {
 
         donationManager.addDonation(name, location, value, shortDescription, fullDescription,
                 category, comment, photo);
+
+        Map<String, Object> donation = new HashMap<>();
+        donation.put("name", name);
+        donation.put("location", location.getName());
+        donation.put("value", Double.toString(value));
+        donation.put("shortDescription", shortDescription);
+        donation.put("fullDescription", fullDescription);
+        donation.put("category", category.toString());
+        donation.put("comment", comment);
+
+
+        db.collection("donations")
+                .add(donation)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(AddDonation.this, "Added donation to database.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddDonation.this, "Failed to add donation to database.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
         Intent backtoLocationPageIntent = new Intent(this, PageLocation.class);
         backtoLocationPageIntent.putExtra("location", location);

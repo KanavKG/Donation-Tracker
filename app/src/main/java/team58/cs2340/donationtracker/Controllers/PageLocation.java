@@ -31,7 +31,6 @@ public class PageLocation extends AppCompatActivity {
     private Button locationDetails;
     private Location location;
     ArrayList<Donation> donationsAtLocation = new ArrayList<>();
-    ArrayAdapter<Donation> adapter;
     ListView donationListView;
     UserManager userManager;
 
@@ -61,9 +60,10 @@ public class PageLocation extends AppCompatActivity {
         donationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(PageLocation.this, DonationItemDetail.class);
-                intent.putExtra("donation", donationManager.getDonations().get(position));
-                startActivity(intent);
+                Toast.makeText(PageLocation.this, "Register", Toast.LENGTH_SHORT).show();
+                Intent donationDetailsintent = new Intent(getApplicationContext(), DonationItemDetail.class);
+                donationDetailsintent.putExtra("donation", donationManager.getDonations().get(position));
+                startActivity(donationDetailsintent);
             }
         });
         
