@@ -57,6 +57,7 @@ public class PageLocation extends AppCompatActivity {
         location = (Location) intent.getSerializableExtra("location");
         
         this.donationManager = DonationManager.getInstance();
+        donationListView = findViewById(R.id.donationList);
        /* for (Donation donation : donationManager.getDonations()) {
             if (donation.getLocation().equals(location.getName())) {
                 donationsAtLocation.add(donation);
@@ -75,6 +76,17 @@ public class PageLocation extends AppCompatActivity {
                                         d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                         d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
                                 donationsAtLocation.add(donation);
+                                DonationListAdapter locationAdapter = new DonationListAdapter(PageLocation.this, R.layout.layout_donationitem, donationsAtLocation);
+                                donationListView.setAdapter(locationAdapter);
+
+                                donationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        Intent donationDetailsintent = new Intent(getApplicationContext(), DonationItemDetail.class);
+                                        donationDetailsintent.putExtra("donation", donationManager.getDonations().get(position));
+                                        startActivity(donationDetailsintent);
+                                    }
+                                });
                             }
                         } else {
                             Toast.makeText(PageLocation.this, task.getException().getMessage(),
@@ -82,22 +94,6 @@ public class PageLocation extends AppCompatActivity {
                         }
                     }
                 });
-
-
-        donationListView = findViewById(R.id.donationList);
-        DonationListAdapter locationAdapter = new DonationListAdapter(this, R.layout.layout_donationitem, donationsAtLocation);
-        donationListView.setAdapter(locationAdapter);
-
-        donationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(PageLocation.this, "Register", Toast.LENGTH_SHORT).show();
-                Intent donationDetailsintent = new Intent(getApplicationContext(), DonationItemDetail.class);
-                donationDetailsintent.putExtra("donation", donationManager.getDonations().get(position));
-                startActivity(donationDetailsintent);
-            }
-        });
-        
 
         addItem = findViewById(R.id.addItemBtn);
         if ((userManager.getCurrentUser().getRole() == Role.LOCATIONEMPLOYEE && userManager.
