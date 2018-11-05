@@ -97,7 +97,7 @@ public class AddDonation extends AppCompatActivity {
 
     public void onAddClicked(View view) {
         String name = this.name.getText().toString();
-        Location location = (Location) locationSpinner.getSelectedItem();
+        final Location location = (Location) locationSpinner.getSelectedItem();
         Double value = getValue();
         String shortDescription = this.shortDescription.getText().toString();
         String fullDescription = this.fullDescription.getText().toString();
@@ -125,6 +125,9 @@ public class AddDonation extends AppCompatActivity {
                     public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(AddDonation.this, "Added donation to database.",
                                 Toast.LENGTH_SHORT).show();
+                        Intent backtoLocationPageIntent = new Intent(AddDonation.this, PageLocation.class);
+                        backtoLocationPageIntent.putExtra("location", location);
+                        startActivity(backtoLocationPageIntent);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -134,11 +137,6 @@ public class AddDonation extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
-        Intent backtoLocationPageIntent = new Intent(this, PageLocation.class);
-        backtoLocationPageIntent.putExtra("location", location);
-        startActivity(backtoLocationPageIntent);
     }
 
     public boolean hasCamera() {
