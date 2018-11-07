@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -96,6 +97,7 @@ public class AddDonation extends AppCompatActivity {
     }
 
     public void onAddClicked(View view) {
+        Log.d("adding","Entering add function");
         String name = this.name.getText().toString();
         final Location location = (Location) locationSpinner.getSelectedItem();
         Double value = getValue();
@@ -109,7 +111,7 @@ public class AddDonation extends AppCompatActivity {
 
         Map<String, Object> donation = new HashMap<>();
         donation.put("name", name);
-        donation.put("location", location);
+        donation.put("location", location.getName());
         donation.put("value", Double.toString(value));
         donation.put("shortDescription", shortDescription);
         donation.put("fullDescription", fullDescription);
@@ -118,13 +120,16 @@ public class AddDonation extends AppCompatActivity {
         donation.put("timestamp", FieldValue.serverTimestamp());
 
 
+        Log.d("adding","Adding donation to DB");
         db.collection("donations")
                 .add(donation)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        Log.d("adding","Added donation to DB");
                         Toast.makeText(AddDonation.this, "Added donation to database.",
                                 Toast.LENGTH_SHORT).show();
+                        Log.d("adding","Starting activity");
                         Intent backtoLocationPageIntent = new Intent(AddDonation.this, PageLocation.class);
                         backtoLocationPageIntent.putExtra("location", location);
                         startActivity(backtoLocationPageIntent);

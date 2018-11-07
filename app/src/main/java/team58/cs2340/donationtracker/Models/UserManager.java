@@ -7,10 +7,6 @@ public class UserManager {
 
     private User currentUser;
 
-    private UserManager() {
-        this.currentUser = null;
-    }
-
     public static UserManager getInstance() {
         return instance;
     }
