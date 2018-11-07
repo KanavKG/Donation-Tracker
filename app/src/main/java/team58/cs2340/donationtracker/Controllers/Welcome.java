@@ -64,7 +64,9 @@ public class Welcome extends AppCompatActivity {
                                         d.getString("streetAddress"), d.getString("city"), d.getString("state"),
                                         d.getString("zip"), LocationType.fromString(d.getString("type")), d.getString("phone"),
                                         d.getString("website"));
-                                locationManager.addLocation(loc);
+                                if(!locationManager.getLocations().contains(loc)) {
+                                    locationManager.addLocation(loc);
+                                }
                             }
                         }
                     }
