@@ -59,11 +59,6 @@ public class PageLocation extends AppCompatActivity {
         
         this.donationManager = DonationManager.getInstance();
         donationListView = findViewById(R.id.donationList);
-       /* for (Donation donation : donationManager.getDonations()) {
-            if (donation.getLocation().equals(location.getName())) {
-                donationsAtLocation.add(donation);
-            }
-        }*/
 
         db.collection("donations")
                 .whereEqualTo("location", location.getName())
@@ -84,7 +79,8 @@ public class PageLocation extends AppCompatActivity {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                         Intent donationDetailsintent = new Intent(getApplicationContext(), DonationItemDetail.class);
-                                        donationDetailsintent.putExtra("donation", donationManager.getDonations().get(position));
+                                        Log.d("donation clicked:", donationsAtLocation.get(position).getName());
+                                        donationDetailsintent.putExtra("donation", donationsAtLocation.get(position));
                                         startActivity(donationDetailsintent);
                                     }
                                 });
