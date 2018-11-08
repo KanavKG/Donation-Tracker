@@ -8,29 +8,24 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import team58.cs2340.donationtracker.Models.Location;
-import team58.cs2340.donationtracker.Models.LocationManager;
-import team58.cs2340.donationtracker.Models.UserManager;
+import team58.cs2340.donationtracker.Models.LocationsLocal;
+import team58.cs2340.donationtracker.Models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
 
 public class LocationList extends AppCompatActivity{
 
-    private LocationManager locationManager;
-    private UserManager userManager;
+    private LocationsLocal locationManager;
+    private CurrUserLocal userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        this.locationManager = LocationManager.getInstance();
-        this.userManager = UserManager.getInstance();
+        this.locationManager = LocationsLocal.getInstance();
+        this.userManager = CurrUserLocal.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locationlist);
         ListView locationListView = findViewById(R.id.locationList);

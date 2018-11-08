@@ -23,13 +23,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 
 import team58.cs2340.donationtracker.Models.Location;
-import team58.cs2340.donationtracker.Models.LocationManager;
+import team58.cs2340.donationtracker.Models.LocationsLocal;
 import team58.cs2340.donationtracker.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private LocationManager locationManager;
+    private LocationsLocal locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        this.locationManager = LocationManager.getInstance();
+        this.locationManager = LocationsLocal.getInstance();
     }
 
 

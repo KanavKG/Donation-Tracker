@@ -3,7 +3,6 @@ package team58.cs2340.donationtracker.Controllers;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -27,15 +26,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import team58.cs2340.donationtracker.Models.Category;
-import team58.cs2340.donationtracker.Models.LocationManager;
+import team58.cs2340.donationtracker.Models.LocationsLocal;
 import team58.cs2340.donationtracker.Models.Location;
-import team58.cs2340.donationtracker.Models.UserManager;
+import team58.cs2340.donationtracker.Models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
 
 public class AddDonation extends AppCompatActivity {
 
-    private LocationManager locationManager;
-    private UserManager userManager;
+    private LocationsLocal locationManager;
+    private CurrUserLocal userManager;
 
     private TextView name;
     private Spinner locationSpinner;
@@ -55,8 +54,8 @@ public class AddDonation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_donation);
-        this.locationManager = LocationManager.getInstance();
-        this.userManager = UserManager.getInstance();
+        this.locationManager = LocationsLocal.getInstance();
+        this.userManager = CurrUserLocal.getInstance();
         this.name = findViewById(R.id.name);
         this.locationSpinner = findViewById(R.id.locationSpinner);
         this.shortDescription = findViewById(R.id.shortDescription);

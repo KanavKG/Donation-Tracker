@@ -11,28 +11,23 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.List;
 
 import team58.cs2340.donationtracker.Models.Location;
-import team58.cs2340.donationtracker.Models.LocationManager;
+import team58.cs2340.donationtracker.Models.LocationsLocal;
 import team58.cs2340.donationtracker.Models.LocationType;
 import team58.cs2340.donationtracker.R;
 
 public class Welcome extends AppCompatActivity {
 
-    LocationManager locationManager;
+    LocationsLocal locationManager;
     FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        locationManager = LocationManager.getInstance();
+        locationManager = LocationsLocal.getInstance();
         db = FirebaseFirestore.getInstance();
         readLocationData();
     }

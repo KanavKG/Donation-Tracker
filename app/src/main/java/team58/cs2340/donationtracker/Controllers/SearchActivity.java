@@ -24,13 +24,13 @@ import java.util.List;
 import team58.cs2340.donationtracker.Models.Category;
 import team58.cs2340.donationtracker.Models.Donation;
 import team58.cs2340.donationtracker.Models.Location;
-import team58.cs2340.donationtracker.Models.LocationManager;
+import team58.cs2340.donationtracker.Models.LocationsLocal;
 import team58.cs2340.donationtracker.R;
 
 public class SearchActivity extends AppCompatActivity {
 
 
-    private LocationManager locationManager;
+    private LocationsLocal locationManager;
 
     private TextView name;
     private Spinner locationSpinner;
@@ -47,7 +47,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        this.locationManager = LocationManager.getInstance();
+        this.locationManager = LocationsLocal.getInstance();
         db = FirebaseFirestore.getInstance();
 
         this.name = findViewById(R.id.name);

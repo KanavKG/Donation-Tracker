@@ -23,7 +23,7 @@ import team58.cs2340.donationtracker.Models.Category;
 import team58.cs2340.donationtracker.Models.Donation;
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.Role;
-import team58.cs2340.donationtracker.Models.UserManager;
+import team58.cs2340.donationtracker.Models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
 
 public class PageLocation extends AppCompatActivity {
@@ -32,14 +32,14 @@ public class PageLocation extends AppCompatActivity {
     private Location location;
     ArrayList<Donation> donationsAtLocation = new ArrayList<>();
     ListView donationListView;
-    UserManager userManager;
+    CurrUserLocal userManager;
     private FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_location);
 
-        userManager = UserManager.getInstance();
+        userManager = CurrUserLocal.getInstance();
         db = FirebaseFirestore.getInstance();
 
 

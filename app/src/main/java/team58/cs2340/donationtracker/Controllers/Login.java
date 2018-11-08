@@ -19,7 +19,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import team58.cs2340.donationtracker.Models.Role;
 import team58.cs2340.donationtracker.Models.User;
-import team58.cs2340.donationtracker.Models.UserManager;
+import team58.cs2340.donationtracker.Models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
 
 public class Login extends AppCompatActivity {
@@ -27,7 +27,7 @@ public class Login extends AppCompatActivity {
     private TextView email;
     private TextView password;
     private FirebaseAuth mAuth;
-    private UserManager userManager;
+    private CurrUserLocal userManager;
     private FirebaseFirestore db;
 
     @Override
@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity {
         this.email = findViewById(R.id.email);
         this.password = findViewById(R.id.password);
         this.mAuth = FirebaseAuth.getInstance();
-        this.userManager = UserManager.getInstance();
+        this.userManager = CurrUserLocal.getInstance();
         this.db = FirebaseFirestore.getInstance();
 
     }

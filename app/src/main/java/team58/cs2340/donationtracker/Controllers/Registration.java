@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,25 +20,16 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
 import team58.cs2340.donationtracker.Models.Location;
-import team58.cs2340.donationtracker.Models.LocationType;
-import team58.cs2340.donationtracker.Models.UserManager;
-import team58.cs2340.donationtracker.Models.LocationManager;
-import team58.cs2340.donationtracker.Models.User;
+import team58.cs2340.donationtracker.Models.CurrUserLocal;
+import team58.cs2340.donationtracker.Models.LocationsLocal;
 import team58.cs2340.donationtracker.Models.Role;
 import team58.cs2340.donationtracker.R;
 
@@ -53,8 +43,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     private TextView password;
     private TextView confirmPassword;
 
-    private UserManager userManager;
-    private LocationManager locationManager;
+    private CurrUserLocal userManager;
+    private LocationsLocal locationManager;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
@@ -64,8 +54,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_registration);
 
 
-        this.userManager = UserManager.getInstance();
-        this.locationManager = LocationManager.getInstance();
+        this.userManager = CurrUserLocal.getInstance();
+        this.locationManager = LocationsLocal.getInstance();
 
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);

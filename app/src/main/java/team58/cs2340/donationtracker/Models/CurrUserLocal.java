@@ -1,13 +1,11 @@
 package team58.cs2340.donationtracker.Models;
 
-import java.util.HashMap;
-
-public class UserManager {
-    private static final UserManager instance = new UserManager();
+public class CurrUserLocal {
+    private static final CurrUserLocal instance = new CurrUserLocal();
 
     private User currentUser;
 
-    public static UserManager getInstance() {
+    public static CurrUserLocal getInstance() {
         return instance;
     }
 
