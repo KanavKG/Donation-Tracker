@@ -27,17 +27,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import team58.cs2340.donationtracker.Models.Category;
-import team58.cs2340.donationtracker.Models.DonationManager;
 import team58.cs2340.donationtracker.Models.LocationManager;
-import team58.cs2340.donationtracker.Models.Donation;
 import team58.cs2340.donationtracker.Models.Location;
-import team58.cs2340.donationtracker.Models.Role;
 import team58.cs2340.donationtracker.Models.UserManager;
 import team58.cs2340.donationtracker.R;
 
 public class AddDonation extends AppCompatActivity {
 
-    private DonationManager donationManager;
     private LocationManager locationManager;
     private UserManager userManager;
 
@@ -59,7 +55,6 @@ public class AddDonation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_donation);
-        this.donationManager = DonationManager.getInstance();
         this.locationManager = LocationManager.getInstance();
         this.userManager = UserManager.getInstance();
         this.name = findViewById(R.id.name);
@@ -105,9 +100,6 @@ public class AddDonation extends AppCompatActivity {
         String fullDescription = this.fullDescription.getText().toString();
         Category category = (Category) categorySpinner.getSelectedItem();
         String comment = this.comment.getText().toString();
-
-        donationManager.addDonation(name, location.getName(), value, shortDescription, fullDescription,
-                category, comment);
 
         Map<String, Object> donation = new HashMap<>();
         donation.put("name", name);

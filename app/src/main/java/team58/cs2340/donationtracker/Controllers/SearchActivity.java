@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,7 +23,6 @@ import java.util.List;
 
 import team58.cs2340.donationtracker.Models.Category;
 import team58.cs2340.donationtracker.Models.Donation;
-import team58.cs2340.donationtracker.Models.DonationManager;
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.LocationManager;
 import team58.cs2340.donationtracker.R;
@@ -33,7 +31,6 @@ public class SearchActivity extends AppCompatActivity {
 
 
     private LocationManager locationManager;
-    private DonationManager donationManager;
 
     private TextView name;
     private Spinner locationSpinner;
@@ -51,7 +48,6 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         this.locationManager = LocationManager.getInstance();
-        this.donationManager = DonationManager.getInstance();
         db = FirebaseFirestore.getInstance();
 
         this.name = findViewById(R.id.name);
@@ -89,11 +85,6 @@ public class SearchActivity extends AppCompatActivity {
 
     public void onSearchByCategory(View view) {
         message.setVisibility(View.GONE);
-        result = donationManager.searchByCategory((Location) locationSpinner.getSelectedItem(),
-                (Category) categorySpinner.getSelectedItem());
-        DonationListAdapter donationAdapter = new DonationListAdapter(this, R.layout.layout_donationitem, result);
-        donationList.setAdapter(donationAdapter);
-
         db.collection("donations")
                 .whereEqualTo("location", ((Location) locationSpinner.getSelectedItem()).getName())
                 .whereEqualTo("category", ((Category) categorySpinner.getSelectedItem()).toString())

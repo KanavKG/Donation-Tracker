@@ -1,37 +1,28 @@
 package team58.cs2340.donationtracker.Controllers;
 
 import android.content.Intent;
-import android.graphics.pdf.PdfDocument;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import team58.cs2340.donationtracker.Models.Category;
 import team58.cs2340.donationtracker.Models.Donation;
-import team58.cs2340.donationtracker.Models.DonationManager;
 import team58.cs2340.donationtracker.Models.Location;
 import team58.cs2340.donationtracker.Models.Role;
-import team58.cs2340.donationtracker.Models.User;
 import team58.cs2340.donationtracker.Models.UserManager;
 import team58.cs2340.donationtracker.R;
 
@@ -43,8 +34,6 @@ public class PageLocation extends AppCompatActivity {
     ListView donationListView;
     UserManager userManager;
     private FirebaseFirestore db;
-
-    private DonationManager donationManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +45,7 @@ public class PageLocation extends AppCompatActivity {
 
         Intent intent = getIntent();
         location = (Location) intent.getSerializableExtra("location");
-        
-        this.donationManager = DonationManager.getInstance();
+
         donationListView = findViewById(R.id.donationList);
 
         db.collection("donations")
