@@ -34,8 +34,9 @@
         <activity android:name=".Controllers.AddDonation" />
         <activity android:name=".Controllers.PageLocation" />
         <activity android:name=".Controllers.DonationItemDetail" />
-        <activity android:name=".Controllers.PageLocation" />
         <activity android:name=".Controllers.SearchActivity" />
+        <uses-library android:required="true" android:name="com.google.android.maps" />
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
