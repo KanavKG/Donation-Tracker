@@ -12,10 +12,6 @@ public class LocationManager {
     private static final Location defaultAllLocation = new Location(-1, "All Locations", "", "",
                                                                  "", "", "", "", null, "", "");
 
-    private LocationManager() {
-        locations = new ArrayList<>();
-    }
-
     public static LocationManager getInstance() {
         return instance;
     }
