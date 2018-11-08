@@ -85,6 +85,7 @@ public class SearchActivity extends AppCompatActivity {
 
     public void onSearchByCategory(View view) {
         message.setVisibility(View.GONE);
+        result.clear();
         db.collection("donations")
                 .whereEqualTo("location", ((Location) locationSpinner.getSelectedItem()).getName())
                 .whereEqualTo("category", ((Category) categorySpinner.getSelectedItem()).toString())
@@ -115,28 +116,53 @@ public class SearchActivity extends AppCompatActivity {
 
     public void onSearchByName(View view) {
         message.setVisibility(View.GONE);
-        db.collection("donations")
-                .whereEqualTo("location", ((Location) locationSpinner.getSelectedItem()).getName())
-                .whereEqualTo("name", name.getText().toString())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (DocumentSnapshot d : task.getResult()) {
-                                Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
-                                        d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
-                                        d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
-                                result.add(donation);
-                                DonationListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, R.layout.layout_donationitem, result);
-                                donationList.setAdapter(donationAdapter);
+        result.clear();
+        if ((Location) locationSpinner.getSelectedItem() == locationManager.getDefaultAllLocation()) {
+            db.collection("donations")
+                    .whereEqualTo("name", name.getText().toString())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot d : task.getResult()) {
+                                    Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
+                                            d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
+                                            d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
+                                    result.add(donation);
+                                    DonationListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, R.layout.layout_donationitem, result);
+                                    donationList.setAdapter(donationAdapter);
+                                }
+                            } else {
+                                Toast.makeText(SearchActivity.this, task.getException().getMessage(),
+                                        Toast.LENGTH_SHORT).show();
                             }
-                        } else {
-                            Toast.makeText(SearchActivity.this, task.getException().getMessage(),
-                                    Toast.LENGTH_SHORT).show();
                         }
-                    }
-                });
+                    });
+        } else {
+            db.collection("donations")
+                    .whereEqualTo("location", ((Location) locationSpinner.getSelectedItem()).getName())
+                    .whereEqualTo("name", name.getText().toString())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (DocumentSnapshot d : task.getResult()) {
+                                    Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
+                                            d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
+                                            d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
+                                    result.add(donation);
+                                    DonationListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, R.layout.layout_donationitem, result);
+                                    donationList.setAdapter(donationAdapter);
+                                }
+                            } else {
+                                Toast.makeText(SearchActivity.this, task.getException().getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
         if (result.size() == 0) {
             message.setVisibility(View.VISIBLE);
         }

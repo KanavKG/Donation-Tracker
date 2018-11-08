@@ -16,10 +16,6 @@ public class LocationsLocal {
     private static final Location defaultAllLocation = new Location(-1, "All Locations", "", "",
             "", "", "", "", null, "", "");
 
-    public Location getDefaultAllLocation() {
-        return defaultAllLocation;
-    }
-
     public static LocationsLocal getInstance() {
         return instance;
     }
@@ -30,5 +26,9 @@ public class LocationsLocal {
 
     public void addLocation(Location location) {
         locations.add(location);
+    }
+
+    public static Location getDefaultAllLocation() {
+        return defaultAllLocation;
     }
 }
