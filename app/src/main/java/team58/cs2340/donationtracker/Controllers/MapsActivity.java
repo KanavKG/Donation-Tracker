@@ -28,6 +28,8 @@ import team58.cs2340.donationtracker.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    private static final int mapPadding = 200;
+
     private GoogleMap mMap;
     private LocationsLocal locationManager;
 
@@ -58,11 +60,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        // Add a marker in Atlanta and move the camera
-        LatLng atl = new LatLng(33.7490, -84.3880);
-        //mMap.addMarker(new MarkerOptions().position(atl).title("Marker in Atlanta"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(atl));
-
         List<Location> locations = locationManager.getLocations();
 
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
@@ -76,7 +73,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         LatLngBounds bounds = builder.build();
-        int padding = 200; // offset from edges of the map in pixels
+        int padding = mapPadding; // offset from edges of the map in pixels
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
         googleMap.animateCamera(cu);
 
