@@ -55,7 +55,7 @@ public class LocationList extends AppCompatActivity{
                 Toast.makeText(getApplicationContext(), "Logout Successful!",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.search:
-                Intent searchIntent = new Intent(this, SearchActivity.class);
+                Intent searchIntent = new Intent(this, SearchDonationsActivity.class);
                 startActivity(searchIntent);
                 break;
             case R.id.map:
