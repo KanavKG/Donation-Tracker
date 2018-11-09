@@ -44,17 +44,11 @@
             android:text="Address:" />
 
         <TextView
-            android:id="@+id/coordsTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:text="Coordinates:" />
-
-        <TextView
             android:id="@+id/phoneTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
+            android:autoLink="phone"
             android:text="phone number:" />
 
         <TextView

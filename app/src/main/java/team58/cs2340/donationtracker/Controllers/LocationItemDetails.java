@@ -4,6 +4,8 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -32,7 +34,6 @@ public class LocationItemDetails extends AppCompatActivity implements OnMapReady
 
         TextView locationTitle = findViewById(R.id.locationTitleTxt);
         TextView locationType = findViewById(R.id.typeTxt);
-        TextView locationCoords = findViewById(R.id.coordsTxt);
         TextView locationAddress = findViewById(R.id.streetAddressTxt);
         TextView locationPhone = findViewById(R.id.phoneTxt);
         TextView locationWebsite = findViewById(R.id.websiteTxt);
@@ -46,12 +47,11 @@ public class LocationItemDetails extends AppCompatActivity implements OnMapReady
 
         locationTitle.setText(location.getName());
         locationType.setText(location.getType().toString());
-        String coords = location.getLatitude() + ", "
-                + location.getLongitude();
-        locationCoords.setText("Coordinates: " + coords);
         locationAddress.setText("Address: " + location.getStreetAddress());
         locationPhone.setText("Phone Number: " + location.getPhoneNumber());
-        locationWebsite.setText("Website: " + location.getWebsite());
+        locationWebsite.setClickable(true);
+        locationWebsite.setMovementMethod(LinkMovementMethod.getInstance());
+        locationWebsite.setText(Html.fromHtml("Website: " + "<a href='" + location.getWebsite() + "'>" + location.getWebsite() + "</a>"));
 
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager()
