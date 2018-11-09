@@ -77,8 +77,8 @@ public class SearchDonationsActivity extends AppCompatActivity {
         String category = (String) categorySpinner.getSelectedItem();
         final String searchQuery = searchTxt.getText().toString();
 
-        final ArrayList<Donation> donationsFiltered = new ArrayList<>();
-        final DonationNameToStringFunc dnFunc = new DonationNameToStringFunc();
+        //final ArrayList<Donation> donationsFiltered = new ArrayList<>();
+        //final DonationNameToStringFunc dnFunc = new DonationNameToStringFunc();
         final ArrayList<Donation> donationsQueryResults = new ArrayList<>();
 
         if (location.equals("All Locations") && category.equals("All Categories")) {
@@ -253,10 +253,10 @@ public class SearchDonationsActivity extends AppCompatActivity {
                     });
         }
     }
-    class DonationNameToStringFunc implements ToStringFunction<Donation> {
+    /*class DonationNameToStringFunc implements ToStringFunction<Donation> {
         @Override
         public String apply(Donation item) {
             return item.getName();
         }
-    }
+    }*/
 }
