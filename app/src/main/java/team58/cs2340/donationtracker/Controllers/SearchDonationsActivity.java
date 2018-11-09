@@ -1,9 +1,11 @@
 package team58.cs2340.donationtracker.Controllers;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -98,6 +100,15 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 }
                                 DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
+
+                                donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        Intent intent = new Intent(SearchDonationsActivity.this, DonationItemDetail.class);
+                                        intent.putExtra("donation", donationsQueryResults.get(position));
+                                        startActivity(intent);
+                                    }
+                                });
                             } else {
                                 Toast.makeText(SearchDonationsActivity.this, task.getException().getMessage(),
                                         Toast.LENGTH_SHORT).show();
@@ -125,6 +136,15 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 }
                                 DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
+
+                                donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        Intent intent = new Intent(SearchDonationsActivity.this, DonationItemDetail.class);
+                                        intent.putExtra("donation", donationsQueryResults.get(position));
+                                        startActivity(intent);
+                                    }
+                                });
                             } else {
                                 Toast.makeText(SearchDonationsActivity.this, task.getException().getMessage(),
                                         Toast.LENGTH_SHORT).show();
@@ -152,6 +172,15 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 }
                                 DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
+
+                                donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        Intent intent = new Intent(SearchDonationsActivity.this, DonationItemDetail.class);
+                                        intent.putExtra("donation", donationsQueryResults.get(position));
+                                        startActivity(intent);
+                                    }
+                                });
                             } else {
                                 Toast.makeText(SearchDonationsActivity.this, task.getException().getMessage(),
                                         Toast.LENGTH_SHORT).show();
@@ -179,6 +208,15 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 }
                                 DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
+
+                                donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        Intent intent = new Intent(SearchDonationsActivity.this, DonationItemDetail.class);
+                                        intent.putExtra("donation", donationsQueryResults.get(position));
+                                        startActivity(intent);
+                                    }
+                                });
                             } else {
                                 Toast.makeText(SearchDonationsActivity.this, task.getException().getMessage(),
                                         Toast.LENGTH_SHORT).show();
