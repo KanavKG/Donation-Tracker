@@ -89,15 +89,22 @@ public class SearchDonationsActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : task.getResult()) {
-                                    Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
+                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= 60) {
+                                        Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
+                                                d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
+                                                d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
+                                        donationsQueryResults.add(donation);
+                                    }
+
+                                    /*Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                             d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                             d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
-                                    donationsFiltered.add(donation);
+                                    donationsFiltered.add(donation);*/
                                 }
-                                List<BoundExtractedResult<Donation>> matches = FuzzySearch.extractTop(searchQuery, donationsFiltered, dnFunc, 5);
+                                /*List<BoundExtractedResult<Donation>> matches = FuzzySearch.extractTop(searchQuery, donationsFiltered, dnFunc, 5);
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
-                                }
+                                }*/
                                 DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
@@ -125,15 +132,22 @@ public class SearchDonationsActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : task.getResult()) {
-                                    Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
+                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= 60) {
+                                        Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
+                                                d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
+                                                d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
+                                        donationsQueryResults.add(donation);
+                                    }
+
+                                    /*Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                             d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                             d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
-                                    donationsFiltered.add(donation);
+                                    donationsFiltered.add(donation);*/
                                 }
-                                List<BoundExtractedResult<Donation>> matches = FuzzySearch.extractTop(searchQuery, donationsFiltered, dnFunc, 5);
+                                /*List<BoundExtractedResult<Donation>> matches = FuzzySearch.extractTop(searchQuery, donationsFiltered, dnFunc, 5);
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
-                                }
+                                }*/
                                 DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
@@ -161,15 +175,22 @@ public class SearchDonationsActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : task.getResult()) {
-                                    Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
+                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= 60) {
+                                        Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
+                                                d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
+                                                d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
+                                        donationsQueryResults.add(donation);
+                                    }
+
+                                    /*Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                             d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                             d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
-                                    donationsFiltered.add(donation);
+                                    donationsFiltered.add(donation);*/
                                 }
-                                List<BoundExtractedResult<Donation>> matches = FuzzySearch.extractTop(searchQuery, donationsFiltered, dnFunc, 5);
+                                /*List<BoundExtractedResult<Donation>> matches = FuzzySearch.extractTop(searchQuery, donationsFiltered, dnFunc, 5);
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
-                                }
+                                }*/
                                 DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
@@ -197,15 +218,22 @@ public class SearchDonationsActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : task.getResult()) {
-                                    Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
+                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= 60) {
+                                        Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
+                                                d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
+                                                d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
+                                        donationsQueryResults.add(donation);
+                                    }
+
+                                    /*Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                             d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                             d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
-                                    donationsFiltered.add(donation);
+                                    donationsFiltered.add(donation);*/
                                 }
-                                List<BoundExtractedResult<Donation>> matches = FuzzySearch.extractTop(searchQuery, donationsFiltered, dnFunc, 5);
+                                /*List<BoundExtractedResult<Donation>> matches = FuzzySearch.extractTop(searchQuery, donationsFiltered, dnFunc, 5);
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
-                                }
+                                }*/
                                 DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
