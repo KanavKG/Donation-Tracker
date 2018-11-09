@@ -61,13 +61,8 @@ public class LocationItemDetails extends AppCompatActivity implements OnMapReady
 
     @Override
     public void onMapReady(GoogleMap locMap) {
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
         LatLng locationPos = new LatLng(locLat, locLng);
-        builder.include(locationPos);
-        LatLngBounds bounds = builder.build();
-        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
-        locMap.animateCamera(cu);
-
+        locMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationPos, 16.0f));
         locMap.addMarker(new MarkerOptions().position(locationPos).title(locName));
     }
 }
