@@ -31,7 +31,7 @@ public class DonationItemDetail extends AppCompatActivity {
         this.fullDescription = findViewById(R.id.fullDescription);
         this.value = findViewById(R.id.value);
         this.comment = findViewById(R.id.comment);
-        //this.timeStamp = findViewById(R.id.timeStamp);
+        this.timeStamp = findViewById(R.id.timeStamp);
         //this.photoView = findViewById(R.id.photoImage);
 
         Intent intent = getIntent();
@@ -43,7 +43,7 @@ public class DonationItemDetail extends AppCompatActivity {
         shortDescription.setText("Short Description: " + donation.getShortDescription());
         fullDescription.setText("Full Description: " + donation.getFullDescription());
         comment.setText("Comment: " + donation.getComment());
-        //timeStamp.setText("Time Stamp: " + donation.getTimeStamp());
+        timeStamp.setText("Time Stamp: " + donation.getTimeStamp());
        // photoView.setImageBitmap(donation.getPhoto());
     }
 }
