@@ -30,9 +30,9 @@ public class LocationItemDetails extends AppCompatActivity {
         locationType.setText(location.getType().toString());
         String coords = location.getLatitude() + ", "
                 + location.getLongitude();
-        locationCoords.setText(coords);
-        locationAddress.setText(location.getStreetAddress());
-        locationPhone.setText(intent.getStringExtra(location.getPhoneNumber()));
-        locationWebsite.setText(intent.getStringExtra(location.getWebsite()));
+        locationCoords.setText("Coordinates: " + coords);
+        locationAddress.setText("Address: " + location.getStreetAddress());
+        locationPhone.setText("Phone Number: " + location.getPhoneNumber());
+        locationWebsite.setText("Website: " + location.getWebsite());
     }
 }
