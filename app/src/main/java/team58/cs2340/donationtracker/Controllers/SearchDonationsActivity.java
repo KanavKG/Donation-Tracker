@@ -40,6 +40,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
     private Spinner categorySpinner;
     private EditText searchTxt;
     private ListView donationList;
+    private TextView nfMessageText;
 
     private LocationsLocal locationManager;
     private FirebaseFirestore db;
@@ -53,6 +54,8 @@ public class SearchDonationsActivity extends AppCompatActivity {
         categorySpinner = findViewById(R.id.categorySpinner);
         searchTxt = findViewById(R.id.searchText);
         donationList = findViewById(R.id.donationSearchList);
+        nfMessageText = findViewById(R.id.nothingFoundText);
+        nfMessageText.setVisibility(View.GONE);
 
         db = FirebaseFirestore.getInstance();
         LocationsLocal locationManager = LocationsLocal.getInstance();
@@ -73,6 +76,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
     }
 
     public void onSearchClick(View view) {
+        nfMessageText.setVisibility(View.GONE);
         String location = ((Location) locationSpinner.getSelectedItem()).getName();
         String category = (String) categorySpinner.getSelectedItem();
         final String searchQuery = searchTxt.getText().toString();
@@ -105,6 +109,9 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
                                 }*/
+                                if (donationsQueryResults.size() == 0) {
+                                    nfMessageText.setVisibility(View.VISIBLE);
+                                }
                                 DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
@@ -148,6 +155,9 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
                                 }*/
+                                if (donationsQueryResults.size() == 0) {
+                                    nfMessageText.setVisibility(View.VISIBLE);
+                                }
                                 DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
@@ -191,6 +201,9 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
                                 }*/
+                                if (donationsQueryResults.size() == 0) {
+                                    nfMessageText.setVisibility(View.VISIBLE);
+                                }
                                 DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
@@ -234,6 +247,9 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
                                 }*/
+                                if (donationsQueryResults.size() == 0) {
+                                    nfMessageText.setVisibility(View.VISIBLE);
+                                }
                                 DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
