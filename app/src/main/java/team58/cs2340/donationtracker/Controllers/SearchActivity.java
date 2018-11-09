@@ -21,6 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.xdrop.fuzzywuzzy.FuzzySearch;
 import team58.cs2340.donationtracker.Models.Category;
 import team58.cs2340.donationtracker.Models.Donation;
 import team58.cs2340.donationtracker.Models.Location;
@@ -84,6 +85,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void onSearchByCategory(View view) {
+
         message.setVisibility(View.GONE);
         result.clear();
         db.collection("donations")
