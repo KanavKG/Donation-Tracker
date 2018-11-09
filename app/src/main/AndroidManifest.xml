@@ -34,7 +34,6 @@
         <activity android:name=".Controllers.AddDonation" />
         <activity android:name=".Controllers.PageLocation" />
         <activity android:name=".Controllers.DonationItemDetail" />
-        <activity android:name=".Controllers.SearchActivity" />
 
         <uses-library
             android:name="com.google.android.maps"
