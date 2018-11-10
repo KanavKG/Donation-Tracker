@@ -15,7 +15,7 @@ public enum Category {
 
 
 
-    private String categoryName;
+    private final String categoryName;
 
     Category(String categoryName) {
         this.categoryName = categoryName;

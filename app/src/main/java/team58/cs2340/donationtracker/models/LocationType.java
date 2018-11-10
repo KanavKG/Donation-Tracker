@@ -8,7 +8,7 @@ public enum LocationType {
     STORE("Store"),
     WAREHOUSE("Warehouse");
 
-    private String typeName;
+    private final String typeName;
 
     LocationType (String typeName) {
         this.typeName = typeName;

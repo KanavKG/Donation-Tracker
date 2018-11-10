@@ -8,7 +8,7 @@ public enum Role {
     LOCATIONEMPLOYEE("Location Employee"),
     ADMIN("Admin");
 
-    private String roleName;
+    private final String roleName;
 
     Role (String roleName) {
         this.roleName = roleName;
