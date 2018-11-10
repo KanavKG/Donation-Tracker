@@ -264,7 +264,7 @@ public class AddDonation extends AppCompatActivity {
      * @return Double value of item
      */
     public double getValue() {
-        if (this.value.getText().toString().equals("")) {
+        if ("".equals(this.value.getText().toString())) {
             return 0;
         }
         double value = Double.parseDouble(this.value.getText().toString());

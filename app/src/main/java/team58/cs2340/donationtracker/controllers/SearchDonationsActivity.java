@@ -86,7 +86,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
         //final DonationNameToStringFunc dnFunc = new DonationNameToStringFunc();
         final ArrayList<Donation> donationsQueryResults = new ArrayList<>();
 
-        if (location.equals("All Locations") && category.equals("All Categories")) {
+        if ("All Locations".equals(location) && "All Categories".equals(category)) {
             db.collection("donations")
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -131,7 +131,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                         }
                     });
 
-        } else if (location.equals("All Locations")) {
+        } else if ("All Locations".equals(location)) {
             db.collection("donations")
                     .whereEqualTo("category", category)
                     .get()
@@ -177,7 +177,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                         }
                     });
 
-        } else if (category.equals("All Categories")) {
+        } else if ("All Categories".equals(category)) {
             db.collection("donations")
                     .whereEqualTo("location", location)
                     .get()

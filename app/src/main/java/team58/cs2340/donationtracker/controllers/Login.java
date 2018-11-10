@@ -93,7 +93,7 @@ public class Login extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                             if (task.isSuccessful()) {
                                                 for (DocumentSnapshot d : task.getResult()) {
-                                                    if (d.getString("role").equals("Location Employee")) {
+                                                    if ("Location Employee".equals(d.getString("role"))) {
                                                         userManager.setCurrentUser(new User(d.getString("first"), d.getString("last"),
                                                                 Role.fromString(d.getString("role")), d.getString("location")));
                                                     } else {
