@@ -88,9 +88,9 @@ public class User {
 
     @Override
     public boolean equals(Object other) {
-        if (null == other) return false;
-        if (this == other) return true;
-        if (!(other instanceof User)) return false;
+        if (null == other) { return false; }
+        if (this == other) { return true; }
+        if (!(other instanceof User)) { return false; }
         User that = (User) other;
         return this.hashCode() == that.hashCode();
     }
