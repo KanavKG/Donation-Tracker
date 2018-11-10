@@ -19,7 +19,8 @@ import team58.cs2340.donationtracker.R;
 
 public class LocationItemDetails extends AppCompatActivity implements OnMapReadyCallback {
 
-    private double locLat, locLng;
+    private double locLat;
+    private double locLng;
     private String locName;
     private static final int MAP_BUFFER = 16;
 
