@@ -97,6 +97,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return (31 * 17 + this.lastName.hashCode() + this.firstName.hashCode());
+        return ((31 * 17) + this.lastName.hashCode() + this.firstName.hashCode());
     }
 }

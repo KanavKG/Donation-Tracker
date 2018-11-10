@@ -138,7 +138,7 @@ public class AddDonation extends AppCompatActivity {
         if (comment.isEmpty()) {
             comment = "";
         }
-        if (hasCamera() && mPhotoPath == null) {
+        if (hasCamera() && (mPhotoPath == null)) {
             Toast.makeText(AddDonation.this, "Take a picture!",
                     Toast.LENGTH_SHORT).show();
             this.photoView.requestFocus();
@@ -251,7 +251,7 @@ public class AddDonation extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        if((requestCode == REQUEST_IMAGE_CAPTURE) && (resultCode == RESULT_OK)) {
             File imgFile = new  File(mPhotoPath);
             if(imgFile.exists())            {
                 photoView.setImageURI(Uri.fromFile(imgFile));

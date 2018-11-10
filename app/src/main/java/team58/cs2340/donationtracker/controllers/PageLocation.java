@@ -82,7 +82,7 @@ public class PageLocation extends AppCompatActivity {
                 });
 
         addItem = findViewById(R.id.addItemBtn);
-        if ((userManager.getCurrentUser().getRole() == Role.LOCATIONEMPLOYEE && userManager.
+        if (((userManager.getCurrentUser().getRole() == Role.LOCATIONEMPLOYEE) && userManager.
                 getCurrentUser().getLocation().equals(location.getName()))) {
             addItem.setVisibility(View.VISIBLE);
             addItem.setOnClickListener(new View.OnClickListener() {
