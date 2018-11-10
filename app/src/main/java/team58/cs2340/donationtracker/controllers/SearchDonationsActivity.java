@@ -110,7 +110,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
                                 }*/
-                                if (donationsQueryResults.size() == 0) {
+                                if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
                                 ListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
@@ -156,7 +156,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
                                 }*/
-                                if (donationsQueryResults.size() == 0) {
+                                if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
                                 ListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
@@ -202,7 +202,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
                                 }*/
-                                if (donationsQueryResults.size() == 0) {
+                                if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
                                 ListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
@@ -248,7 +248,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
                                 }*/
-                                if (donationsQueryResults.size() == 0) {
+                                if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
                                 ListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
