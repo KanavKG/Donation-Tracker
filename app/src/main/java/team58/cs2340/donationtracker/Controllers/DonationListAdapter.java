@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import team58.cs2340.donationtracker.Models.Donation;
 import team58.cs2340.donationtracker.Models.Location;
@@ -21,7 +22,8 @@ public class DonationListAdapter extends ArrayAdapter<Donation> {
     private TextView valueTxt;
     private TextView descTxt;
 
-    public DonationListAdapter(@NonNull Context context, int resource, ArrayList<Donation> objects) {
+    // changed ArrayList -> List : weakened type
+    public DonationListAdapter(@NonNull Context context, int resource, List<Donation> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;

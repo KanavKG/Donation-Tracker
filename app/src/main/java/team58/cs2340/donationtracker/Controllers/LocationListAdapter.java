@@ -21,7 +21,8 @@ public class LocationListAdapter extends ArrayAdapter<Location> {
     private TextView nameTxt;
     private TextView cityTxt;
 
-    public LocationListAdapter(@NonNull Context context, int resource, ArrayList<Location> objects) {
+    // changed ArrayList -> List : weakened type
+    public LocationListAdapter(@NonNull Context context, int resource, List<Location> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
