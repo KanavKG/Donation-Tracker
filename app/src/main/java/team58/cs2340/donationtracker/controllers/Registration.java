@@ -78,6 +78,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         locationSpinner.setVisibility(View.GONE);
 
         FirebaseApp.initializeApp(this);
+        // getToken showing up as deprecated??
         FirebaseInstanceId.getInstance().getToken();
 
         mAuth = FirebaseAuth.getInstance();
