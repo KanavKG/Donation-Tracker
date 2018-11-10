@@ -36,6 +36,8 @@ import team58.cs2340.donationtracker.R;
 
 public class SearchDonationsActivity extends AppCompatActivity {
 
+    private static final int WEIGHT = 60;
+
     private Spinner locationSpinner;
     private Spinner categorySpinner;
     private EditText searchTxt;
@@ -97,7 +99,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : task.getResult()) {
-                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= 60) {
+                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= WEIGHT) {
                                         Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                                 d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
@@ -143,7 +145,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : task.getResult()) {
-                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= 60) {
+                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= WEIGHT) {
                                         Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                                 d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
@@ -189,7 +191,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : task.getResult()) {
-                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= 60) {
+                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= WEIGHT) {
                                         Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                                 d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
@@ -235,7 +237,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : task.getResult()) {
-                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= 60) {
+                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= WEIGHT) {
                                         Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                                 d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));

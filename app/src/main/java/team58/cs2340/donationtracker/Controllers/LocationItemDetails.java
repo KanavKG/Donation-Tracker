@@ -26,6 +26,7 @@ public class LocationItemDetails extends AppCompatActivity implements OnMapReady
 
     private double locLat, locLng;
     private String locName;
+    private static final int MAP_BUFFER = 16;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class LocationItemDetails extends AppCompatActivity implements OnMapReady
     @Override
     public void onMapReady(GoogleMap locMap) {
         LatLng locationPos = new LatLng(locLat, locLng);
-        locMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationPos, 16.0f));
+        locMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationPos, MAP_BUFFER));
         locMap.addMarker(new MarkerOptions().position(locationPos).title(locName));
     }
 }
