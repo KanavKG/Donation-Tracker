@@ -32,6 +32,10 @@ public class Welcome extends AppCompatActivity {
         readLocationData();
     }
 
+    /**
+     * Onclick listener on welcome page
+     * @param v view of the welcome page
+     */
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
@@ -46,6 +50,10 @@ public class Welcome extends AppCompatActivity {
                 break;
         }
     }
+
+    /**
+     * Function to read location data
+     */
     private void readLocationData() {
         db.collection("locations").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {

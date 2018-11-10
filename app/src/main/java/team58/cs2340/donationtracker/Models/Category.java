@@ -26,6 +26,11 @@ public enum Category {
         return this.categoryName;
     }
 
+    /**
+     * Function to convert string to enum
+     * @param text string to be converted
+     * @return enum of string
+     */
     public static Category fromString(String text) {
         for (Category c : Category.values()) {
             if (c.categoryName.equalsIgnoreCase(text)) {

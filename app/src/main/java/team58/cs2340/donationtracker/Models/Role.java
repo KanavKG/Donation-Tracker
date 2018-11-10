@@ -19,6 +19,11 @@ public enum Role {
         return this.roleName;
     }
 
+    /**
+     * Function to convert string to role enum
+     * @param text to be converted
+     * @return enum of the text
+     */
     public static Role fromString(String text) {
         for (Role r : Role.values()) {
             if (r.roleName.equalsIgnoreCase(text)) {

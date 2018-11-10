@@ -103,6 +103,10 @@ public class AddDonation extends AppCompatActivity {
         }
     }
 
+    /**
+     * Function executed when add donation button is clicked
+     * @param view The button view
+     */
     public void onAddClicked(View view) {
         String name = this.nameTxt.getText().toString();
         final Location location = (Location) locationSpinner.getSelectedItem();
@@ -198,10 +202,18 @@ public class AddDonation extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Function to check if the device has a camera
+     * @return boolean value of existance of camera
+     */
     public boolean hasCamera() {
         return getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY);
     }
 
+    /**
+     * Function to launch camera
+     * @param view Camera view
+     */
     public void launchCamera(View view) {
         Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (photoIntent.resolveActivity(getPackageManager()) != null) {
@@ -247,6 +259,10 @@ public class AddDonation extends AppCompatActivity {
         }
     }
 
+    /**
+     * Function to get price of item as a double
+     * @return Double value of item
+     */
     public double getValue() {
         if (this.value.getText().toString().equals("")) {
             return 0;
