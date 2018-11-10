@@ -69,6 +69,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         roleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roleSpinner.setAdapter(roleAdapter);
 
+        // if we weaken this type: spinner does not function correctly
         ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationManager.getLocations());
         locationSpinner.setAdapter(locationAdapter);
 

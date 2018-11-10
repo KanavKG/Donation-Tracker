@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -60,7 +61,7 @@ public class PageLocation extends AppCompatActivity {
                                         d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                         d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
                                 donationsAtLocation.add(donation);
-                                DonationListAdapter locationAdapter = new DonationListAdapter(PageLocation.this, R.layout.layout_donationitem, donationsAtLocation);
+                                ListAdapter locationAdapter = new DonationListAdapter(PageLocation.this, R.layout.layout_donationitem, donationsAtLocation);
                                 donationListView.setAdapter(locationAdapter);
 
                                 donationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

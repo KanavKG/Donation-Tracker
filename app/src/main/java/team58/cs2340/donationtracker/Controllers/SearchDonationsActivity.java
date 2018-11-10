@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -118,7 +119,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 if (donationsQueryResults.size() == 0) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
                                 donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -164,7 +165,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 if (donationsQueryResults.size() == 0) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
                                 donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -210,7 +211,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 if (donationsQueryResults.size() == 0) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
                                 donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -256,7 +257,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 if (donationsQueryResults.size() == 0) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                DonationListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
                                 donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
