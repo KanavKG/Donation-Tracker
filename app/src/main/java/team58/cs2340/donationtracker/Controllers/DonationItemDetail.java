@@ -1,10 +1,23 @@
 package team58.cs2340.donationtracker.Controllers;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 import team58.cs2340.donationtracker.Models.Donation;
 import team58.cs2340.donationtracker.R;
@@ -18,7 +31,10 @@ public class DonationItemDetail extends AppCompatActivity {
     private TextView fullDescription;
     private TextView comment;
     private TextView timeStamp;
-    //ImageView photoView;
+    private ImageView photoView;
+    private Bitmap donationImage;
+
+    private StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +48,8 @@ public class DonationItemDetail extends AppCompatActivity {
         this.value = findViewById(R.id.value);
         this.comment = findViewById(R.id.comment);
         this.timeStamp = findViewById(R.id.timeStamp);
-        //this.photoView = findViewById(R.id.photoImage);
+        this.photoView = findViewById(R.id.photoView);
+        this.mStorageRef = FirebaseStorage.getInstance().getReference();
 
         Intent intent = getIntent();
         Donation donation  = (Donation) intent.getSerializableExtra("donation");
@@ -44,6 +61,28 @@ public class DonationItemDetail extends AppCompatActivity {
         fullDescription.setText("Full Description: " + donation.getFullDescription());
         comment.setText("Comment: " + donation.getComment());
         timeStamp.setText("Time Stamp: " + donation.getTimeStamp());
-       // photoView.setImageBitmap(donation.getPhoto());
+
+        String imgName = donation.getName();
+        imgName.replaceAll("\\s+","");
+
+        StorageReference pathReference = mStorageRef.child("donationImages/" + imgName);
+
+        try {
+            final File localFile = File.createTempFile("donationImages", "jpg");
+            pathReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    donationImage = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    photoView.setImageBitmap(donationImage);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(DonationItemDetail.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

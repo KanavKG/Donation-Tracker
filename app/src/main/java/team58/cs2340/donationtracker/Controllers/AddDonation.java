@@ -59,8 +59,8 @@ public class AddDonation extends AppCompatActivity {
     private StorageReference mStorage;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    ImageView photoView;
-    Button takePhoto;
+    private ImageView photoView;
+    private Button takePhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +108,7 @@ public class AddDonation extends AppCompatActivity {
      * @param view The button view
      */
     public void onAddClicked(View view) {
-        String name = this.nameTxt.getText().toString();
+        final String name = this.nameTxt.getText().toString();
         final Location location = (Location) locationSpinner.getSelectedItem();
         Double value = getValue();
         String shortDescription = this.shortDescription.getText().toString();
@@ -146,7 +146,7 @@ public class AddDonation extends AppCompatActivity {
             return;
         }
 
-        Map<String, Object> donation = new HashMap<>();
+        final Map<String, Object> donation = new HashMap<>();
         donation.put("name", name);
         donation.put("location", location.getName());
         donation.put("value", Double.toString(value));
@@ -166,7 +166,8 @@ public class AddDonation extends AppCompatActivity {
                         if (hasCamera()) {
                             File photoFile = new File(mPhotoPath);
                             Uri photoUri = Uri.fromFile(photoFile);
-                            StorageReference filePath = mStorage.child("donationImages").child(documentReference.getId());
+                            name.replaceAll("\\s+","");
+                            StorageReference filePath = mStorage.child("donationImages").child(name);
                             filePath.putFile(photoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -204,7 +205,7 @@ public class AddDonation extends AppCompatActivity {
 
     /**
      * Function to check if the device has a camera
-     * @return boolean value of existance of camera
+     * @return boolean value of existence of camera
      */
     public boolean hasCamera() {
         return getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY);
@@ -212,7 +213,7 @@ public class AddDonation extends AppCompatActivity {
 
     /**
      * Function to launch camera
-     * @param view Camera view
+     * @param view takePhoto button view
      */
     public void launchCamera(View view) {
         Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
