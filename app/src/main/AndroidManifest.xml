@@ -22,20 +22,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Controllers.Welcome">
+        <activity android:name=".controllers.Welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Controllers.Login" />
-        <activity android:name=".Controllers.LocationList" />
-        <activity android:name=".Controllers.Registration" />
-        <activity android:name=".Controllers.LocationItemDetails" />
-        <activity android:name=".Controllers.AddDonation" />
-        <activity android:name=".Controllers.PageLocation" />
-        <activity android:name=".Controllers.DonationItemDetail" />
+        <activity android:name=".controllers.Login" />
+        <activity android:name=".controllers.LocationList" />
+        <activity android:name=".controllers.Registration" />
+        <activity android:name=".controllers.LocationItemDetails" />
+        <activity android:name=".controllers.AddDonation" />
+        <activity android:name=".controllers.PageLocation" />
+        <activity android:name=".controllers.DonationItemDetail" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -66,9 +66,9 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Controllers.MapsActivity"
+            android:name=".controllers.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".Controllers.SearchDonationsActivity" />
+        <activity android:name=".controllers.SearchDonationsActivity" />
     </application>
 
 </manifest>

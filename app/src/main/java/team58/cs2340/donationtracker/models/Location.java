@@ -1,7 +1,6 @@
-package team58.cs2340.donationtracker.Models;
+package team58.cs2340.donationtracker.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Location implements Serializable{
 

@@ -1,4 +1,4 @@
-package team58.cs2340.donationtracker.Controllers;
+package team58.cs2340.donationtracker.controllers;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -17,22 +16,17 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
-import me.xdrop.fuzzywuzzy.ToStringFunction;
-import me.xdrop.fuzzywuzzy.model.BoundExtractedResult;
-import me.xdrop.fuzzywuzzy.model.ExtractedResult;
-import team58.cs2340.donationtracker.Models.Category;
-import team58.cs2340.donationtracker.Models.Donation;
-import team58.cs2340.donationtracker.Models.Location;
-import team58.cs2340.donationtracker.Models.LocationsLocal;
+import team58.cs2340.donationtracker.models.Category;
+import team58.cs2340.donationtracker.models.Donation;
+import team58.cs2340.donationtracker.models.Location;
+import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.R;
 
 public class SearchDonationsActivity extends AppCompatActivity {

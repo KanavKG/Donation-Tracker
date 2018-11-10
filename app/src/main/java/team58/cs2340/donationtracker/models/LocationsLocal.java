@@ -1,4 +1,4 @@
-package team58.cs2340.donationtracker.Models;
+package team58.cs2340.donationtracker.models;
 
 import java.util.ArrayList;
 import java.util.List;

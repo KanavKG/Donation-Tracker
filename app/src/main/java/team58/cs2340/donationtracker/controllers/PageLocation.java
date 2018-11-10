@@ -1,4 +1,4 @@
-package team58.cs2340.donationtracker.Controllers;
+package team58.cs2340.donationtracker.controllers;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -20,11 +20,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-import team58.cs2340.donationtracker.Models.Category;
-import team58.cs2340.donationtracker.Models.Donation;
-import team58.cs2340.donationtracker.Models.Location;
-import team58.cs2340.donationtracker.Models.Role;
-import team58.cs2340.donationtracker.Models.CurrUserLocal;
+import team58.cs2340.donationtracker.models.Category;
+import team58.cs2340.donationtracker.models.Donation;
+import team58.cs2340.donationtracker.models.Location;
+import team58.cs2340.donationtracker.models.Role;
+import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
 
 public class PageLocation extends AppCompatActivity {

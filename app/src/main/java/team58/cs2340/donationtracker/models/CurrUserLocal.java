@@ -1,4 +1,4 @@
-package team58.cs2340.donationtracker.Models;
+package team58.cs2340.donationtracker.models;
 
 public class CurrUserLocal {
     private static final CurrUserLocal instance = new CurrUserLocal();

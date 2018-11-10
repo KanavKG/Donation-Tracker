@@ -1,4 +1,4 @@
-package team58.cs2340.donationtracker.Controllers;
+package team58.cs2340.donationtracker.controllers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +13,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
-import team58.cs2340.donationtracker.Models.Location;
-import team58.cs2340.donationtracker.Models.LocationsLocal;
-import team58.cs2340.donationtracker.Models.LocationType;
+import team58.cs2340.donationtracker.models.Location;
+import team58.cs2340.donationtracker.models.LocationsLocal;
+import team58.cs2340.donationtracker.models.LocationType;
 import team58.cs2340.donationtracker.R;
 
 public class Welcome extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package team58.cs2340.donationtracker.Controllers;
+package team58.cs2340.donationtracker.controllers;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,7 +19,7 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
-import team58.cs2340.donationtracker.Models.Donation;
+import team58.cs2340.donationtracker.models.Donation;
 import team58.cs2340.donationtracker.R;
 
 public class DonationItemDetail extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package team58.cs2340.donationtracker.Controllers;
+package team58.cs2340.donationtracker.controllers;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import team58.cs2340.donationtracker.Models.Donation;
-import team58.cs2340.donationtracker.Models.Location;
+import team58.cs2340.donationtracker.models.Donation;
 import team58.cs2340.donationtracker.R;
 
 public class DonationListAdapter extends ArrayAdapter<Donation> {

@@ -1,4 +1,4 @@
-package team58.cs2340.donationtracker.Controllers;
+package team58.cs2340.donationtracker.controllers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,9 +12,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-import team58.cs2340.donationtracker.Models.Location;
-import team58.cs2340.donationtracker.Models.LocationsLocal;
-import team58.cs2340.donationtracker.Models.CurrUserLocal;
+import team58.cs2340.donationtracker.models.Location;
+import team58.cs2340.donationtracker.models.LocationsLocal;
+import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
 
 public class LocationList extends AppCompatActivity{

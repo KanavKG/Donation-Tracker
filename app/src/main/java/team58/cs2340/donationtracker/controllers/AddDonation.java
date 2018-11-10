@@ -1,8 +1,7 @@
-package team58.cs2340.donationtracker.Controllers;
+package team58.cs2340.donationtracker.controllers;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -34,10 +33,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import team58.cs2340.donationtracker.Models.Category;
-import team58.cs2340.donationtracker.Models.LocationsLocal;
-import team58.cs2340.donationtracker.Models.Location;
-import team58.cs2340.donationtracker.Models.CurrUserLocal;
+import team58.cs2340.donationtracker.models.Category;
+import team58.cs2340.donationtracker.models.LocationsLocal;
+import team58.cs2340.donationtracker.models.Location;
+import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
 
 public class AddDonation extends AppCompatActivity {

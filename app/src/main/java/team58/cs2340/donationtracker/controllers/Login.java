@@ -1,4 +1,4 @@
-package team58.cs2340.donationtracker.Controllers;
+package team58.cs2340.donationtracker.controllers;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -17,9 +17,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import team58.cs2340.donationtracker.Models.Role;
-import team58.cs2340.donationtracker.Models.User;
-import team58.cs2340.donationtracker.Models.CurrUserLocal;
+import team58.cs2340.donationtracker.models.Role;
+import team58.cs2340.donationtracker.models.User;
+import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
 
 public class Login extends AppCompatActivity {
