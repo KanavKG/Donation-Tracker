@@ -95,7 +95,7 @@ public class AddDonation extends AppCompatActivity {
         Intent intent = getIntent();
         Location location = (Location) intent.getSerializableExtra("location");
 
-        if (userManager.getCurrentUser().getLocation() != null) {
+        if (userManager.getCurrentUserLocation() != null) {
             int spinnerPosition = locationAdapter.getPosition(location);
             locationSpinner.setSelection(spinnerPosition);
             locationSpinner.setEnabled(false);

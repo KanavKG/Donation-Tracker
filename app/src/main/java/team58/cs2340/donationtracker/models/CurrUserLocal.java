@@ -38,4 +38,12 @@ public class CurrUserLocal {
     public void clearCurrentUser() {
         this.currentUser = null;
     }
+
+    /**
+     * Function to get current user's location
+     * @return
+     */
+    public String getCurrentUserLocation() {
+        return (this.currentUser != null) ? this.currentUser.getLocation() : null;
+    }
 }
