@@ -12,6 +12,8 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -35,6 +37,16 @@
         <activity android:name=".Controllers.PageLocation" />
         <activity android:name=".Controllers.DonationItemDetail" />
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.team58.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+
         <uses-library
             android:name="com.google.android.maps"
             android:required="true" />
@@ -56,7 +68,7 @@
         <activity
             android:name=".Controllers.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".Controllers.SearchDonationsActivity"></activity>
+        <activity android:name=".Controllers.SearchDonationsActivity" />
     </application>
 
 </manifest>

@@ -3,11 +3,13 @@ package team58.cs2340.donationtracker.Controllers;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,7 +23,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,15 +45,18 @@ public class AddDonation extends AppCompatActivity {
     private LocationsLocal locationManager;
     private CurrUserLocal userManager;
 
-    private TextView name;
+    private TextView nameTxt;
     private Spinner locationSpinner;
     private TextView value;
     private TextView shortDescription;
     private TextView fullDescription;
     private Spinner categorySpinner;
     private TextView comment;
-    private Bitmap photo = null;
+
+    private String mPhotoPath;
+
     private FirebaseFirestore db;
+    private StorageReference mStorage;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     ImageView photoView;
@@ -56,7 +68,7 @@ public class AddDonation extends AppCompatActivity {
         setContentView(R.layout.activity_add_donation);
         this.locationManager = LocationsLocal.getInstance();
         this.userManager = CurrUserLocal.getInstance();
-        this.name = findViewById(R.id.name);
+        this.nameTxt = findViewById(R.id.name);
         this.locationSpinner = findViewById(R.id.locationSpinner);
         this.shortDescription = findViewById(R.id.shortDescription);
         this.fullDescription = findViewById(R.id.fullDescription);
@@ -66,6 +78,7 @@ public class AddDonation extends AppCompatActivity {
         this.takePhoto = findViewById(R.id.takePhotoBtn);
         this.photoView = findViewById(R.id.photo);
         this.db = FirebaseFirestore.getInstance();
+        this.mStorage = FirebaseStorage.getInstance().getReference();
 
         //Disable button if user has no camera
         if (!hasCamera()) {
@@ -91,14 +104,43 @@ public class AddDonation extends AppCompatActivity {
     }
 
     public void onAddClicked(View view) {
-        Log.d("adding","Entering add function");
-        String name = this.name.getText().toString();
+        String name = this.nameTxt.getText().toString();
         final Location location = (Location) locationSpinner.getSelectedItem();
         Double value = getValue();
         String shortDescription = this.shortDescription.getText().toString();
         String fullDescription = this.fullDescription.getText().toString();
         Category category = (Category) categorySpinner.getSelectedItem();
         String comment = this.comment.getText().toString();
+
+        if (name.isEmpty()) {
+            nameTxt.setError("Item name is required!");
+            nameTxt.requestFocus();
+            return;
+        }
+        if (this.value.getText().toString().isEmpty()) {
+            this.value.setError("Value cannot be empty!");
+            this.value.requestFocus();
+            return;
+        }
+        if (shortDescription.isEmpty()) {
+            this.shortDescription.setError("Short description is required!");
+            this.shortDescription.requestFocus();
+            return;
+        }
+        if (fullDescription.isEmpty()) {
+            this.fullDescription.setError("Full description is required!");
+            this.fullDescription.requestFocus();
+            return;
+        }
+        if (comment.isEmpty()) {
+            comment = "";
+        }
+        if (hasCamera() && mPhotoPath == null) {
+            Toast.makeText(AddDonation.this, "Take a picture!",
+                    Toast.LENGTH_SHORT).show();
+            this.photoView.requestFocus();
+            return;
+        }
 
         Map<String, Object> donation = new HashMap<>();
         donation.put("name", name);
@@ -110,20 +152,41 @@ public class AddDonation extends AppCompatActivity {
         donation.put("comment", comment);
         donation.put("timestamp", FieldValue.serverTimestamp());
 
-
-        Log.d("adding","Adding donation to DB");
         db.collection("donations")
                 .add(donation)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Log.d("adding","Added donation to DB");
                         Toast.makeText(AddDonation.this, "Added donation to database.",
                                 Toast.LENGTH_SHORT).show();
-                        Log.d("adding","Starting activity");
-                        Intent backtoLocationPageIntent = new Intent(AddDonation.this, PageLocation.class);
-                        backtoLocationPageIntent.putExtra("location", location);
-                        startActivity(backtoLocationPageIntent);
+                        if (hasCamera()) {
+                            File photoFile = new File(mPhotoPath);
+                            Uri photoUri = Uri.fromFile(photoFile);
+                            StorageReference filePath = mStorage.child("donationImages").child(documentReference.getId());
+                            filePath.putFile(photoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Toast.makeText(AddDonation.this, "Added image to storage.",
+                                            Toast.LENGTH_SHORT).show();
+                                    Intent backtoLocationPageIntent = new Intent(AddDonation.this, PageLocation.class);
+                                    backtoLocationPageIntent.putExtra("location", location);
+                                    startActivity(backtoLocationPageIntent);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(AddDonation.this, "Failed to add image to storage.",
+                                            Toast.LENGTH_SHORT).show();
+                                    Intent backtoLocationPageIntent = new Intent(AddDonation.this, PageLocation.class);
+                                    backtoLocationPageIntent.putExtra("location", location);
+                                    startActivity(backtoLocationPageIntent);
+                                }
+                            });
+                        } else {
+                            Intent backtoLocationPageIntent = new Intent(AddDonation.this, PageLocation.class);
+                            backtoLocationPageIntent.putExtra("location", location);
+                            startActivity(backtoLocationPageIntent);
+                        }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -141,19 +204,51 @@ public class AddDonation extends AppCompatActivity {
 
     public void launchCamera(View view) {
         Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(photoIntent, REQUEST_IMAGE_CAPTURE);
+        if (photoIntent.resolveActivity(getPackageManager()) != null) {
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                Toast.makeText(this,
+                        "Photo file can't be created, please try again",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.team58.fileprovider",
+                        photoFile);
+                photoIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        photoURI);
+                startActivityForResult(photoIntent, REQUEST_IMAGE_CAPTURE);
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,
+                ".jpg",
+                storageDir
+        );
+        mPhotoPath = image.getAbsolutePath();
+        return image;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            photo = (Bitmap) extras.get("data");
-            photoView.setImageBitmap(photo);
+            File imgFile = new  File(mPhotoPath);
+            if(imgFile.exists())            {
+                photoView.setImageURI(Uri.fromFile(imgFile));
+            }
         }
     }
 
     public double getValue() {
-        if (this.value.getText().toString() == null || this.value.getText().toString().equals("")) {
+        if (this.value.getText().toString().equals("")) {
             return 0;
         }
         double value = Double.parseDouble(this.value.getText().toString());
