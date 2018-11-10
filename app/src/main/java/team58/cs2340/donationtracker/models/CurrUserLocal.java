@@ -1,8 +1,11 @@
 package team58.cs2340.donationtracker.models;
 
+import android.support.annotation.Nullable;
+
 public class CurrUserLocal {
     private static final CurrUserLocal instance = new CurrUserLocal();
 
+    @Nullable
     private User currentUser;
 
     /**
