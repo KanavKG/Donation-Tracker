@@ -88,10 +88,11 @@
         android:id="@+id/photo"
         android:layout_width="122dp"
         android:layout_height="110dp"
-        android:layout_alignStart="@+id/textView2"
         android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textView2"
         android:layout_marginStart="97dp"
         android:layout_marginTop="156dp"
+        android:contentDescription="Image of Donation"
         app:srcCompat="@android:drawable/toast_frame" />
 
     <Button
