@@ -75,6 +75,10 @@ public class SearchDonationsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Function called when search button is clicked
+     * @param view view of the search screen
+     */
     public void onSearchClick(View view) {
         nfMessageText.setVisibility(View.GONE);
         String location = ((Location) locationSpinner.getSelectedItem()).getName();

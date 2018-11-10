@@ -43,6 +43,10 @@ public class Login extends AppCompatActivity {
 
     }
 
+    /**
+     * Function called when a button is pressed
+     * @param v view of the login page
+     */
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {

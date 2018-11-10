@@ -44,6 +44,10 @@ public class LocationList extends AppCompatActivity{
 
     }
 
+    /**
+     * Onclicklistener for location list page
+     * @param v view of the location list screen
+     */
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {

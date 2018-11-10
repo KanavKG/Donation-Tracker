@@ -188,6 +188,12 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 });
     }
 
+    /**
+     * Function executed when role = location employee is selected
+     * @param parent ListAdapter
+     * @param view view of the current scene
+     * @param pos Position of item
+     */
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
         if (parent.getItemAtPosition(pos) == Role.LOCATIONEMPLOYEE) {
