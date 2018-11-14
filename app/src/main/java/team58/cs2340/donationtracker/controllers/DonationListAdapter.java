@@ -18,20 +18,15 @@ import team58.cs2340.donationtracker.R;
 public class DonationListAdapter extends ArrayAdapter<Donation> {
     private Context mContext;
     private int mResource;
-    private TextView nameTxt;
-    private TextView valueTxt;
-    private TextView descTxt;
-    private ImageView donImg;
 
-    // changed ArrayList -> List : weakened type
-    public DonationListAdapter(@NonNull Context context, int resource, List<Donation> objects) {
+    DonationListAdapter(@NonNull Context context, int resource, List<Donation> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
     }
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         String name = getItem(position).getName();
         String value = Double.toString(getItem(position).getValue());
         String desc = getItem(position).getShortDescription();
@@ -40,14 +35,16 @@ public class DonationListAdapter extends ArrayAdapter<Donation> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
-        nameTxt = (TextView) convertView.findViewById(R.id.donationNameText);
-        valueTxt = (TextView) convertView.findViewById(R.id.donationValueText);
-        descTxt = (TextView) convertView.findViewById(R.id.donationDescText);
-        donImg = (ImageView) convertView.findViewById(R.id.donationImg);
+        TextView nameTxt = (TextView) convertView.findViewById(R.id.donationNameText);
+        TextView valueTxt = (TextView) convertView.findViewById(R.id.donationValueText);
+        TextView descTxt = (TextView) convertView.findViewById(R.id.donationDescText);
+        TextView catTxt = (TextView) convertView.findViewById(R.id.categoryText);
+        ImageView donImg = (ImageView) convertView.findViewById(R.id.donationImg);
 
         nameTxt.setText(name);
         valueTxt.setText("$" + value);
         descTxt.setText(desc);
+        catTxt.setText(cat.toString());
         if (cat == Category.APPLIANCES) {
             donImg.setImageResource(R.drawable.ic_1appliances);
         } else if (cat == Category.BABY) {

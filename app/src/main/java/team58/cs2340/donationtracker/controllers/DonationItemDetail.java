@@ -55,7 +55,7 @@ public class DonationItemDetail extends AppCompatActivity {
         Donation donation  = (Donation) intent.getSerializableExtra("donation");
 
         name.setText("Name: " + donation.getName());
-        location.setText(donation.getLocation().toString());
+        location.setText(donation.getLocation());
         value.setText("Value: " + donation.getValue());
         shortDescription.setText("Short Description: " + donation.getShortDescription());
         fullDescription.setText("Full Description: " + donation.getFullDescription());
