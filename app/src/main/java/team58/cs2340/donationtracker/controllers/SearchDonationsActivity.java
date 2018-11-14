@@ -21,6 +21,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 import team58.cs2340.donationtracker.models.Category;
@@ -57,7 +58,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         LocationsLocal locationManager = LocationsLocal.getInstance();
         ArrayList<Location> locations = new ArrayList<>();
-        locations.add(locationManager.getDefaultAllLocation());
+        locations.add(LocationsLocal.getDefaultAllLocation());
         locations.addAll(locationManager.getLocations());
         ArrayList<String> categories = new ArrayList<>();
         categories.add("All Categories");
@@ -93,7 +94,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot d : task.getResult()) {
+                                for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
                                     if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= WEIGHT) {
                                         Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
@@ -125,7 +126,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                     }
                                 });
                             } else {
-                                Toast.makeText(SearchDonationsActivity.this, task.getException().getMessage(),
+                                Toast.makeText(SearchDonationsActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -139,7 +140,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot d : task.getResult()) {
+                                for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
                                     if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= WEIGHT) {
                                         Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
@@ -171,7 +172,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                     }
                                 });
                             } else {
-                                Toast.makeText(SearchDonationsActivity.this, task.getException().getMessage(),
+                                Toast.makeText(SearchDonationsActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -185,7 +186,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot d : task.getResult()) {
+                                for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
                                     if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= WEIGHT) {
                                         Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
@@ -217,7 +218,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                     }
                                 });
                             } else {
-                                Toast.makeText(SearchDonationsActivity.this, task.getException().getMessage(),
+                                Toast.makeText(SearchDonationsActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -231,7 +232,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot d : task.getResult()) {
+                                for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
                                     if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= WEIGHT) {
                                         Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
@@ -263,7 +264,7 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                     }
                                 });
                             } else {
-                                Toast.makeText(SearchDonationsActivity.this, task.getException().getMessage(),
+                                Toast.makeText(SearchDonationsActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }

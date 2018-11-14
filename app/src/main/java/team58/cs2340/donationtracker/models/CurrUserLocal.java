@@ -20,6 +20,7 @@ public class CurrUserLocal {
      * Function to return currentuser
      * @return currentUser
      */
+    @Nullable
     public User getCurrentUser() {
         return currentUser;
     }
@@ -28,7 +29,7 @@ public class CurrUserLocal {
      * Function to set current user
      * @param currentUser current user
      */
-    public void setCurrentUser(User currentUser) {
+    public void setCurrentUser(@Nullable User currentUser) {
         this.currentUser = currentUser;
     }
 
@@ -41,7 +42,7 @@ public class CurrUserLocal {
 
     /**
      * Function to get current user's location
-     * @return
+     * @return currentUser location if applicable
      */
     public String getCurrentUserLocation() {
         return (this.currentUser != null) ? this.currentUser.getLocation() : null;

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Objects;
 
 import team58.cs2340.donationtracker.models.Category;
 import team58.cs2340.donationtracker.models.Donation;
@@ -27,10 +28,10 @@ public class DonationListAdapter extends ArrayAdapter<Donation> {
     @NonNull
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-        String name = getItem(position).getName();
-        String value = Double.toString(getItem(position).getValue());
-        String desc = getItem(position).getShortDescription();
-        Category cat = getItem(position).getCategory();
+        String name = Objects.requireNonNull(getItem(position)).getName();
+        String value = Double.toString(Objects.requireNonNull(getItem(position)).getValue());
+        String desc = Objects.requireNonNull(getItem(position)).getShortDescription();
+        Category cat = Objects.requireNonNull(getItem(position)).getCategory();
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);

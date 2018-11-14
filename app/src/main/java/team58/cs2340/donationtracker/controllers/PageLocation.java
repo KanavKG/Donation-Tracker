@@ -19,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import team58.cs2340.donationtracker.models.Category;
 import team58.cs2340.donationtracker.models.Donation;
@@ -56,7 +57,7 @@ public class PageLocation extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            for (DocumentSnapshot d : task.getResult()) {
+                            for (DocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
                                 Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                         d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                         d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
@@ -75,13 +76,14 @@ public class PageLocation extends AppCompatActivity {
                                 });
                             }
                         } else {
-                            Toast.makeText(PageLocation.this, task.getException().getMessage(),
+                            Toast.makeText(PageLocation.this, Objects.requireNonNull(task.getException()).getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
         addItem = findViewById(R.id.addItemBtn);
+        assert userManager.getCurrentUser() != null;
         if (((userManager.getCurrentUser().getRole() == Role.LOCATIONEMPLOYEE) && userManager.
                 getCurrentUser().getLocation().equals(location.getName()))) {
             addItem.setVisibility(View.VISIBLE);

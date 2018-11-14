@@ -16,7 +16,7 @@ public class User {
         this.location = location;
     }
 
-    public User(String firstName, String lastName, Role role) {
+    private User(String firstName, String lastName, Role role) {
         this(firstName, lastName, role, null);
     }
 

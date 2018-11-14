@@ -53,6 +53,7 @@ public class LocationItemDetails extends AppCompatActivity implements OnMapReady
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.mapFrag);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
     }
 

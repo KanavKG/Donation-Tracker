@@ -26,6 +26,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import team58.cs2340.donationtracker.models.Location;
 import team58.cs2340.donationtracker.models.CurrUserLocal;
@@ -43,8 +44,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
     private TextView password;
     private TextView confirmPassword;
 
-    private CurrUserLocal userManager;
-    private LocationsLocal locationManager;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
@@ -53,9 +52,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-
-        this.userManager = CurrUserLocal.getInstance();
-        this.locationManager = LocationsLocal.getInstance();
+        CurrUserLocal userManager = CurrUserLocal.getInstance();
+        LocationsLocal locationManager = LocationsLocal.getInstance();
 
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
@@ -69,7 +67,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         roleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roleSpinner.setAdapter(roleAdapter);
 
-        // if we weaken this type: spinner does not function correctly
         ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationManager.getLocations());
         locationSpinner.setAdapter(locationAdapter);
 
@@ -78,7 +75,6 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         locationSpinner.setVisibility(View.GONE);
 
         FirebaseApp.initializeApp(this);
-        // getToken showing up as deprecated??
         FirebaseInstanceId.getInstance().getToken();
 
         mAuth = FirebaseAuth.getInstance();
@@ -149,11 +145,12 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
 
                             //FirebaseUser user = mAuth.getCurrentUser();
                             Map<String, Object> user = new HashMap<>();
-                            user.put("UID", mAuth.getCurrentUser().getUid());
+                            user.put("UID", Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
                             user.put("first", userfirst);
                             user.put("last", userlast);
                             user.put("role", ((Role) roleSpinner.getSelectedItem()).toString());
                             if ((Role) roleSpinner.getSelectedItem() == Role.LOCATIONEMPLOYEE) {
+                                assert location != null;
                                 user.put("location", location.getName());
                             }
 
@@ -181,7 +178,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                 Toast.makeText(Registration.this, "An account with that email already exists",
                                         Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(Registration.this, task.getException().getMessage(),
+                                Toast.makeText(Registration.this, Objects.requireNonNull(task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
 

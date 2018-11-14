@@ -17,6 +17,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Objects;
+
 import team58.cs2340.donationtracker.models.Role;
 import team58.cs2340.donationtracker.models.User;
 import team58.cs2340.donationtracker.models.CurrUserLocal;
@@ -86,13 +88,13 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(Login.this, "Sign in successful! :)",
                                     Toast.LENGTH_SHORT).show();
                             db.collection("users")
-                                    .whereEqualTo("UID", FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .whereEqualTo("UID", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                             if (task.isSuccessful()) {
-                                                for (DocumentSnapshot d : task.getResult()) {
+                                                for (DocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
                                                     if ("Location Employee".equals(d.getString("role"))) {
                                                         userManager.setCurrentUser(new User(d.getString("first"), d.getString("last"),
                                                                 Role.fromString(d.getString("role")), d.getString("location")));
@@ -101,7 +103,7 @@ public class Login extends AppCompatActivity {
                                                     }
                                                 }
                                             } else {
-                                                Toast.makeText(Login.this, task.getException().getMessage(),
+                                                Toast.makeText(Login.this, Objects.requireNonNull(task.getException()).getMessage(),
                                                         Toast.LENGTH_SHORT).show();
                                             }
                                         }
