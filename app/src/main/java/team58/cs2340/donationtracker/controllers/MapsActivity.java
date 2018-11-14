@@ -1,10 +1,14 @@
 package team58.cs2340.donationtracker.controllers;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,6 +19,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -44,6 +50,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         this.locationManager = LocationsLocal.getInstance();
     }
 
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, R.drawable.ic_location_on_black_24dp);
+        assert vectorDrawable != null;
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
 
     /**
      * Manipulates the map once available.
@@ -68,7 +83,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng point = new LatLng(Double.parseDouble(location.getLatitude()),
                     Double.parseDouble(location.getLongitude()));
             mMap.addMarker(new MarkerOptions().position(point).title(location.getName())
-                    .snippet(location.getType().toString() + "\n" + location.getPhoneNumber() + "\n"));
+                    .snippet(location.getType().toString() + "\n" + location.getPhoneNumber() + "\n")
+                    .icon(bitmapDescriptorFromVector(this)));
             builder.include(point);
         }
 

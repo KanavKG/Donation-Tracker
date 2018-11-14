@@ -1,6 +1,11 @@
 package team58.cs2340.donationtracker.controllers;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -11,6 +16,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -57,10 +64,21 @@ public class LocationItemDetails extends AppCompatActivity implements OnMapReady
         mapFragment.getMapAsync(this);
     }
 
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, R.drawable.ic_location_on_black_24dp);
+        assert vectorDrawable != null;
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
     @Override
     public void onMapReady(GoogleMap locMap) {
         LatLng locationPos = new LatLng(locLat, locLng);
         locMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationPos, MAP_BUFFER));
-        locMap.addMarker(new MarkerOptions().position(locationPos).title(locName));
+        locMap.addMarker(new MarkerOptions().position(locationPos).title(locName)
+                .icon(bitmapDescriptorFromVector(this)));
     }
 }
