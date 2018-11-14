@@ -1,37 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum = "100">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/locationCityText"
+        android:layout_width="101dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="25">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="0dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="end"
+        android:paddingRight="30dip"
+        android:text="Location City"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
+        android:textStyle="italic" />
 
-        <TextView
-            android:id="@+id/locationNameText"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="start"
-            android:text="Location Name"
-            android:paddingLeft="30dip"
-            android:textColor="#016180"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/locationNameText"
+        android:layout_width="302dp"
+        android:layout_height="42dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="2dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="end"
+        android:paddingRight="30dip"
+        android:text="Location Name"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="19sp"
+        android:typeface="normal" />
 
-        <TextView
-            android:id="@+id/locationCityText"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:gravity="end"
-            android:text="Location City"
-            android:paddingRight="30dip"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="11sp"
-            android:textStyle="italic" />
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignTop="@+id/locationNameText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="-3dp"
+        app:srcCompat="@drawable/ic_location_on_black_24dp" />
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

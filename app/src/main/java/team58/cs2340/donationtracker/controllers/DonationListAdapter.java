@@ -41,7 +41,7 @@ public class DonationListAdapter extends ArrayAdapter<Donation> {
         descTxt = (TextView) convertView.findViewById(R.id.donationDescText);
 
         nameTxt.setText(name);
-        valueTxt.setText(value);
+        valueTxt.setText("$" + value);
         descTxt.setText(desc);
 
         return convertView;
