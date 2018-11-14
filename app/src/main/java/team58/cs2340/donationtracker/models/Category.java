@@ -4,12 +4,12 @@ public enum Category {
     APPLIANCES("Appliances"),
     BABY("Baby"),
     BAGSANDACCESSORIES("Bags and Accessories"),
-    BOOKSMOVIESMUSICGAMES("Books, Movies, Music, and Games"),
+    BOOKSANDMUSIC("Books and Music"),
     CLOTHING("Clothing"),
     ELECTRONICS("Electronics"),
     FOOD("Food"),
     FURNITURE("Furniture"),
-    SHOES("Shoes"),
+    MOVIESANDGAMES("Movies and Games"),
     SPORTSANDOUTDOORS("Sports and Outdoors"),
     TOYS("Toys");
 

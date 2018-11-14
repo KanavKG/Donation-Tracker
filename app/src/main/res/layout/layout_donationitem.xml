@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum = "100">
@@ -11,15 +12,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="3dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="end"
         android:paddingRight="30dip"
         android:text="Donation Name"
-        android:textAlignment="textStart"
+        android:textAlignment="viewStart"
         android:textColor="@android:color/holo_green_dark"
-        android:textSize="15sp"
+        android:textSize="16sp"
         android:typeface="normal" />
 
     <TextView
@@ -29,26 +30,52 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="240dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="44dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="end"
         android:paddingRight="30dip"
         android:text="$ Value"
         android:textColor="@android:color/holo_green_dark"
-        android:textSize="11sp"
+        android:textSize="13sp"
         android:textStyle="bold|italic" />
 
     <TextView
         android:id="@+id/donationDescText"
-        android:layout_width="280dp"
+        android:layout_width="245dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/donationValueText"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="81dp"
-        android:layout_marginTop="-2dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="-6dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Description"
+        android:textAlignment="textStart"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="10sp" />
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/categoryText"
+        android:layout_width="245dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/donationValueText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="-35dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Description"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="11sp"
+        android:textStyle="italic" />
+
+    <ImageView
+        android:id="@+id/donationImg"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_alignBottom="@+id/donationValueText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="-8dp"
+        app:srcCompat="@drawable/ic_1appliances" />
 
 </RelativeLayout>

@@ -28,9 +28,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="191970" />
-                            <entry key="outputName" value="ic_location_on_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\Saahil Yechuri" />
+                            <entry key="outputName" value="ic_1toys" />
+                            <entry key="sourceFile" value="C:\Users\Saahil Yechuri\Downloads\1toys.svg" />
                           </map>
                         </option>
                       </PersistentState>
