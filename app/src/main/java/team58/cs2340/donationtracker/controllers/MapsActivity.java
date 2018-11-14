@@ -53,8 +53,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private BitmapDescriptor bitmapDescriptorFromVector(Context context) {
         Drawable vectorDrawable = ContextCompat.getDrawable(context, R.drawable.ic_location_on_black_24dp);
         assert vectorDrawable != null;
-        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
-        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth()*2, vectorDrawable.getIntrinsicHeight()*2);
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth()*2, vectorDrawable.getIntrinsicHeight()*2, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
@@ -71,29 +71,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        GoogleMap mMap = googleMap;
 
-        mMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
 
         List<Location> locations = locationManager.getLocations();
 
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
+        BitmapDescriptor markbmDesc = bitmapDescriptorFromVector(this);
+
         for (Location location : locations) {
             LatLng point = new LatLng(Double.parseDouble(location.getLatitude()),
                     Double.parseDouble(location.getLongitude()));
-            mMap.addMarker(new MarkerOptions().position(point).title(location.getName())
+            googleMap.addMarker(new MarkerOptions().position(point).title(location.getName())
                     .snippet(location.getType().toString() + "\n" + location.getPhoneNumber() + "\n")
-                    .icon(bitmapDescriptorFromVector(this)));
+                    .icon(markbmDesc));
             builder.include(point);
         }
 
         LatLngBounds bounds = builder.build();
-        int padding = mapPadding; // offset from edges of the map in pixels
-        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, mapPadding);
         googleMap.animateCamera(cu);
 
-        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+        googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
             @Override
             public View getInfoWindow(Marker arg0) {
