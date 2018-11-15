@@ -40,7 +40,6 @@ public class SearchActivity extends AppCompatActivity {
     private ListView donationList;
     private TextView nfMessageText;
 
-    private LocationsLocal locationManager;
     private FirebaseFirestore db;
 
     @Override
@@ -114,7 +113,7 @@ public class SearchActivity extends AppCompatActivity {
                                 if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, R.layout.layout_donationitem, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
                                 donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -160,7 +159,7 @@ public class SearchActivity extends AppCompatActivity {
                                 if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, R.layout.layout_donationitem, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
                                 donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -206,7 +205,7 @@ public class SearchActivity extends AppCompatActivity {
                                 if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, R.layout.layout_donationitem, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
                                 donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -252,7 +251,7 @@ public class SearchActivity extends AppCompatActivity {
                                 if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, R.layout.layout_donationitem, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
                                 donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

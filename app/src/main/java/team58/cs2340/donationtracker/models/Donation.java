@@ -22,7 +22,7 @@ public class Donation implements Serializable{
 
     public Donation( Date timeStamp, String name, String location, double value,
                     String shortDescription, String fullDescription, Category category, String comment) {
-        this.timeStamp = timeStamp;
+        this.timeStamp = (Date) timeStamp.clone();
         this.name = name;
         this.location = location;
         this.value = value;
@@ -36,15 +36,6 @@ public class Donation implements Serializable{
     public Donation(String name, String location, double value, String shortDescription,
                     String fullDescription, Category category, String comment) {
         this(new Date(), name, location, value, shortDescription, fullDescription, category, comment);
-    }
-
-    /**
-     * Function to check category
-     * @param category category to be checked
-     * @return boolean value of check
-     */
-    public boolean checkCategory(Category category) {
-        return this.category.equals(category);
     }
 
     /**

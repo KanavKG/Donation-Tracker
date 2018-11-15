@@ -1,13 +1,14 @@
 package team58.cs2340.donationtracker.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public final class LocationsLocal {
 
     private static final LocationsLocal instance = new LocationsLocal();
 
-    private List<Location> locations;
+    private final List<Location> locations;
 
     private LocationsLocal() {
         locations = new ArrayList<>();
@@ -28,7 +29,7 @@ public final class LocationsLocal {
      * @return locations to be returned
      */
     public List<Location> getLocations() {
-        return locations;
+        return Collections.unmodifiableList(locations);
     }
 
     /**

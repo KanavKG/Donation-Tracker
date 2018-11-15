@@ -3,17 +3,18 @@ package team58.cs2340.donationtracker;
 import org.junit.Test;
 import team58.cs2340.donationtracker.models.Category;
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNull;
 
 public class CategoryTest {
 
     @Test
     public void testNull() {
-        assertEquals("Null string fails",null, Category.fromString(null));
+        assertNull("Null string fails", Category.fromString(null));
     }
 
     @Test
     public void testInvalid() {
-        assertEquals("Invalid string fails",null, Category.fromString("potato"));
+        assertNull("Invalid string fails", Category.fromString("potato"));
     }
 
     @Test

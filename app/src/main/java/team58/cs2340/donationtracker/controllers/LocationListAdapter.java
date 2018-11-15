@@ -14,15 +14,15 @@ import java.util.Objects;
 import team58.cs2340.donationtracker.models.Location;
 import team58.cs2340.donationtracker.R;
 
-public class LocationListAdapter extends ArrayAdapter<Location> {
-    private Context mContext;
+class LocationListAdapter extends ArrayAdapter<Location> {
+    private final Context mContext;
     private int mResource;
 
     // changed ArrayList -> List : weakened type
-    LocationListAdapter(@NonNull Context context, int resource, List<Location> objects) {
-        super(context, resource, objects);
+    LocationListAdapter(@NonNull Context context, List<Location> objects) {
+        super(context, R.layout.layout_locationitem, objects);
         mContext = context;
-        mResource = resource;
+        mResource = R.layout.layout_locationitem;
     }
     @NonNull
     @Override

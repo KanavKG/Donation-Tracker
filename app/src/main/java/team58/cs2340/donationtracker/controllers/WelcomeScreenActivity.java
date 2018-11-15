@@ -20,7 +20,7 @@ import team58.cs2340.donationtracker.R;
 
 public class WelcomeScreenActivity extends AppCompatActivity {
 
-    LocationsLocal locationManager;
+    private LocationsLocal locationManager;
     FirebaseFirestore db;
 
     @Override

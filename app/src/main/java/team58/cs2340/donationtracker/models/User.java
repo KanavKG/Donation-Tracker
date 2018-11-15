@@ -20,10 +20,6 @@ public class User {
         this(firstName, lastName, role, null);
     }
 
-    public User(String firstName, String lastName) {
-        this(firstName, lastName, Role.USER);
-    }
-
     public User() {
 
     }

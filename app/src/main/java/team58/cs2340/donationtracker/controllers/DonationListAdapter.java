@@ -16,14 +16,14 @@ import team58.cs2340.donationtracker.models.Category;
 import team58.cs2340.donationtracker.models.Donation;
 import team58.cs2340.donationtracker.R;
 
-public class DonationListAdapter extends ArrayAdapter<Donation> {
-    private Context mContext;
+class DonationListAdapter extends ArrayAdapter<Donation> {
+    private final Context mContext;
     private int mResource;
 
-    DonationListAdapter(@NonNull Context context, int resource, List<Donation> objects) {
-        super(context, resource, objects);
+    DonationListAdapter(@NonNull Context context, List<Donation> objects) {
+        super(context, R.layout.layout_donationitem, objects);
         mContext = context;
-        mResource = resource;
+        mResource = R.layout.layout_donationitem;
     }
     @NonNull
     @Override

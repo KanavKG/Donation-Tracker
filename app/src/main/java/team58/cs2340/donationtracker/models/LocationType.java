@@ -15,14 +15,6 @@ public enum LocationType {
     }
 
     /**
-     * Function to return type name
-     * @return type name to be returned
-     */
-    public String getTypeName() {
-        return this.typeName;
-    }
-
-    /**
      * Function to return location type enum from string
      * @param text string to be converted
      * @return location type enum of string

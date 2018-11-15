@@ -32,7 +32,7 @@ public class LocationPageActivity extends AppCompatActivity {
     private Button addItem;
     private Button locationDetails;
     private Location location;
-    ArrayList<Donation> donationsAtLocation = new ArrayList<>();
+    private final ArrayList<Donation> donationsAtLocation = new ArrayList<>();
     ListView donationListView;
     CurrUserLocal userManager;
     private FirebaseFirestore db;
@@ -62,7 +62,7 @@ public class LocationPageActivity extends AppCompatActivity {
                                         d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                         d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
                                 donationsAtLocation.add(donation);
-                                ListAdapter locationAdapter = new DonationListAdapter(LocationPageActivity.this, R.layout.layout_donationitem, donationsAtLocation);
+                                ListAdapter locationAdapter = new DonationListAdapter(LocationPageActivity.this, donationsAtLocation);
                                 donationListView.setAdapter(locationAdapter);
 
                                 donationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -89,6 +89,7 @@ public class LocationPageActivity extends AppCompatActivity {
                 getCurrentUser().getLocation().equals(location.getName()))) {
             addItem.setVisibility(View.VISIBLE);
             addItem.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     Intent addItemIntent = new Intent(LocationPageActivity.this, AddDonationActivity.class);
                     addItemIntent.putExtra("location", location);

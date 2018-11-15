@@ -19,6 +19,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import team58.cs2340.donationtracker.models.Category;
 import team58.cs2340.donationtracker.models.CurrUserLocal;
@@ -52,13 +53,14 @@ public class DonationDetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final Donation donation  = (Donation) intent.getSerializableExtra("donation");
-        final Location locationExtra  = (Location) intent.getSerializableExtra("location");
+        final Serializable locationExtra  = (Location) intent.getSerializableExtra("location");
 
         assert userManager.getCurrentUser() != null;
         if (((userManager.getCurrentUser().getRole() == Role.LOCATIONEMPLOYEE) && userManager.
                 getCurrentUser().getLocation().equals(donation.getLocation()))) {
             editBtn.setVisibility(View.VISIBLE);
             editBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     Intent addItemIntent = new Intent(DonationDetailsActivity.this, EditDonationActivity.class);
                     addItemIntent.putExtra("donation", donation);

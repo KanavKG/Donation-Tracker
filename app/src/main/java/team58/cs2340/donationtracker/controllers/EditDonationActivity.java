@@ -53,10 +53,9 @@ public class EditDonationActivity extends AppCompatActivity {
 
     private String mPhotoPath;
 
-    private FirebaseFirestore db;
     private StorageReference mStorageRef;
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView photoView;
     private Button takePhoto;
 
@@ -75,7 +74,6 @@ public class EditDonationActivity extends AppCompatActivity {
         this.comment = findViewById(R.id.comment);
         this.takePhoto = findViewById(R.id.takePhotoBtn);
         this.photoView = findViewById(R.id.photo);
-        this.db = FirebaseFirestore.getInstance();
         this.mStorageRef = FirebaseStorage.getInstance().getReference();
 
         //Disable button if user has no camera
@@ -179,6 +177,7 @@ public class EditDonationActivity extends AppCompatActivity {
         return image;
     }
 
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if((requestCode == REQUEST_IMAGE_CAPTURE) && (resultCode == RESULT_OK)) {
             File imgFile = new  File(mPhotoPath);

@@ -33,6 +33,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.OverridingMethodsMustInvokeSuper;
+
 import team58.cs2340.donationtracker.models.Category;
 import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.models.Location;
@@ -58,7 +60,7 @@ public class AddDonationActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private StorageReference mStorage;
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView photoView;
     private Button takePhoto;
 
@@ -251,6 +253,7 @@ public class AddDonationActivity extends AppCompatActivity {
         return image;
     }
 
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if((requestCode == REQUEST_IMAGE_CAPTURE) && (resultCode == RESULT_OK)) {
             File imgFile = new  File(mPhotoPath);

@@ -52,7 +52,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        CurrUserLocal userManager = CurrUserLocal.getInstance();
         LocationsLocal locationManager = LocationsLocal.getInstance();
 
         firstName = findViewById(R.id.firstName);
@@ -193,6 +192,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
      * @param view view of the current scene
      * @param pos Position of item
      */
+    @Override
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
         if (parent.getItemAtPosition(pos) == Role.LOCATIONEMPLOYEE) {
@@ -201,7 +201,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             locationSpinner.setVisibility(View.GONE);
         }
     }
-
+    @Override
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
     }
