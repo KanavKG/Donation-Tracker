@@ -71,6 +71,7 @@ public class PageLocation extends AppCompatActivity {
                                         Intent donationDetailsintent = new Intent(getApplicationContext(), DonationItemDetail.class);
                                         Log.d("donation clicked:", donationsAtLocation.get(position).getName());
                                         donationDetailsintent.putExtra("donation", donationsAtLocation.get(position));
+                                        donationDetailsintent.putExtra("location", location);
                                         startActivity(donationDetailsintent);
                                     }
                                 });

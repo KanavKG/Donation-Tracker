@@ -21,23 +21,35 @@ tools:context=".controllers.DonationItemDetail">
 
     <TextView
         android:id="@+id/location"
-        android:layout_width="match_parent"
+        android:layout_width="228dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="-2dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="33dp"
         android:text="Location"
+        android:textAlignment="center"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="249dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="0dp"
+        android:text="Category"
         android:textAlignment="center"
         android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="203dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="222dp"
+        android:layout_marginTop="271dp"
         android:orientation="vertical">
 
         <TextView
@@ -88,4 +100,14 @@ tools:context=".controllers.DonationItemDetail">
         android:layout_marginTop="0dp"
         android:contentDescription="Image of Donation"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <Button
+        android:id="@+id/editBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Edit Item" />
 </RelativeLayout>

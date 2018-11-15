@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,44 +21,62 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
+import team58.cs2340.donationtracker.models.Category;
+import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.models.Donation;
 import team58.cs2340.donationtracker.R;
+import team58.cs2340.donationtracker.models.Location;
+import team58.cs2340.donationtracker.models.Role;
 
 public class DonationItemDetail extends AppCompatActivity {
 
-    private TextView name;
-    private TextView location;
-    private TextView value;
-    private TextView shortDescription;
-    private TextView fullDescription;
-    private TextView comment;
-    private TextView timeStamp;
     private ImageView photoView;
     private Bitmap donationImage;
-
-    private StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_item_detail);
 
-        this.name = findViewById(R.id.name);
-        this.location = findViewById(R.id.location);
-        this.shortDescription = findViewById(R.id.shortDescription);
-        this.fullDescription = findViewById(R.id.fullDescription);
-        this.value = findViewById(R.id.value);
-        this.comment = findViewById(R.id.comment);
-        this.timeStamp = findViewById(R.id.timeStamp);
+        TextView name = findViewById(R.id.name);
+        TextView location = findViewById(R.id.location);
+        TextView shortDescription = findViewById(R.id.shortDescription);
+        TextView fullDescription = findViewById(R.id.fullDescription);
+        TextView value = findViewById(R.id.value);
+        TextView comment = findViewById(R.id.comment);
+        TextView timeStamp = findViewById(R.id.timeStamp);
+        CurrUserLocal userManager = CurrUserLocal.getInstance();
+        Button editBtn = findViewById(R.id.editBtn);
         this.photoView = findViewById(R.id.photoView);
-        this.mStorageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+        TextView catTxt = findViewById(R.id.category);
 
         Intent intent = getIntent();
-        Donation donation  = (Donation) intent.getSerializableExtra("donation");
+        final Donation donation  = (Donation) intent.getSerializableExtra("donation");
+        final Location locationExtra  = (Location) intent.getSerializableExtra("location");
 
-        name.setText("Name: " + donation.getName());
+        assert userManager.getCurrentUser() != null;
+        if (((userManager.getCurrentUser().getRole() == Role.LOCATIONEMPLOYEE) && userManager.
+                getCurrentUser().getLocation().equals(donation.getLocation()))) {
+            editBtn.setVisibility(View.VISIBLE);
+            editBtn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent addItemIntent = new Intent(DonationItemDetail.this, EditDonation.class);
+                    addItemIntent.putExtra("donation", donation);
+                    addItemIntent.putExtra("location", locationExtra);
+                    startActivity(addItemIntent);
+                }
+            });
+        } else {
+            editBtn.setVisibility(View.GONE);
+        }
+
+        final Category cat = donation.getCategory();
+
+        name.setText(donation.getName());
+        catTxt.setText(cat.toString());
         location.setText(donation.getLocation());
-        value.setText("Value: " + donation.getValue());
+        value.setText("$" + donation.getValue());
         shortDescription.setText("Short Description: " + donation.getShortDescription());
         fullDescription.setText("Full Description: " + donation.getFullDescription());
         comment.setText("Comment: " + donation.getComment());
@@ -78,7 +98,29 @@ public class DonationItemDetail extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(DonationItemDetail.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    if (cat == Category.APPLIANCES) {
+                        photoView.setImageResource(R.drawable.ic_1appliances);
+                    } else if (cat == Category.BABY) {
+                        photoView.setImageResource(R.drawable.ic_1baby);
+                    } else if (cat == Category.BAGSANDACCESSORIES) {
+                        photoView.setImageResource(R.drawable.ic_1bags);
+                    } else if (cat == Category.BOOKSANDMUSIC) {
+                        photoView.setImageResource(R.drawable.ic_1books);
+                    } else if (cat == Category.CLOTHING) {
+                        photoView.setImageResource(R.drawable.ic_1clothing);
+                    } else if (cat == Category.ELECTRONICS) {
+                        photoView.setImageResource(R.drawable.ic_1electronics);
+                    } else if (cat == Category.FOOD) {
+                        photoView.setImageResource(R.drawable.ic_1food);
+                    } else if (cat == Category.FURNITURE) {
+                        photoView.setImageResource(R.drawable.ic_1furniture);
+                    } else if (cat == Category.MOVIESANDGAMES) {
+                        photoView.setImageResource(R.drawable.ic_1movie);
+                    } else if (cat == Category.SPORTSANDOUTDOORS) {
+                        photoView.setImageResource(R.drawable.ic_1sports);
+                    } else if (cat == Category.TOYS) {
+                        photoView.setImageResource(R.drawable.ic_1toys);
+                    }
                 }
             });
         } catch (IOException e) {

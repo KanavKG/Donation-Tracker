@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controllers.EditDonation">
+
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="46dp"
+        android:ems="10"
+        android:hint="Item name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/value"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/name"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="95dp"
+        android:ems="10"
+        android:hint="Value"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="22dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/name"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="104dp"
+        android:text="$"
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/locationSpinner"
+        android:layout_width="258dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="20dp" />
+
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="221dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="438dp" />
+
+    <EditText
+        android:id="@+id/shortDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-4dp"
+        android:layout_marginTop="265dp"
+        android:ems="10"
+        android:hint="Short Description" />
+
+    <EditText
+        android:id="@+id/fullDescription"
+        android:layout_width="237dp"
+        android:layout_height="119dp"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="310dp"
+        android:ems="10"
+        android:hint="Full Description"
+        android:inputType="textMultiLine"
+        android:lines="5" />
+
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="122dp"
+        android:layout_height="110dp"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="154dp"
+        android:contentDescription="Image of Donation"
+        app:srcCompat="@android:drawable/toast_frame" />
+
+    <Button
+        android:id="@+id/takePhotoBtn"
+        android:layout_width="77dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/name"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="185dp"
+        android:layout_marginEnd="-100dp"
+        android:onClick="launchCamera"
+        android:text="Take Photo" />
+
+    <EditText
+        android:id="@+id/comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fullDescription"
+        android:layout_alignStart="@+id/fullDescription"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="Comments"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/comment"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="-2dp"
+        android:text="Update Item" />
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="108dp"
+        android:layout_height="37dp"
+        android:layout_alignBottom="@+id/comment"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="127dp"
+        android:layout_marginBottom="-44dp"
+        android:background="@android:color/holo_red_light"
+        android:text="Delete Item"
+        android:textColor="@android:color/background_light" />
+
+</RelativeLayout>

@@ -80,7 +80,6 @@ public class Login extends AppCompatActivity {
                     password.requestFocus();
                     return;
                 }
-
                 mAuth.signInWithEmailAndPassword(useremail, userpass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
