@@ -69,7 +69,8 @@
         android:layout_marginStart="-5dp"
         android:layout_marginTop="267dp"
         android:ems="10"
-        android:hint="Short Description" />
+        android:hint="Short Description"
+        android:inputType="textShortMessage"/>
 
     <EditText
         android:id="@+id/fullDescription"
