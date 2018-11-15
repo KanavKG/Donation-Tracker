@@ -210,4 +210,9 @@ public class Location implements Serializable{
         Location that = (Location) obj;
         return this.name.equals(that.name);
     }
+
+    @Override
+    public int hashCode() {
+        return ((31 * 17) + this.name.hashCode() + this.zip.hashCode());
+    }
 }
