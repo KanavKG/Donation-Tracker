@@ -213,5 +213,22 @@ public class Donation implements Serializable{
     public  String toString() {
         return this.name;
     }
+
+    /**
+     * Function to get price of item as a double
+     * @param v String that is to be converted to a double
+     * @return Double value of item
+     */
+    public static double getValue(String v) {
+        if ("".equals(v) || v == null) {
+            return 0;
+        }
+        double value = Double.parseDouble(v);
+        if (value < 0) {
+            return 0;
+        } else {
+            return value;
+        }
+    }
 }
 

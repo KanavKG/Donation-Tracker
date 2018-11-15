@@ -37,6 +37,7 @@ import team58.cs2340.donationtracker.models.Category;
 import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.models.Location;
 import team58.cs2340.donationtracker.models.CurrUserLocal;
+import team58.cs2340.donationtracker.models.Donation;
 import team58.cs2340.donationtracker.R;
 
 public class AddDonationActivity extends AppCompatActivity {
@@ -109,7 +110,7 @@ public class AddDonationActivity extends AppCompatActivity {
     public void onAddClicked(View view) {
         final String name = this.nameTxt.getText().toString();
         final Location location = (Location) locationSpinner.getSelectedItem();
-        Double value = getValue();
+        Double value = Donation.getValue(this.value.getText().toString());
         String shortDescription = this.shortDescription.getText().toString();
         String fullDescription = this.fullDescription.getText().toString();
         Category category = (Category) categorySpinner.getSelectedItem();
@@ -256,22 +257,6 @@ public class AddDonationActivity extends AppCompatActivity {
             if(imgFile.exists())            {
                 photoView.setImageURI(Uri.fromFile(imgFile));
             }
-        }
-    }
-
-    /**
-     * Function to get price of item as a double
-     * @return Double value of item
-     */
-    public double getValue() {
-        if ("".equals(this.value.getText().toString())) {
-            return 0;
-        }
-        double value = Double.parseDouble(this.value.getText().toString());
-        if (value < 0) {
-            return 0;
-        } else {
-            return value;
         }
     }
 }
