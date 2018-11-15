@@ -28,7 +28,7 @@ import team58.cs2340.donationtracker.models.Role;
 import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
 
-public class PageLocation extends AppCompatActivity {
+public class LocationPageActivity extends AppCompatActivity {
     private Button addItem;
     private Button locationDetails;
     private Location location;
@@ -62,13 +62,13 @@ public class PageLocation extends AppCompatActivity {
                                         d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                         d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
                                 donationsAtLocation.add(donation);
-                                ListAdapter locationAdapter = new DonationListAdapter(PageLocation.this, R.layout.layout_donationitem, donationsAtLocation);
+                                ListAdapter locationAdapter = new DonationListAdapter(LocationPageActivity.this, R.layout.layout_donationitem, donationsAtLocation);
                                 donationListView.setAdapter(locationAdapter);
 
                                 donationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Intent donationDetailsintent = new Intent(getApplicationContext(), DonationItemDetail.class);
+                                        Intent donationDetailsintent = new Intent(getApplicationContext(), DonationDetailsActivity.class);
                                         Log.d("donation clicked:", donationsAtLocation.get(position).getName());
                                         donationDetailsintent.putExtra("donation", donationsAtLocation.get(position));
                                         donationDetailsintent.putExtra("location", location);
@@ -77,7 +77,7 @@ public class PageLocation extends AppCompatActivity {
                                 });
                             }
                         } else {
-                            Toast.makeText(PageLocation.this, Objects.requireNonNull(task.getException()).getMessage(),
+                            Toast.makeText(LocationPageActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -90,7 +90,7 @@ public class PageLocation extends AppCompatActivity {
             addItem.setVisibility(View.VISIBLE);
             addItem.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent addItemIntent = new Intent(PageLocation.this, AddDonation.class);
+                    Intent addItemIntent = new Intent(LocationPageActivity.this, AddDonationActivity.class);
                     addItemIntent.putExtra("location", location);
                     startActivity(addItemIntent);
                 }
@@ -102,7 +102,7 @@ public class PageLocation extends AppCompatActivity {
         locationDetails = findViewById(R.id.locationDetailsBtn);
         locationDetails.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent detailsIntent = new Intent(PageLocation.this, LocationItemDetails.class);
+                Intent detailsIntent = new Intent(LocationPageActivity.this, LocationDetailsActivity.class);
                 detailsIntent.putExtra("location", location);
                 startActivity(detailsIntent);
             }
@@ -112,7 +112,7 @@ public class PageLocation extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent a = new Intent(this, LocationList.class);
+        Intent a = new Intent(this, HomeScreenActivity.class);
         a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(a);
     }

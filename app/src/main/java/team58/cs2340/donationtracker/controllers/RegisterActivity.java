@@ -34,7 +34,7 @@ import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.models.Role;
 import team58.cs2340.donationtracker.R;
 
-public class Registration extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private TextView firstName;
     private TextView lastName;
@@ -140,7 +140,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(Registration.this, "Registered successfully! :)",
+                            Toast.makeText(RegisterActivity.this, "Registered successfully! :)",
                                     Toast.LENGTH_SHORT).show();
 
                             //FirebaseUser user = mAuth.getCurrentUser();
@@ -159,26 +159,26 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(Registration.this, "Added user to database.",
+                                            Toast.makeText(RegisterActivity.this, "Added user to database.",
                                                     Toast.LENGTH_SHORT).show();
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(Registration.this, "Failed to add user to database.",
+                                            Toast.makeText(RegisterActivity.this, "Failed to add user to database.",
                                                     Toast.LENGTH_SHORT).show();
                                         }
                                     });
 
-                            Intent intent = new Intent(Registration.this, Login.class);
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                         } else {
                             if(task.getException() instanceof FirebaseAuthUserCollisionException) {
-                                Toast.makeText(Registration.this, "An account with that email already exists",
+                                Toast.makeText(RegisterActivity.this, "An account with that email already exists",
                                         Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(Registration.this, Objects.requireNonNull(task.getException()).getMessage(),
+                                Toast.makeText(RegisterActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
 

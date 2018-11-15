@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,7 +27,7 @@ import team58.cs2340.donationtracker.R;
 import team58.cs2340.donationtracker.models.Location;
 import team58.cs2340.donationtracker.models.Role;
 
-public class DonationItemDetail extends AppCompatActivity {
+public class DonationDetailsActivity extends AppCompatActivity {
 
     private ImageView photoView;
     private Bitmap donationImage;
@@ -61,7 +60,7 @@ public class DonationItemDetail extends AppCompatActivity {
             editBtn.setVisibility(View.VISIBLE);
             editBtn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent addItemIntent = new Intent(DonationItemDetail.this, EditDonation.class);
+                    Intent addItemIntent = new Intent(DonationDetailsActivity.this, EditDonationActivity.class);
                     addItemIntent.putExtra("donation", donation);
                     addItemIntent.putExtra("location", locationExtra);
                     startActivity(addItemIntent);

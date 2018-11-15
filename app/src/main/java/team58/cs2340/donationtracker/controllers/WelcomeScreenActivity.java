@@ -18,7 +18,7 @@ import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.models.LocationType;
 import team58.cs2340.donationtracker.R;
 
-public class Welcome extends AppCompatActivity {
+public class WelcomeScreenActivity extends AppCompatActivity {
 
     LocationsLocal locationManager;
     FirebaseFirestore db;
@@ -40,13 +40,13 @@ public class Welcome extends AppCompatActivity {
         int id = v.getId();
         switch (id) {
             case R.id.loginBtn:
-                Intent loginIntent = new Intent(this, Login.class);
+                Intent loginIntent = new Intent(this, LoginActivity.class);
                 startActivity(loginIntent);
                 break;
             case R.id.signupBtn:
-                Intent registrationIntent = new Intent(this, Registration.class);
+                Intent registrationIntent = new Intent(this, RegisterActivity.class);
                 startActivity(registrationIntent);
-                Toast.makeText(Welcome.this, "Register", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WelcomeScreenActivity.this, "Register", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

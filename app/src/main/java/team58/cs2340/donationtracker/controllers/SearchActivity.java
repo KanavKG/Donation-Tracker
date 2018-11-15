@@ -30,7 +30,7 @@ import team58.cs2340.donationtracker.models.Location;
 import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.R;
 
-public class SearchDonationsActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
 
     private static final int WEIGHT = 60;
 
@@ -114,19 +114,19 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                ListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
                                 donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Intent intent = new Intent(SearchDonationsActivity.this, DonationItemDetail.class);
+                                        Intent intent = new Intent(SearchActivity.this, DonationDetailsActivity.class);
                                         intent.putExtra("donation", donationsQueryResults.get(position));
                                         startActivity(intent);
                                     }
                                 });
                             } else {
-                                Toast.makeText(SearchDonationsActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
+                                Toast.makeText(SearchActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -160,19 +160,19 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                ListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
                                 donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Intent intent = new Intent(SearchDonationsActivity.this, DonationItemDetail.class);
+                                        Intent intent = new Intent(SearchActivity.this, DonationDetailsActivity.class);
                                         intent.putExtra("donation", donationsQueryResults.get(position));
                                         startActivity(intent);
                                     }
                                 });
                             } else {
-                                Toast.makeText(SearchDonationsActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
+                                Toast.makeText(SearchActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -206,19 +206,19 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                ListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
                                 donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Intent intent = new Intent(SearchDonationsActivity.this, DonationItemDetail.class);
+                                        Intent intent = new Intent(SearchActivity.this, DonationDetailsActivity.class);
                                         intent.putExtra("donation", donationsQueryResults.get(position));
                                         startActivity(intent);
                                     }
                                 });
                             } else {
-                                Toast.makeText(SearchDonationsActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
+                                Toast.makeText(SearchActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -252,19 +252,19 @@ public class SearchDonationsActivity extends AppCompatActivity {
                                 if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                ListAdapter donationAdapter = new DonationListAdapter(SearchDonationsActivity.this, R.layout.layout_donationitem, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, R.layout.layout_donationitem, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
                                 donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Intent intent = new Intent(SearchDonationsActivity.this, DonationItemDetail.class);
+                                        Intent intent = new Intent(SearchActivity.this, DonationDetailsActivity.class);
                                         intent.putExtra("donation", donationsQueryResults.get(position));
                                         startActivity(intent);
                                     }
                                 });
                             } else {
-                                Toast.makeText(SearchDonationsActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
+                                Toast.makeText(SearchActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }

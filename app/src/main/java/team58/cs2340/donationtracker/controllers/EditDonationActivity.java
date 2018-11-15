@@ -38,7 +38,7 @@ import team58.cs2340.donationtracker.models.Donation;
 import team58.cs2340.donationtracker.models.Location;
 import team58.cs2340.donationtracker.models.LocationsLocal;
 
-public class EditDonation extends AppCompatActivity {
+public class EditDonationActivity extends AppCompatActivity {
 
     private LocationsLocal locationManager;
     private CurrUserLocal userManager;
@@ -113,7 +113,7 @@ public class EditDonation extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(EditDonation.this,
+                    Toast.makeText(EditDonationActivity.this,
                             "Current photo cannot be loaded!",
                             Toast.LENGTH_SHORT).show();
                 }

@@ -17,7 +17,7 @@ import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
 
-public class LocationList extends AppCompatActivity{
+public class HomeScreenActivity extends AppCompatActivity{
 
     private LocationsLocal locationManager;
     private CurrUserLocal userManager;
@@ -36,7 +36,7 @@ public class LocationList extends AppCompatActivity{
         locationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(LocationList.this, PageLocation.class);
+                Intent intent = new Intent(HomeScreenActivity.this, LocationPageActivity.class);
                 intent.putExtra("location", locationManager.getLocations().get(position));
                 startActivity(intent);
             }
@@ -53,12 +53,12 @@ public class LocationList extends AppCompatActivity{
             case R.id.logoutBtn:
                 FirebaseAuth.getInstance().signOut();
                 userManager.clearCurrentUser();
-                Intent logoutIntent = new Intent(this, Welcome.class);
+                Intent logoutIntent = new Intent(this, WelcomeScreenActivity.class);
                 startActivity(logoutIntent);
                 Toast.makeText(getApplicationContext(), "Logout Successful!",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.search:
-                Intent searchIntent = new Intent(this, SearchDonationsActivity.class);
+                Intent searchIntent = new Intent(this, SearchActivity.class);
                 startActivity(searchIntent);
                 break;
             case R.id.map:

@@ -24,7 +24,7 @@ import team58.cs2340.donationtracker.models.User;
 import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private TextView email;
     private TextView password;
@@ -84,7 +84,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(Login.this, "Sign in successful! :)",
+                            Toast.makeText(LoginActivity.this, "Sign in successful! :)",
                                     Toast.LENGTH_SHORT).show();
                             db.collection("users")
                                     .whereEqualTo("UID", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
@@ -102,16 +102,16 @@ public class Login extends AppCompatActivity {
                                                     }
                                                 }
                                             } else {
-                                                Toast.makeText(Login.this, Objects.requireNonNull(task.getException()).getMessage(),
+                                                Toast.makeText(LoginActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
                                                         Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
                             userManager.setCurrentUser(new User());
-                            Intent intent = new Intent(Login.this, LocationList.class);
+                            Intent intent = new Intent(LoginActivity.this, HomeScreenActivity.class);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(Login.this, task.getException().getMessage(),
+                            Toast.makeText(LoginActivity.this, task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -122,7 +122,7 @@ public class Login extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent a = new Intent(this, Welcome.class);
+        Intent a = new Intent(this, WelcomeScreenActivity.class);
         a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(a);
     }
