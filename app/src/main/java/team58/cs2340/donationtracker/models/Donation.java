@@ -52,7 +52,7 @@ public class Donation implements Serializable{
      * @param location location to be checked
      * @return boolean value of check
      */
-    public boolean checkLocation(Location location) {
+    public boolean checkLocation(String location) {
         return this.location.equals(location);
     }
 
