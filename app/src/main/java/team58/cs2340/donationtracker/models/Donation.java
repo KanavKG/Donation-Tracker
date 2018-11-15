@@ -220,7 +220,7 @@ public class Donation implements Serializable{
      * @return Double value of item
      */
     public static double getValue(String v) {
-        if ("".equals(v) || v == null) {
+        if ("".equals(v) || (v == null)) {
             return 0;
         }
         double value = Double.parseDouble(v);
