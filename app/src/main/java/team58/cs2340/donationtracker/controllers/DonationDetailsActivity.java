@@ -54,9 +54,9 @@ public class DonationDetailsActivity extends AppCompatActivity {
         final Donation donation  = (Donation) intent.getSerializableExtra("donation");
         final Location locationExtra  = (Location) intent.getSerializableExtra("location");
 
-        assert userManager.getCurrentUser() != null;
-        if (((userManager.getCurrentUser().getRole() == Role.LOCATIONEMPLOYEE) && userManager.
-                getCurrentUser().getLocation().equals(donation.getLocation()))) {
+        //assert userManager.getCurrentUser() != null;
+        if (((userManager.getCurrentUserRole() == Role.LOCATIONEMPLOYEE) && userManager.
+                getCurrentUserLocation().equals(donation.getLocation()))) {
             editBtn.setVisibility(View.VISIBLE);
             editBtn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
