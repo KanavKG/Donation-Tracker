@@ -13,32 +13,32 @@ public class CategoryTest {
 
     @Test
     public void testInvalid() {
-        assertEquals("Empty string fails",null, Category.fromString("potato"));
+        assertEquals("Invalid string fails",null, Category.fromString("potato"));
     }
 
     @Test
     public void testAppliances() {
-        assertEquals("Empty string fails",Category.APPLIANCES, Category.fromString("Appliances"));
+        assertEquals("Correct output for Appliances",Category.APPLIANCES, Category.fromString("Appliances"));
     }
 
     @Test
     public void testBaby() {
-        assertEquals("Empty string fails",Category.BABY, Category.fromString("Baby"));
+        assertEquals("Correct output for Baby",Category.BABY, Category.fromString("Baby"));
     }
 
     @Test
     public void testBagsAndAccessories() {
-        assertEquals("Empty string fails",Category.BAGSANDACCESSORIES, Category.fromString("Bags and Accessories"));
+        assertEquals("Correct output for Bags and Accessories",Category.BAGSANDACCESSORIES, Category.fromString("Bags and Accessories"));
     }
 
     @Test
     public void testBooksAndMusic() {
-        assertEquals("Empty string fails",Category.BOOKSANDMUSIC, Category.fromString("Books and Music"));
+        assertEquals("Correct output for Books and Music",Category.BOOKSANDMUSIC, Category.fromString("Books and Music"));
     }
 
     @Test
     public void testClothing() {
-        assertEquals("Empty string fails",Category.CLOTHING, Category.fromString("Clothing"));
+        assertEquals("Correct output for Clothing",Category.CLOTHING, Category.fromString("Clothing"));
     }
 
     @Test
@@ -48,27 +48,27 @@ public class CategoryTest {
 
     @Test
     public void testFood() {
-        assertEquals("Empty string fails",Category.FOOD, Category.fromString("Food"));
+        assertEquals("Correct output for Food",Category.FOOD, Category.fromString("Food"));
     }
 
     @Test
     public void testFurniture() {
-        assertEquals("Empty string fails",Category.FURNITURE, Category.fromString("Furniture"));
+        assertEquals("Correct output for Furniture",Category.FURNITURE, Category.fromString("Furniture"));
     }
 
     @Test
     public void testMoviesAndGames() {
-        assertEquals("Empty string fails",Category.MOVIESANDGAMES, Category.fromString("Movies and Games"));
+        assertEquals("Correct output for Movies and Games",Category.MOVIESANDGAMES, Category.fromString("Movies and Games"));
     }
 
     @Test
     public void testSportsAndOutdoors() {
-        assertEquals("Empty string fails",Category.SPORTSANDOUTDOORS, Category.fromString("Sports and Outdoors"));
+        assertEquals("Correct output for Sports and Outdoors",Category.SPORTSANDOUTDOORS, Category.fromString("Sports and Outdoors"));
     }
 
     @Test
     public void testToys() {
-        assertEquals("Empty string fails",Category.TOYS, Category.fromString("Toys"));
+        assertEquals("Correct output for Toys",Category.TOYS, Category.fromString("Toys"));
     }
 
 }
