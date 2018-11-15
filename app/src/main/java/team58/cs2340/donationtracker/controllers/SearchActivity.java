@@ -32,7 +32,7 @@ import team58.cs2340.donationtracker.R;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private static final int WEIGHT = 60;
+    private static final int THRESHOLD_RATIO = 60;
 
     private Spinner locationSpinner;
     private Spinner categorySpinner;
@@ -95,7 +95,7 @@ public class SearchActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
-                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= WEIGHT) {
+                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= THRESHOLD_RATIO) {
                                         Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                                 d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
@@ -141,7 +141,7 @@ public class SearchActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
-                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= WEIGHT) {
+                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= THRESHOLD_RATIO) {
                                         Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                                 d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
@@ -187,7 +187,7 @@ public class SearchActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
-                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= WEIGHT) {
+                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= THRESHOLD_RATIO) {
                                         Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                                 d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
@@ -233,7 +233,7 @@ public class SearchActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
-                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= WEIGHT) {
+                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= THRESHOLD_RATIO) {
                                         Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                                 d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
