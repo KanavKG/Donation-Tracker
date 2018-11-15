@@ -47,4 +47,12 @@ public class CurrUserLocal {
     public String getCurrentUserLocation() {
         return (this.currentUser != null) ? this.currentUser.getLocation() : null;
     }
+
+    /**
+     * Function to get current user's role
+     * @return currentUser role if applicable
+     */
+    public Role getCurrentUserRole() {
+        return (this.currentUser != null) ? this.currentUser.getRole() : null;
+    }
 }

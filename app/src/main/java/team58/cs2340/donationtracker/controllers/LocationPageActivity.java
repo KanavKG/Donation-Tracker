@@ -85,7 +85,7 @@ public class LocationPageActivity extends AppCompatActivity {
 
         addItem = findViewById(R.id.addItemBtn);
         assert userManager.getCurrentUser() != null;
-        if (((userManager.getCurrentUser().getRole() == Role.LOCATIONEMPLOYEE) && userManager.
+        if (((userManager.getCurrentUserRole() == Role.LOCATIONEMPLOYEE) && userManager.
                 getCurrentUser().getLocation().equals(location.getName()))) {
             addItem.setVisibility(View.VISIBLE);
             addItem.setOnClickListener(new View.OnClickListener() {
