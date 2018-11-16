@@ -7,6 +7,7 @@ import static junit.framework.TestCase.assertNull;
 
 /**
  * Tests functionality of fromString in Category class
+ * @author Akshay Karthik
  */
 public class CategoryTest {
 

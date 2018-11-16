@@ -6,6 +6,7 @@ import static junit.framework.TestCase.assertEquals;
 
 /**
  * Test the getValue method inside Donation
+ * @author Kunal Patel
  */
 public class ValueTest {
 

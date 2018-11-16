@@ -7,6 +7,7 @@ import static junit.framework.TestCase.assertNull;
 
 /**
  * Tests functionality of fromString in Role class
+ * @author Harshith Kayam
  */
 public class RoleTest {
 
