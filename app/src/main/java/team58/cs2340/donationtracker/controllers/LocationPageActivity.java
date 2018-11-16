@@ -35,7 +35,7 @@ public class LocationPageActivity extends AppCompatActivity {
     private Location location;
     private final ArrayList<Donation> donationsAtLocation = new ArrayList<>();
     private ListView donationListView;
-    CurrUserLocal userManager;
+    private CurrUserLocal userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

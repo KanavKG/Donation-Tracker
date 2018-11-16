@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum = "100">
@@ -20,7 +21,8 @@
         android:textAlignment="viewStart"
         android:textColor="?attr/colorPrimary"
         android:textSize="17sp"
-        android:typeface="normal" />
+        android:typeface="normal"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/donationValueText"

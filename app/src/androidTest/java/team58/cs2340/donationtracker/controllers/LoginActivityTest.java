@@ -55,7 +55,8 @@ public class LoginActivityTest {
                 .perform(typeText(validPassword));
         onView(withId(R.id.login))
                 .perform(click());
-        onView(withId(R.id.email)).check(matches(hasErrorText("Email is required!")));
+        onView(withId(R.id.email)).check(matches(hasErrorText(
+                "Email is required!")));
     }
 
     /**
@@ -67,7 +68,8 @@ public class LoginActivityTest {
                 .perform(typeText(validUsername));
         onView(withId(R.id.login))
                 .perform(click());
-        onView(withId(R.id.password)).check(matches(hasErrorText("Password is required!")));
+        onView(withId(R.id.password)).check(matches(hasErrorText(
+                "Password is required!")));
     }
 
     /**
@@ -82,7 +84,8 @@ public class LoginActivityTest {
                 .perform(typeText(validPassword));
         onView(withId(R.id.login))
                 .perform(click());
-        onView(withId(R.id.email)).check(matches(hasErrorText("Please enter a valid email!")));
+        onView(withId(R.id.email)).check(matches(hasErrorText(
+                "Please enter a valid email!")));
     }
 
     /**
@@ -97,12 +100,13 @@ public class LoginActivityTest {
                 .perform(typeText(shortPassword));
         onView(withId(R.id.login))
                 .perform(click());
-        onView(withId(R.id.password)).check(matches(hasErrorText("Password must be at least 6 characters long!")));
+        onView(withId(R.id.password)).check(matches(hasErrorText(
+                "Password must be at least 6 characters long!")));
     }
 
     /**
      * Tests unauthentic (fake) login credentials
-     * @throws InterruptedException
+     * @throws java.lang.InterruptedException
      */
     @Test
     public void unsuccessfulLogin() throws InterruptedException {
