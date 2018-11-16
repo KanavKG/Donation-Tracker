@@ -29,16 +29,18 @@ import team58.cs2340.donationtracker.R;
  * @author Saahil Yechuri
  */
 public class LoginActivityTest {
-    private String validUsername = "probator@test.app";
-    private String validPassword = "password";
+    private final String validUsername = "probator@test.app";
+    private final String validPassword = "password";
 
-    private String invalidUsername = "saahilyechuri";
-    private String shortPassword = "12345";
+    private final String invalidUsername = "saahilyechuri";
+    private final String shortPassword = "12345";
 
-    private String fakeUsername = "fake@unreal.scam";
-    private String fakePassword = "drowssap";
+    private final String fakeUsername = "fake@unreal.scam";
+    private final String fakePassword = "drowssap";
 
-    private String unsuccessfulToastMessage = "Login unsuccessful! :(";
+    private final String unsuccessfulToastMessage = "Login unsuccessful! :(";
+
+    private final int TIMEOUT = 2000;
 
     @Rule
     public ActivityTestRule<LoginActivity> mActivityRule
@@ -115,7 +117,7 @@ public class LoginActivityTest {
                 .perform(typeText(fakePassword));
         onView(withId(R.id.login))
                 .perform(click());
-        Thread.sleep(2000);
+        Thread.sleep(TIMEOUT);
 
         LoginActivity activity = mActivityRule.getActivity();
         onView(withText(unsuccessfulToastMessage)).
@@ -134,7 +136,7 @@ public class LoginActivityTest {
                 .perform(typeText(validPassword));
         onView(withId(R.id.login))
                 .perform(click());
-        Thread.sleep(2000);
+        Thread.sleep(TIMEOUT);
         intended(hasComponent(HomeScreenActivity.class.getName()));
     }
 
