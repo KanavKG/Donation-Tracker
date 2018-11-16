@@ -35,14 +35,13 @@ public class LocationPageActivity extends AppCompatActivity {
     private Location location;
     private final ArrayList<Donation> donationsAtLocation = new ArrayList<>();
     private ListView donationListView;
-    private CurrUserLocal userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_location);
 
-        userManager = CurrUserLocal.getInstance();
+        CurrUserLocal userManager = CurrUserLocal.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
