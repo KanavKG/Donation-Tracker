@@ -2,6 +2,9 @@ package team58.cs2340.donationtracker.models;
 
 import java.io.Serializable;
 
+/**
+ * Location class containing information about a location
+ */
 public class Location implements Serializable{
 
     private int key;
@@ -16,7 +19,25 @@ public class Location implements Serializable{
     private String phoneNumber;
     private String website;
 
+    /**
+     * Empty constructor
+     */
     public Location() { }
+
+    /**
+     * Constructor to instantiate a location object
+     * @param key of the location
+     * @param name of the location
+     * @param latitude of the location
+     * @param longitude of the location
+     * @param streetAddress of the location
+     * @param city of the location
+     * @param state of the location
+     * @param zip of the location
+     * @param type of the location
+     * @param phoneNumber of the location
+     * @param website of the location
+     */
     public Location(int key, String name, String latitude, String longitude,
                     String streetAddress, String city, String state,
                     String zip, LocationType type, String phoneNumber,

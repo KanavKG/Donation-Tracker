@@ -113,7 +113,8 @@ public class EditDonationActivity extends AppCompatActivity {
         }
 
         nameTxt.setText(donation.getName());
-        value.setText(String.format(Locale.getDefault(), Double.toString(donation.getValue())));
+        String val = Double.toString(donation.getValue());
+        value.setText(val);
         shortDescription.setText(donation.getShortDescription());
         fullDescription.setText(donation.getFullDescription());
         comment.setText(donation.getComment());
