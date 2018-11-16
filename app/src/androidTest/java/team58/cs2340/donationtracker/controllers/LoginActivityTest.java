@@ -1,40 +1,121 @@
 package team58.cs2340.donationtracker.controllers;
 
-import static androidx.test.espresso.Espresso.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.typeText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.junit.Assert.*;
+import android.support.test.espresso.intent.Intents;
+import android.support.test.rule.ActivityTestRule;
+
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.intent.Intents.intended;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
+import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.core.IsNot.not;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import androidx.test.rule.ActivityTestRule;
+
 import team58.cs2340.donationtracker.R;
 
 
 public class LoginActivityTest {
-    private String mStringToBetyped;
+    private String validUsername = "probator@test.app";
+    private String validPassword = "password";
+
+    private String invalidUsername = "saahilyechuri";
+    private String shortPassword = "12345";
+
+    private String fakeUsername = "fake@unreal.scam";
+    private String fakePassword = "drowssap";
+
+    private String unsuccessfulToastMessage = "Login unsuccessful! :(";
 
     @Rule
     public ActivityTestRule<LoginActivity> mActivityRule
             = new ActivityTestRule<>(LoginActivity.class);
 
     @Before
-    public void initValidString() {
-        mStringToBetyped = "Espresso";
+    public void setUp() {
+        Intents.init();
     }
 
     @Test
-    public void changeText_sameActivity() {
-        // Type text and then press the button.
-        onView(withId(R.id.editTextUserInput))
-                .perform(typeText(mStringToBetyped), closeSoftKeyboard());
-        onView(withId(R.id.changeTextBt)).perform(click());
+    public void blankUsername() {
+        onView(withId(R.id.password))
+                .perform(typeText(validPassword));
+        onView(withId(R.id.login))
+                .perform(click());
+        onView(withId(R.id.email)).check(matches(hasErrorText("Email is required!")));
+    }
 
-        // Check that the text was changed.
-        onView(withId(R.id.textToBeChanged))
-                .check(matches(withText(mStringToBetyped)));
+    @Test
+    public void blankPassword() {
+        onView(withId(R.id.email))
+                .perform(typeText(validUsername));
+        onView(withId(R.id.login))
+                .perform(click());
+        onView(withId(R.id.password)).check(matches(hasErrorText("Password is required!")));
+    }
+
+    @Test
+    public void invalidUsername() {
+        onView(withId(R.id.email))
+                .perform(typeText(invalidUsername));
+        onView(withId(R.id.password))
+                .perform(typeText(validPassword));
+        onView(withId(R.id.login))
+                .perform(click());
+        onView(withId(R.id.email)).check(matches(hasErrorText("Please enter a valid email!")));
+    }
+
+    @Test
+    public void shortPassword() {
+        onView(withId(R.id.email))
+                .perform(typeText(validUsername));
+        onView(withId(R.id.password))
+                .perform(typeText(shortPassword));
+        onView(withId(R.id.login))
+                .perform(click());
+        onView(withId(R.id.password)).check(matches(hasErrorText("Password must be at least 6 characters long!")));
+    }
+
+    @Test
+    public void unsuccessfulLogin() throws InterruptedException {
+        onView(withId(R.id.email))
+                .perform(typeText(fakeUsername));
+        onView(withId(R.id.password))
+                .perform(typeText(fakePassword));
+        onView(withId(R.id.login))
+                .perform(click());
+        Thread.sleep(2000);
+
+        LoginActivity activity = mActivityRule.getActivity();
+        onView(withText(unsuccessfulToastMessage)).
+                inRoot(withDecorView(not(is(activity.getWindow().getDecorView())))).
+                check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void successfulLogin() throws InterruptedException {
+        onView(withId(R.id.email))
+                .perform(typeText(validUsername));
+        onView(withId(R.id.password))
+                .perform(typeText(validPassword));
+        onView(withId(R.id.login))
+                .perform(click());
+        Thread.sleep(2000);
+        intended(hasComponent(HomeScreenActivity.class.getName()));
+    }
+
+    @After
+    public void tearDown() {
+        Intents.release();
     }
 }

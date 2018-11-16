@@ -127,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                         } else {
                             Toast.makeText(LoginActivity.this,
-                                    Objects.requireNonNull(task.getException()).getMessage(),
+                                    "Login unsuccessful! :(",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
