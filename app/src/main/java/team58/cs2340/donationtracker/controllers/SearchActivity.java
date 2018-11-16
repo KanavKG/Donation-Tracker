@@ -169,37 +169,56 @@ public class SearchActivity extends AppCompatActivity {
                                         task.getResult())) {
                                     if (FuzzySearch.weightedRatio(searchQuery,
                                             d.getString("name")) >= THRESHOLD_RATIO) {
-                                        Donation donation = new Donation(Objects.requireNonNull(d.getDate("timestamp")), d.getString("name"),
-                                                d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
-                                                d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
+                                        Donation donation = new Donation(Objects.requireNonNull(
+                                                d.getDate("timestamp")),
+                                                d.getString("name"),
+                                                d.getString("location"),
+                                                Double.parseDouble(d.getString("value")),
+                                                d.getString("shortDescription"),
+                                                d.getString("fullDescription"),
+                                                Category.fromString(d.getString("category")),
+                                                d.getString("comment"));
                                         donationsQueryResults.add(donation);
                                     }
 
-                                    /*Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
-                                            d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
-                                            d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
+                                    /*Donation donation = new Donation(d.getDate("timestamp"),
+                                    d.getString("name"),
+                                            d.getString("location"),
+                                            Double.parseDouble(d.getString("value")),
+                                            d.getString("shortDescription"),
+                                            d.getString("fullDescription"),
+                                            Category.fromString(d.getString("category")),
+                                            d.getString("comment"));
                                     donationsFiltered.add(donation);*/
                                 }
-                                /*List<BoundExtractedResult<Donation>> matches = FuzzySearch.extractTop(searchQuery, donationsFiltered, dnFunc, 5);
+                                /*List<BoundExtractedResult<Donation>> matches =
+                                FuzzySearch.extractTop(searchQuery, donationsFiltered, dnFunc, 5);
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
                                 }*/
                                 if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(
+                                        SearchActivity.this, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
-                                donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                donationList.setOnItemClickListener(
+                                        new AdapterView.OnItemClickListener() {
                                     @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Intent intent = new Intent(SearchActivity.this, DonationDetailsActivity.class);
-                                        intent.putExtra("donation", donationsQueryResults.get(position));
+                                    public void onItemClick(AdapterView<?> parent, View view,
+                                                            int position, long id) {
+                                        Intent intent = new Intent(
+                                                SearchActivity.this,
+                                                DonationDetailsActivity.class);
+                                        intent.putExtra("donation",
+                                                donationsQueryResults.get(position));
                                         startActivity(intent);
                                     }
                                 });
                             } else {
-                                Toast.makeText(SearchActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
+                                Toast.makeText(SearchActivity.this,
+                                        Objects.requireNonNull(task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -213,39 +232,60 @@ public class SearchActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
-                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= THRESHOLD_RATIO) {
-                                        Donation donation = new Donation(Objects.requireNonNull(d.getDate("timestamp")), d.getString("name"),
-                                                d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
-                                                d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
+                                for (QueryDocumentSnapshot d : Objects.requireNonNull(
+                                        task.getResult())) {
+                                    if (FuzzySearch.weightedRatio(searchQuery,
+                                            d.getString("name")) >= THRESHOLD_RATIO) {
+                                        Donation donation = new Donation(Objects.requireNonNull(
+                                                d.getDate("timestamp")),
+                                                d.getString("name"),
+                                                d.getString("location"),
+                                                Double.parseDouble(d.getString("value")),
+                                                d.getString("shortDescription"),
+                                                d.getString("fullDescription"),
+                                                Category.fromString(d.getString("category")),
+                                                d.getString("comment"));
                                         donationsQueryResults.add(donation);
                                     }
 
-                                    /*Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
-                                            d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
-                                            d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
+                                    /*Donation donation = new Donation(d.getDate("timestamp"),
+                                    d.getString("name"),
+                                            d.getString("location"),
+                                            Double.parseDouble(d.getString("value")),
+                                            d.getString("shortDescription"),
+                                            d.getString("fullDescription"),
+                                            Category.fromString(d.getString("category")),
+                                            d.getString("comment"));
                                     donationsFiltered.add(donation);*/
                                 }
-                                /*List<BoundExtractedResult<Donation>> matches = FuzzySearch.extractTop(searchQuery, donationsFiltered, dnFunc, 5);
+                                /*List<BoundExtractedResult<Donation>> matches =
+                                FuzzySearch.extractTop(searchQuery, donationsFiltered, dnFunc, 5);
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
                                 }*/
                                 if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(
+                                        SearchActivity.this, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
-                                donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                donationList.setOnItemClickListener(
+                                        new AdapterView.OnItemClickListener() {
                                     @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Intent intent = new Intent(SearchActivity.this, DonationDetailsActivity.class);
-                                        intent.putExtra("donation", donationsQueryResults.get(position));
+                                    public void onItemClick(AdapterView<?> parent, View view,
+                                                            int position, long id) {
+                                        Intent intent = new Intent(
+                                                SearchActivity.this,
+                                                DonationDetailsActivity.class);
+                                        intent.putExtra("donation",
+                                                donationsQueryResults.get(position));
                                         startActivity(intent);
                                     }
                                 });
                             } else {
-                                Toast.makeText(SearchActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
+                                Toast.makeText(SearchActivity.this,
+                                        Objects.requireNonNull(task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -259,39 +299,61 @@ public class SearchActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
-                                    if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= THRESHOLD_RATIO) {
-                                        Donation donation = new Donation(Objects.requireNonNull(d.getDate("timestamp")), d.getString("name"),
-                                                d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
-                                                d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
+                                for (QueryDocumentSnapshot d : Objects.requireNonNull(
+                                        task.getResult())) {
+                                    if (FuzzySearch.weightedRatio(searchQuery,
+                                            d.getString("name")) >= THRESHOLD_RATIO) {
+                                        Donation donation = new Donation(
+                                                Objects.requireNonNull(d.getDate(
+                                                        "timestamp")),
+                                                d.getString("name"),
+                                                d.getString("location"),
+                                                Double.parseDouble(d.getString("value")),
+                                                d.getString("shortDescription"),
+                                                d.getString("fullDescription"),
+                                                Category.fromString(d.getString("category")),
+                                                d.getString("comment"));
                                         donationsQueryResults.add(donation);
                                     }
 
-                                    /*Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
-                                            d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
-                                            d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
+                                    /*Donation donation = new Donation(d.getDate("timestamp"),
+                                    d.getString("name"),
+                                            d.getString("location"),
+                                             Double.parseDouble(d.getString("value")),
+                                             d.getString("shortDescription"),
+                                            d.getString("fullDescription"),
+                                            Category.fromString(d.getString("category")),
+                                            d.getString("comment"));
                                     donationsFiltered.add(donation);*/
                                 }
-                                /*List<BoundExtractedResult<Donation>> matches = FuzzySearch.extractTop(searchQuery, donationsFiltered, dnFunc, 5);
+                                /*List<BoundExtractedResult<Donation>> matches =
+                                FuzzySearch.extractTop(searchQuery, donationsFiltered, dnFunc, 5);
                                 for (BoundExtractedResult result : matches) {
                                     donationsQueryResults.add((Donation) result.getReferent());
                                 }*/
                                 if (donationsQueryResults.isEmpty()) {
                                     nfMessageText.setVisibility(View.VISIBLE);
                                 }
-                                ListAdapter donationAdapter = new DonationListAdapter(SearchActivity.this, donationsQueryResults);
+                                ListAdapter donationAdapter = new DonationListAdapter(
+                                        SearchActivity.this, donationsQueryResults);
                                 donationList.setAdapter(donationAdapter);
 
-                                donationList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                donationList.setOnItemClickListener(
+                                        new AdapterView.OnItemClickListener() {
                                     @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Intent intent = new Intent(SearchActivity.this, DonationDetailsActivity.class);
-                                        intent.putExtra("donation", donationsQueryResults.get(position));
+                                    public void onItemClick(AdapterView<?> parent, View view,
+                                                            int position, long id) {
+                                        Intent intent = new Intent(
+                                                SearchActivity.this,
+                                                DonationDetailsActivity.class);
+                                        intent.putExtra("donation",
+                                                donationsQueryResults.get(position));
                                         startActivity(intent);
                                     }
                                 });
                             } else {
-                                Toast.makeText(SearchActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
+                                Toast.makeText(SearchActivity.this,
+                                        Objects.requireNonNull(task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
