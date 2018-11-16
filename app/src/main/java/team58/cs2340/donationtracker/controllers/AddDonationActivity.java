@@ -42,9 +42,6 @@ import team58.cs2340.donationtracker.R;
 
 public class AddDonationActivity extends AppCompatActivity {
 
-    private LocationsLocal locationManager;
-    private CurrUserLocal userManager;
-
     private TextView nameTxt;
     private Spinner locationSpinner;
     private TextView value;
@@ -60,14 +57,13 @@ public class AddDonationActivity extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView photoView;
-    private Button takePhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_donation);
-        this.locationManager = LocationsLocal.getInstance();
-        this.userManager = CurrUserLocal.getInstance();
+        LocationsLocal locationManager = LocationsLocal.getInstance();
+        CurrUserLocal userManager = CurrUserLocal.getInstance();
         this.nameTxt = findViewById(R.id.name);
         this.locationSpinner = findViewById(R.id.locationSpinner);
         this.shortDescription = findViewById(R.id.shortDescription);
@@ -75,7 +71,7 @@ public class AddDonationActivity extends AppCompatActivity {
         this.value = findViewById(R.id.value);
         this.categorySpinner = findViewById(R.id.categorySpinner);
         this.comment = findViewById(R.id.comment);
-        this.takePhoto = findViewById(R.id.takePhotoBtn);
+        Button takePhoto = findViewById(R.id.takePhotoBtn);
         this.photoView = findViewById(R.id.photo);
         this.db = FirebaseFirestore.getInstance();
         this.mStorage = FirebaseStorage.getInstance().getReference();
