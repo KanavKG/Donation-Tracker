@@ -78,11 +78,16 @@ public class DonationDetailsActivity extends AppCompatActivity {
         name.setText(donation.getName());
         catTxt.setText(cat.toString());
         location.setText(donation.getLocation());
-        value.setText("$" + donation.getValue());
-        shortDescription.setText("Short Description: " + donation.getShortDescription());
-        fullDescription.setText("Full Description: " + donation.getFullDescription());
-        comment.setText("Comment: " + donation.getComment());
-        timeStamp.setText("Time Stamp: " + donation.getTimeStamp());
+        String val = "$" + donation.getValue();
+        value.setText(val);
+        String shortDes = "Short Description: " + donation.getShortDescription();
+        shortDescription.setText(shortDes);
+        String fullDes = "Full Description: " + donation.getFullDescription();
+        fullDescription.setText(fullDes);
+        String com = "Comment: " + donation.getComment();
+        comment.setText(com);
+        String time = "Time Stamp: " + donation.getTimeStamp();
+        timeStamp.setText(time);
 
         String imgName = donation.getName();
         imgName.replaceAll("\\s+","");

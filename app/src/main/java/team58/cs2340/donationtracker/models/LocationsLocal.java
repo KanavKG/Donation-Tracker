@@ -29,7 +29,7 @@ public final class LocationsLocal {
      * @return locations to be returned
      */
     public List<Location> getLocations() {
-        return Collections.unmodifiableList(locations);
+        return locations;
     }
 
     /**

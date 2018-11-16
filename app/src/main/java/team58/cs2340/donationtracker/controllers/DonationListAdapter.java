@@ -43,7 +43,8 @@ class DonationListAdapter extends ArrayAdapter<Donation> {
         ImageView donImg = (ImageView) convertView.findViewById(R.id.donationImg);
 
         nameTxt.setText(name);
-        valueTxt.setText("$" + value);
+        String val = "$" + value;
+        valueTxt.setText(val);
         descTxt.setText(desc);
         catTxt.setText(cat.toString());
         if (cat == Category.APPLIANCES) {

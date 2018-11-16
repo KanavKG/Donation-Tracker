@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import team58.cs2340.donationtracker.R;
 import team58.cs2340.donationtracker.models.Category;
@@ -125,7 +126,7 @@ public class EditDonationActivity extends AppCompatActivity {
         }
 
         nameTxt.setText(donation.getName());
-        value.setText(Double.toString(donation.getValue()));
+        value.setText(String.format(Locale.getDefault(), Double.toString(donation.getValue())));
         shortDescription.setText(donation.getShortDescription());
         fullDescription.setText(donation.getFullDescription());
         comment.setText(donation.getComment());
