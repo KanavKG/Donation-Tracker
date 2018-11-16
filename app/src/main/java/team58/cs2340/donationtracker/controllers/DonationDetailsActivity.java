@@ -28,6 +28,9 @@ import team58.cs2340.donationtracker.R;
 import team58.cs2340.donationtracker.models.Location;
 import team58.cs2340.donationtracker.models.Role;
 
+/**
+ * Class for donation details activity
+ */
 public class DonationDetailsActivity extends AppCompatActivity {
 
     private ImageView photoView;

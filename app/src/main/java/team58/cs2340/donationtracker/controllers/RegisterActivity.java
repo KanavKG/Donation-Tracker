@@ -33,6 +33,10 @@ import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.models.Role;
 import team58.cs2340.donationtracker.R;
 
+
+/**
+ * Class for register activity
+ */
 public class RegisterActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
 
@@ -82,6 +86,10 @@ public class RegisterActivity extends AppCompatActivity
         db = FirebaseFirestore.getInstance();
     }
 
+    /**
+     * Method executed when registration button is clicked
+     * @param view current view
+     */
     public void onRegisterClicked(View view) {
 
         final Location location = (roleSpinner.getSelectedItem() == Role.LOCATIONEMPLOYEE) ?

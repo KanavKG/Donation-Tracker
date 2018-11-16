@@ -24,6 +24,9 @@ import team58.cs2340.donationtracker.models.User;
 import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
 
+/**
+ * Class for login activity
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private TextView email;

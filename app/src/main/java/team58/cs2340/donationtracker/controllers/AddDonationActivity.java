@@ -40,6 +40,9 @@ import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.models.Donation;
 import team58.cs2340.donationtracker.R;
 
+/**
+ * Class for add donation activity
+ */
 public class AddDonationActivity extends AppCompatActivity {
 
     private LocationsLocal locationManager;

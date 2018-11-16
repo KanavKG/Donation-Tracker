@@ -28,6 +28,9 @@ import team58.cs2340.donationtracker.models.Role;
 import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
 
+/**
+ * Class for location page activity
+ */
 public class LocationPageActivity extends AppCompatActivity {
     private Button addItem;
     private Button locationDetails;

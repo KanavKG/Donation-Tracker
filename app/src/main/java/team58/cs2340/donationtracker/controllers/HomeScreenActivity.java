@@ -17,6 +17,9 @@ import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
 
+/**
+ * Class for home screen activity
+ */
 public class HomeScreenActivity extends AppCompatActivity{
 
     private LocationsLocal locationManager;

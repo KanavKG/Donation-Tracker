@@ -18,6 +18,9 @@ import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.models.LocationType;
 import team58.cs2340.donationtracker.R;
 
+/**
+ * Class for welcome screen activity
+ */
 public class WelcomeScreenActivity extends AppCompatActivity {
 
     private LocationsLocal locationManager;

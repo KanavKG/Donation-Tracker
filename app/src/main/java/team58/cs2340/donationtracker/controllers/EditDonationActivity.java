@@ -38,6 +38,9 @@ import team58.cs2340.donationtracker.models.Donation;
 import team58.cs2340.donationtracker.models.Location;
 import team58.cs2340.donationtracker.models.LocationsLocal;
 
+/**
+ * Class to the edit donations activity
+ */
 public class EditDonationActivity extends AppCompatActivity {
 
     private TextView value;
@@ -126,6 +129,10 @@ public class EditDonationActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to check if the device has a camera
+     * @return boolean value of existance of camera
+     */
     public boolean hasCamera() {
         return getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY);
     }

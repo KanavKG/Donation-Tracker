@@ -24,6 +24,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import team58.cs2340.donationtracker.models.Location;
 import team58.cs2340.donationtracker.R;
 
+/**
+ * Locations details activity class
+ */
 public class LocationDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private double locLat;

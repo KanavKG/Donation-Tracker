@@ -30,6 +30,9 @@ import team58.cs2340.donationtracker.models.Location;
 import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.R;
 
+/**
+ * Class for search activity
+ */
 public class SearchActivity extends AppCompatActivity {
 
     private static final int THRESHOLD_RATIO = 60;
