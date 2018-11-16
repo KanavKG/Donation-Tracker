@@ -29,6 +29,10 @@ public class User {
         this(firstName, lastName, role, null);
     }
 
+    public User() {
+
+    }
+
     /**
      * Function to get first name
      * @return first name
