@@ -162,20 +162,23 @@ public class AddDonationActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(AddDonationActivity.this, "Added donation to database.",
+                        Toast.makeText(AddDonationActivity.this,
+                                "Added donation to database.",
                                 Toast.LENGTH_SHORT).show();
                         if (hasCamera()) {
                             File photoFile = new File(mPhotoPath);
                             Uri photoUri = Uri.fromFile(photoFile);
                             name.replaceAll("\\s+","");
-                            StorageReference filePath = mStorage.child("donationImages").child(name);
+                            StorageReference filePath =mStorage.child("donationImages").child(name);
                             filePath.putFile(photoUri).addOnSuccessListener(
                                     new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    Toast.makeText(AddDonationActivity.this, "Added image to storage.",
+                                    Toast.makeText(AddDonationActivity.this,
+                                            "Added image to storage.",
                                             Toast.LENGTH_SHORT).show();
-                                    Intent backtoLocationPageIntent = new Intent(AddDonationActivity.this,
+                                    Intent backtoLocationPageIntent =
+                                            new Intent(AddDonationActivity.this,
                                             LocationPageActivity.class);
                                     backtoLocationPageIntent.putExtra("location", location);
                                     startActivity(backtoLocationPageIntent);
@@ -184,16 +187,19 @@ public class AddDonationActivity extends AppCompatActivity {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     Toast.makeText(AddDonationActivity.this,
-                                            "Failed to add image to storage.", Toast.LENGTH_SHORT).show();
+                                            "Failed to add image to storage.",
+                                            Toast.LENGTH_SHORT).show();
                                     Intent backtoLocationPageIntent = new Intent(
-                                            AddDonationActivity.this, LocationPageActivity.class);
+                                            AddDonationActivity.this,
+                                            LocationPageActivity.class);
                                     backtoLocationPageIntent.putExtra("location", location);
                                     startActivity(backtoLocationPageIntent);
                                 }
                             });
                         } else {
                             Intent backtoLocationPageIntent = new Intent(
-                                    AddDonationActivity.this, LocationPageActivity.class);
+                                    AddDonationActivity.this,
+                                    LocationPageActivity.class);
                             backtoLocationPageIntent.putExtra("location", location);
                             startActivity(backtoLocationPageIntent);
                         }
@@ -203,7 +209,8 @@ public class AddDonationActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(AddDonationActivity.this,
-                                "Failed to add donation to database.", Toast.LENGTH_SHORT).show();
+                                "Failed to add donation to database.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }

@@ -5,10 +5,10 @@ import team58.cs2340.donationtracker.models.Role;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 
-/**
- * Tests functionality of fromString in Role class
- */
-public class RoleTest {
+
+
+
+public class LocationTypeTest {
 
     /**
      * Tests null input to fromString
@@ -50,5 +50,5 @@ public class RoleTest {
     public void testAdmin() {
         assertEquals("Correct output for Admin", Role.ADMIN, Role.fromString("Admin"));
     }
-
 }
+

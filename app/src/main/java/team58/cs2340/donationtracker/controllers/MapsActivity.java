@@ -90,7 +90,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng point = new LatLng(Double.parseDouble(location.getLatitude()),
                     Double.parseDouble(location.getLongitude()));
             googleMap.addMarker(new MarkerOptions().position(point).title(location.getName())
-                    .snippet(location.getType().toString() + "\n" + location.getPhoneNumber() + "\n")
+                    .snippet(location.getType().toString() + "\n" +location.getPhoneNumber() + "\n")
                     .icon(markbmDesc));
             builder.include(point);
         }

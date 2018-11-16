@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Sign in successful! :)",
+                            Toast.makeText(LoginActivity.this,"Sign in successful! :)",
                                     Toast.LENGTH_SHORT).show();
                             db.collection("users")
                                     .whereEqualTo("UID", Objects.requireNonNull(
@@ -102,16 +102,20 @@ public class LoginActivity extends AppCompatActivity {
                                                         task.getResult())) {
                                                     if ("Location Employee".equals(
                                                             d.getString("role"))) {
-                                                        userManager.setCurrentUser(new User(d.getString(
-                                                                "first"), d.getString("last"),
-                                                                Role.fromString(d.getString("role")),
+                                                        userManager.setCurrentUser(
+                                                                new User(d.getString(
+                                                                "first"),
+                                                                        d.getString("last"),
+                                                                Role.fromString(
+                                                                        d.getString("role")),
                                                                 d.getString("location")));
                                                     } else {
                                                         userManager.setCurrentUser(new User());
                                                     }
                                                 }
                                             } else {
-                                                Toast.makeText(LoginActivity.this, Objects.requireNonNull(
+                                                Toast.makeText(LoginActivity.this,
+                                                        Objects.requireNonNull(
                                                         task.getException()).getMessage(),
                                                         Toast.LENGTH_SHORT).show();
                                             }
@@ -122,7 +126,8 @@ public class LoginActivity extends AppCompatActivity {
                                     HomeScreenActivity.class);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(LoginActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
+                            Toast.makeText(LoginActivity.this,
+                                    Objects.requireNonNull(task.getException()).getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
