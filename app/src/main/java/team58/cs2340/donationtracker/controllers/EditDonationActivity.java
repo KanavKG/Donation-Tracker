@@ -29,7 +29,6 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import team58.cs2340.donationtracker.R;
 import team58.cs2340.donationtracker.models.Category;
