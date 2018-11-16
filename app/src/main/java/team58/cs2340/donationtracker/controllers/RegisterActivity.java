@@ -150,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity
                                     mAuth.getCurrentUser()).getUid());
                             user.put("first", userfirst);
                             user.put("last", userlast);
-                            user.put("role", ((Role) roleSpinner.getSelectedItem()).toString());
+                            user.put("role", roleSpinner.getSelectedItem().toString());
                             if ((Role) roleSpinner.getSelectedItem() == Role.LOCATIONEMPLOYEE) {
                                 assert location != null;
                                 user.put("location", location.getName());

@@ -31,7 +31,7 @@ public class HomeScreenActivity extends AppCompatActivity{
         ListView locationListView = findViewById(R.id.locationList);
 
         LocationListAdapter locationAdapter = new LocationListAdapter(
-                this, (ArrayList<Location>) locationManager.getLocations());
+                this, locationManager.getLocations());
         locationListView.setAdapter(locationAdapter);
 
         locationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
