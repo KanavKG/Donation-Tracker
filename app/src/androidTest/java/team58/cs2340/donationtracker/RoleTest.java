@@ -24,7 +24,8 @@ public class RoleTest {
 
     @Test
     public void testLocationEmployee() {
-        assertEquals("Correct output for Location Employee", Role.LOCATIONEMPLOYEE, Role.fromString("Location Employee"));
+        assertEquals("Correct output for Location Employee", Role.LOCATIONEMPLOYEE,
+                Role.fromString("Location Employee"));
     }
 
     @Test

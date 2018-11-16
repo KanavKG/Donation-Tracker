@@ -61,7 +61,8 @@ public class LocationDetailsActivity extends AppCompatActivity implements OnMapR
         locationWebsite.setClickable(true);
         locationWebsite.setMovementMethod(LinkMovementMethod.getInstance());
         locationWebsite.setText(Html.fromHtml(
-                "Website: " + "<a href='" + location.getWebsite() + "'>" + location.getWebsite() + "</a>"));
+                "Website: " + "<a href='" + location.getWebsite() + "'>"
+                        + location.getWebsite() + "</a>"));
 
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager()

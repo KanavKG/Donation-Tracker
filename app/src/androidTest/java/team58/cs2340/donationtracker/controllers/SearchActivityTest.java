@@ -7,7 +7,8 @@ import org.junit.Rule;
 class SearchActivityTest {
 
     @Rule
-    //public ActivityTestRule<SearchActivity> mActivityTestRule = new ActivityTestRule<SearchActivity>(SearchActivity.class);
+    //public ActivityTestRule<SearchActivity> mActivityTestRule =
+    // new ActivityTestRule<SearchActivity>(SearchActivity.class);
 
     @Before
     public void setUp() throws Exception {

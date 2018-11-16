@@ -49,7 +49,8 @@ public class WelcomeScreenActivity extends AppCompatActivity {
             case R.id.signupBtn:
                 Intent registrationIntent = new Intent(this, RegisterActivity.class);
                 startActivity(registrationIntent);
-                Toast.makeText(WelcomeScreenActivity.this, "Register", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WelcomeScreenActivity.this, "Register",
+                        Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -65,10 +66,15 @@ public class WelcomeScreenActivity extends AppCompatActivity {
                         if (!queryDocumentSnapshots.isEmpty()) {
                             List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                             for(DocumentSnapshot d : list) {
-                                Location loc = new Location(Integer.parseInt(d.getString("key")), d.getString("name"),
-                                        d.getString("latitude"), d.getString("longitude"),
-                                        d.getString("streetAddress"), d.getString("city"), d.getString("state"),
-                                        d.getString("zip"), LocationType.fromString(d.getString("type")), d.getString("phone"),
+                                Location loc = new Location(Integer.parseInt(
+                                        d.getString("key")), d.getString("name"),
+                                        d.getString("latitude"),
+                                        d.getString("longitude"),
+                                        d.getString("streetAddress"),
+                                        d.getString("city"), d.getString("state"),
+                                        d.getString("zip"),
+                                        LocationType.fromString(d.getString("type")),
+                                        d.getString("phone"),
                                         d.getString("website"));
                                 if(!locationManager.getLocations().contains(loc)) {
                                     locationManager.addLocation(loc);

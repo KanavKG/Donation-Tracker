@@ -59,10 +59,14 @@ public class LocationPageActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
-                                Donation donation = new Donation(Objects.requireNonNull(d.getDate("timestamp")),
-                                        d.getString("name"), d.getString("location"), Double.parseDouble(
-                                                d.getString("value")), d.getString("shortDescription"),
-                                        d.getString("fullDescription"), Category.fromString(d.getString(
+                                Donation donation = new Donation(Objects.requireNonNull(
+                                        d.getDate("timestamp")),
+                                        d.getString("name"), d.getString("location"),
+                                        Double.parseDouble(
+                                                d.getString("value")),
+                                        d.getString("shortDescription"),
+                                        d.getString("fullDescription"),
+                                        Category.fromString(d.getString(
                                                 "category")), d.getString("comment"));
                                 donationsAtLocation.add(donation);
                                 ListAdapter locationAdapter = new DonationListAdapter(
@@ -75,7 +79,8 @@ public class LocationPageActivity extends AppCompatActivity {
                                     public void onItemClick(AdapterView<?> parent, View view,
                                                             int position, long id) {
                                         Intent donationDetailsintent = new Intent(
-                                                getApplicationContext(), DonationDetailsActivity.class);
+                                                getApplicationContext(),
+                                                DonationDetailsActivity.class);
                                         Log.d("donation clicked:", donationsAtLocation.get(
                                                 position).getName());
                                         donationDetailsintent.putExtra("donation",
