@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                                     HomeScreenActivity.class);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(LoginActivity.this, task.getException().getMessage(),
+                            Toast.makeText(LoginActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }

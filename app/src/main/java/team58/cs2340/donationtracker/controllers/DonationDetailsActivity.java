@@ -109,28 +109,40 @@ public class DonationDetailsActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    if (cat == Category.APPLIANCES) {
-                        photoView.setImageResource(R.drawable.ic_1appliances);
-                    } else if (cat == Category.BABY) {
-                        photoView.setImageResource(R.drawable.ic_1baby);
-                    } else if (cat == Category.BAGSANDACCESSORIES) {
-                        photoView.setImageResource(R.drawable.ic_1bags);
-                    } else if (cat == Category.BOOKSANDMUSIC) {
-                        photoView.setImageResource(R.drawable.ic_1books);
-                    } else if (cat == Category.CLOTHING) {
-                        photoView.setImageResource(R.drawable.ic_1clothing);
-                    } else if (cat == Category.ELECTRONICS) {
-                        photoView.setImageResource(R.drawable.ic_1electronics);
-                    } else if (cat == Category.FOOD) {
-                        photoView.setImageResource(R.drawable.ic_1food);
-                    } else if (cat == Category.FURNITURE) {
-                        photoView.setImageResource(R.drawable.ic_1furniture);
-                    } else if (cat == Category.MOVIESANDGAMES) {
-                        photoView.setImageResource(R.drawable.ic_1movie);
-                    } else if (cat == Category.SPORTSANDOUTDOORS) {
-                        photoView.setImageResource(R.drawable.ic_1sports);
-                    } else if (cat == Category.TOYS) {
-                        photoView.setImageResource(R.drawable.ic_1toys);
+                    switch (cat) {
+                        case APPLIANCES:
+                            photoView.setImageResource(R.drawable.ic_1appliances);
+                            break;
+                        case BABY:
+                            photoView.setImageResource(R.drawable.ic_1baby);
+                            break;
+                        case BAGSANDACCESSORIES:
+                            photoView.setImageResource(R.drawable.ic_1bags);
+                            break;
+                        case BOOKSANDMUSIC:
+                            photoView.setImageResource(R.drawable.ic_1books);
+                            break;
+                        case CLOTHING:
+                            photoView.setImageResource(R.drawable.ic_1clothing);
+                            break;
+                        case ELECTRONICS:
+                            photoView.setImageResource(R.drawable.ic_1electronics);
+                            break;
+                        case FOOD:
+                            photoView.setImageResource(R.drawable.ic_1food);
+                            break;
+                        case FURNITURE:
+                            photoView.setImageResource(R.drawable.ic_1furniture);
+                            break;
+                        case MOVIESANDGAMES:
+                            photoView.setImageResource(R.drawable.ic_1movie);
+                            break;
+                        case SPORTSANDOUTDOORS:
+                            photoView.setImageResource(R.drawable.ic_1sports);
+                            break;
+                        case TOYS:
+                            photoView.setImageResource(R.drawable.ic_1toys);
+                            break;
                     }
                 }
             });

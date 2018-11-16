@@ -98,7 +98,7 @@ public class SearchActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
                                     if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= THRESHOLD_RATIO) {
-                                        Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
+                                        Donation donation = new Donation(Objects.requireNonNull(d.getDate("timestamp")), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                                 d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
                                         donationsQueryResults.add(donation);
@@ -144,7 +144,7 @@ public class SearchActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
                                     if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= THRESHOLD_RATIO) {
-                                        Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
+                                        Donation donation = new Donation(Objects.requireNonNull(d.getDate("timestamp")), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                                 d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
                                         donationsQueryResults.add(donation);
@@ -190,7 +190,7 @@ public class SearchActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
                                     if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= THRESHOLD_RATIO) {
-                                        Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
+                                        Donation donation = new Donation(Objects.requireNonNull(d.getDate("timestamp")), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                                 d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
                                         donationsQueryResults.add(donation);
@@ -236,7 +236,7 @@ public class SearchActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
                                     if (FuzzySearch.weightedRatio(searchQuery, d.getString("name")) >= THRESHOLD_RATIO) {
-                                        Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
+                                        Donation donation = new Donation(Objects.requireNonNull(d.getDate("timestamp")), d.getString("name"),
                                                 d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
                                                 d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
                                         donationsQueryResults.add(donation);

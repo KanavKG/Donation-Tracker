@@ -144,7 +144,7 @@ public class EditDonationActivity extends AppCompatActivity {
     public void launchCamera(View view) {
         Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (photoIntent.resolveActivity(getPackageManager()) != null) {
-            File photoFile = null;
+            File photoFile;
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {

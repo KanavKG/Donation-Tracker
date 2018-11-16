@@ -32,20 +32,18 @@ import team58.cs2340.donationtracker.R;
  * Class for location page activity
  */
 public class LocationPageActivity extends AppCompatActivity {
-    private Button addItem;
-    private Button locationDetails;
     private Location location;
     private final ArrayList<Donation> donationsAtLocation = new ArrayList<>();
     ListView donationListView;
     CurrUserLocal userManager;
-    private FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_location);
 
         userManager = CurrUserLocal.getInstance();
-        db = FirebaseFirestore.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
         Intent intent = getIntent();
@@ -95,7 +93,7 @@ public class LocationPageActivity extends AppCompatActivity {
                     }
                 });
 
-        addItem = findViewById(R.id.addItemBtn);
+        Button addItem = findViewById(R.id.addItemBtn);
         assert userManager.getCurrentUser() != null;
         if (((userManager.getCurrentUserRole() == Role.LOCATIONEMPLOYEE) && userManager.
                 getCurrentUser().getLocation().equals(location.getName()))) {
@@ -113,7 +111,7 @@ public class LocationPageActivity extends AppCompatActivity {
             addItem.setVisibility(View.GONE);
         }
 
-        locationDetails = findViewById(R.id.locationDetailsBtn);
+        Button locationDetails = findViewById(R.id.locationDetailsBtn);
         locationDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
