@@ -30,7 +30,8 @@ public class HomeScreenActivity extends AppCompatActivity{
         setContentView(R.layout.activity_locationlist);
         ListView locationListView = findViewById(R.id.locationList);
 
-        LocationListAdapter locationAdapter = new LocationListAdapter(this, (ArrayList<Location>) locationManager.getLocations());
+        LocationListAdapter locationAdapter = new LocationListAdapter(
+                this, (ArrayList<Location>) locationManager.getLocations());
         locationListView.setAdapter(locationAdapter);
 
         locationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -55,7 +56,8 @@ public class HomeScreenActivity extends AppCompatActivity{
                 userManager.clearCurrentUser();
                 Intent logoutIntent = new Intent(this, WelcomeScreenActivity.class);
                 startActivity(logoutIntent);
-                Toast.makeText(getApplicationContext(), "Logout Successful!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),
+                        "Logout Successful!",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.search:
                 Intent searchIntent = new Intent(this, SearchActivity.class);

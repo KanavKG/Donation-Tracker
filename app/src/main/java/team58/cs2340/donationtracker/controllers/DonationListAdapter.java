@@ -18,7 +18,7 @@ import team58.cs2340.donationtracker.R;
 
 class DonationListAdapter extends ArrayAdapter<Donation> {
     private final Context mContext;
-    private int mResource;
+    private final int mResource;
 
     DonationListAdapter(@NonNull Context context, List<Donation> objects) {
         super(context, R.layout.layout_donationitem, objects);

@@ -55,7 +55,8 @@ public class LocationDetailsActivity extends AppCompatActivity implements OnMapR
         locationPhone.setText("Phone Number: " + location.getPhoneNumber());
         locationWebsite.setClickable(true);
         locationWebsite.setMovementMethod(LinkMovementMethod.getInstance());
-        locationWebsite.setText(Html.fromHtml("Website: " + "<a href='" + location.getWebsite() + "'>" + location.getWebsite() + "</a>"));
+        locationWebsite.setText(Html.fromHtml(
+                "Website: " + "<a href='" + location.getWebsite() + "'>" + location.getWebsite() + "</a>"));
 
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager()
@@ -65,10 +66,13 @@ public class LocationDetailsActivity extends AppCompatActivity implements OnMapR
     }
 
     private BitmapDescriptor bitmapDescriptorFromVector(Context context) {
-        Drawable vectorDrawable = ContextCompat.getDrawable(context, R.drawable.ic_location_on_black_24dp);
+        Drawable vectorDrawable = ContextCompat.getDrawable(
+                context, R.drawable.ic_location_on_black_24dp);
         assert vectorDrawable != null;
-        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth()*2, vectorDrawable.getIntrinsicHeight()*2);
-        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth()*2, vectorDrawable.getIntrinsicHeight()*2, Bitmap.Config.ARGB_8888);
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth()*2,
+                vectorDrawable.getIntrinsicHeight()*2);
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth()*2,
+                vectorDrawable.getIntrinsicHeight()*2, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);

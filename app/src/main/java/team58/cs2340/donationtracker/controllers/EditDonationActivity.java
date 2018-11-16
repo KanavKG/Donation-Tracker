@@ -86,10 +86,12 @@ public class EditDonationActivity extends AppCompatActivity {
         Donation donation  = (Donation) intent.getSerializableExtra("donation");
         Location location = (Location) intent.getSerializableExtra("location");
 
-        ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationManager.getLocations());
+        ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, locationManager.getLocations());
         locationSpinner.setAdapter(locationAdapter);
 
-        ArrayAdapter<Category> categoryArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, Category.values());
+        ArrayAdapter<Category> categoryArrayAdapter = new ArrayAdapter<>(
+                this,android.R.layout.simple_spinner_item, Category.values());
         categoryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryArrayAdapter);
         int catSpinnerPos = categoryArrayAdapter.getPosition(donation.getCategory());
@@ -102,10 +104,12 @@ public class EditDonationActivity extends AppCompatActivity {
 
         try {
             final File localFile = File.createTempFile("donationImages", "jpg");
-            pathReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            pathReference.getFile(localFile).addOnSuccessListener(
+                    new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap currDonationImage = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    Bitmap currDonationImage = BitmapFactory
+                            .decodeFile(localFile.getAbsolutePath());
                     photoView.setImageBitmap(currDonationImage);
                 }
             }).addOnFailureListener(new OnFailureListener() {

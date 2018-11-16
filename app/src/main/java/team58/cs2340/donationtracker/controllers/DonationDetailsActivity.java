@@ -62,7 +62,8 @@ public class DonationDetailsActivity extends AppCompatActivity {
             editBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent addItemIntent = new Intent(DonationDetailsActivity.this, EditDonationActivity.class);
+                    Intent addItemIntent = new Intent(
+                            DonationDetailsActivity.this, EditDonationActivity.class);
                     addItemIntent.putExtra("donation", donation);
                     addItemIntent.putExtra("location", locationExtra);
                     startActivity(addItemIntent);
@@ -90,7 +91,8 @@ public class DonationDetailsActivity extends AppCompatActivity {
 
         try {
             final File localFile = File.createTempFile("donationImages", "jpg");
-            pathReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            pathReference.getFile(localFile).addOnSuccessListener(
+                    new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                     donationImage = BitmapFactory.decodeFile(localFile.getAbsolutePath());

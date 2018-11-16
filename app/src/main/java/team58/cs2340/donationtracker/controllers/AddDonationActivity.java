@@ -88,10 +88,12 @@ public class AddDonationActivity extends AppCompatActivity {
             takePhoto.setVisibility(View.GONE);
         }
 
-        ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationManager.getLocations());
+        ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, locationManager.getLocations());
         locationSpinner.setAdapter(locationAdapter);
 
-        ArrayAdapter<Category> categoryArrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, Category.values());
+        ArrayAdapter<Category> categoryArrayAdapter = new ArrayAdapter<>(
+                this,android.R.layout.simple_spinner_item, Category.values());
         categoryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryArrayAdapter);
 
@@ -170,27 +172,31 @@ public class AddDonationActivity extends AppCompatActivity {
                             Uri photoUri = Uri.fromFile(photoFile);
                             name.replaceAll("\\s+","");
                             StorageReference filePath = mStorage.child("donationImages").child(name);
-                            filePath.putFile(photoUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            filePath.putFile(photoUri).addOnSuccessListener(
+                                    new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                     Toast.makeText(AddDonationActivity.this, "Added image to storage.",
                                             Toast.LENGTH_SHORT).show();
-                                    Intent backtoLocationPageIntent = new Intent(AddDonationActivity.this, LocationPageActivity.class);
+                                    Intent backtoLocationPageIntent = new Intent(AddDonationActivity.this,
+                                            LocationPageActivity.class);
                                     backtoLocationPageIntent.putExtra("location", location);
                                     startActivity(backtoLocationPageIntent);
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(AddDonationActivity.this, "Failed to add image to storage.",
-                                            Toast.LENGTH_SHORT).show();
-                                    Intent backtoLocationPageIntent = new Intent(AddDonationActivity.this, LocationPageActivity.class);
+                                    Toast.makeText(AddDonationActivity.this,
+                                            "Failed to add image to storage.", Toast.LENGTH_SHORT).show();
+                                    Intent backtoLocationPageIntent = new Intent(
+                                            AddDonationActivity.this, LocationPageActivity.class);
                                     backtoLocationPageIntent.putExtra("location", location);
                                     startActivity(backtoLocationPageIntent);
                                 }
                             });
                         } else {
-                            Intent backtoLocationPageIntent = new Intent(AddDonationActivity.this, LocationPageActivity.class);
+                            Intent backtoLocationPageIntent = new Intent(
+                                    AddDonationActivity.this, LocationPageActivity.class);
                             backtoLocationPageIntent.putExtra("location", location);
                             startActivity(backtoLocationPageIntent);
                         }
@@ -199,8 +205,8 @@ public class AddDonationActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AddDonationActivity.this, "Failed to add donation to database.",
-                                Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddDonationActivity.this,
+                                "Failed to add donation to database.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

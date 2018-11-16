@@ -16,7 +16,7 @@ import team58.cs2340.donationtracker.R;
 
 class LocationListAdapter extends ArrayAdapter<Location> {
     private final Context mContext;
-    private int mResource;
+    private final int mResource;
 
     // changed ArrayList -> List : weakened type
     LocationListAdapter(@NonNull Context context, List<Location> objects) {
