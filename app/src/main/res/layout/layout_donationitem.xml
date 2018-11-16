@@ -34,6 +34,7 @@
         android:layout_marginTop="44dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="end"
+        android:paddingStart="0dip"
         android:paddingEnd="30dip"
         android:text="$ Value"
         android:textColor="@android:color/holo_green_dark"
