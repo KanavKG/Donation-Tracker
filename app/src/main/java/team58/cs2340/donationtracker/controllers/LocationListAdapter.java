@@ -14,6 +14,7 @@ import java.util.Objects;
 import team58.cs2340.donationtracker.models.Location;
 import team58.cs2340.donationtracker.R;
 
+@SuppressWarnings("AssignmentToMethodParameter")
 class LocationListAdapter extends ArrayAdapter<Location> {
     private final Context mContext;
     private final int mResource;

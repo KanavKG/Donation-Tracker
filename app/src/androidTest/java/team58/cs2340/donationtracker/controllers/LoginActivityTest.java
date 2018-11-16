@@ -35,7 +35,7 @@ public class LoginActivityTest {
     private final int TIMEOUT = 2000;
 
     @Rule
-    public final ActivityTestRule<LoginActivity> mActivityRule
+    private final ActivityTestRule<LoginActivity> mActivityRule
             = new ActivityTestRule<>(LoginActivity.class);
 
     /**
@@ -129,6 +129,7 @@ public class LoginActivityTest {
 
     /**
      * Tests authentic login credentials
+     * @throws java.lang.InterruptedException
      */
     @Test
     public void successfulLogin() throws InterruptedException {

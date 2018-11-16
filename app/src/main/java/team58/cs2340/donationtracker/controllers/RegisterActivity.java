@@ -159,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity
                             user.put("first", userfirst);
                             user.put("last", userlast);
                             user.put("role", roleSpinner.getSelectedItem().toString());
-                            if ((Role) roleSpinner.getSelectedItem() == Role.LOCATIONEMPLOYEE) {
+                            if (roleSpinner.getSelectedItem() == Role.LOCATIONEMPLOYEE) {
                                 assert location != null;
                                 user.put("location", location.getName());
                             }
