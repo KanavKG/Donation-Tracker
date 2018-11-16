@@ -24,7 +24,10 @@ import org.junit.Test;
 
 import team58.cs2340.donationtracker.R;
 
-
+/**
+ * Tests functionality of the Login Activity
+ * @author Saahil Yechuri
+ */
 public class LoginActivityTest {
     private String validUsername = "probator@test.app";
     private String validPassword = "password";
@@ -41,11 +44,17 @@ public class LoginActivityTest {
     public ActivityTestRule<LoginActivity> mActivityRule
             = new ActivityTestRule<>(LoginActivity.class);
 
+    /**
+     * Runs before automation
+     */
     @Before
     public void setUp() {
         Intents.init();
     }
 
+    /**
+     * Tests null blank username input
+     */
     @Test
     public void blankUsername() {
         onView(withId(R.id.password))
@@ -55,6 +64,9 @@ public class LoginActivityTest {
         onView(withId(R.id.email)).check(matches(hasErrorText("Email is required!")));
     }
 
+    /**
+     * Tests null blank password input
+     */
     @Test
     public void blankPassword() {
         onView(withId(R.id.email))
@@ -64,6 +76,9 @@ public class LoginActivityTest {
         onView(withId(R.id.password)).check(matches(hasErrorText("Password is required!")));
     }
 
+    /**
+     * Tests invalid username that is not in an email-address format
+     */
     @Test
     public void invalidUsername() {
         onView(withId(R.id.email))
@@ -75,6 +90,9 @@ public class LoginActivityTest {
         onView(withId(R.id.email)).check(matches(hasErrorText("Please enter a valid email!")));
     }
 
+    /**
+     * Tests input of short password < 6 characters
+     */
     @Test
     public void shortPassword() {
         onView(withId(R.id.email))
@@ -86,6 +104,9 @@ public class LoginActivityTest {
         onView(withId(R.id.password)).check(matches(hasErrorText("Password must be at least 6 characters long!")));
     }
 
+    /**
+     * Tests unauthentic (fake) login credentials
+     */
     @Test
     public void unsuccessfulLogin() throws InterruptedException {
         onView(withId(R.id.email))
@@ -102,6 +123,9 @@ public class LoginActivityTest {
                 check(matches(isDisplayed()));
     }
 
+    /**
+     * Tests authentic login credentials
+     */
     @Test
     public void successfulLogin() throws InterruptedException {
         onView(withId(R.id.email))
@@ -114,6 +138,9 @@ public class LoginActivityTest {
         intended(hasComponent(HomeScreenActivity.class.getName()));
     }
 
+    /**
+     * Runs after automation
+     */
     @After
     public void tearDown() {
         Intents.release();
