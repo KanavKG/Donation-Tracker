@@ -8,8 +8,10 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 
 
-
-
+/**
+ * Tester class to check locationtype.fromString method
+ * @author Kanav Garg
+ */
 public class LocationTypeTest {
 
     /**
