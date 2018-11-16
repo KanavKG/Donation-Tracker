@@ -33,8 +33,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.OverridingMethodsMustInvokeSuper;
-
 import team58.cs2340.donationtracker.models.Category;
 import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.models.Location;
