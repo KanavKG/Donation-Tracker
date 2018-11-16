@@ -1,5 +1,8 @@
 package team58.cs2340.donationtracker.models;
 
+/**
+ * User class containing attributes of a user
+ */
 public class User {
 
     private String firstName;
@@ -7,7 +10,13 @@ public class User {
     private Role role;
     private String location;
 
-
+    /**
+     * Constructor to instantiate a user object
+     * @param firstName First name of the user
+     * @param lastName Last name of the user
+     * @param role Role of the user
+     * @param location Location Branch of the user
+     */
     public User(String firstName, String lastName, Role role,
                 String location) {
         this.firstName = firstName;
@@ -18,10 +27,6 @@ public class User {
 
     private User(String firstName, String lastName, Role role) {
         this(firstName, lastName, role, null);
-    }
-
-    public User() {
-
     }
 
     /**
