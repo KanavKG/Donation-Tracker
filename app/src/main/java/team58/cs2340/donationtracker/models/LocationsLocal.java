@@ -1,7 +1,6 @@
 package team58.cs2340.donationtracker.models;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public final class LocationsLocal {

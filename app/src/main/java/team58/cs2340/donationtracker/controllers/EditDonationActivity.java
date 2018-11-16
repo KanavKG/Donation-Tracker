@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -41,41 +40,29 @@ import team58.cs2340.donationtracker.models.LocationsLocal;
 
 public class EditDonationActivity extends AppCompatActivity {
 
-    private LocationsLocal locationManager;
-    private CurrUserLocal userManager;
-
-    private TextView nameTxt;
-    private Spinner locationSpinner;
     private TextView value;
-    private TextView shortDescription;
-    private TextView fullDescription;
-    private Spinner categorySpinner;
-    private TextView comment;
 
     private String mPhotoPath;
 
-    private StorageReference mStorageRef;
-
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView photoView;
-    private Button takePhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_donation);
-        this.locationManager = LocationsLocal.getInstance();
-        this.userManager = CurrUserLocal.getInstance();
-        this.nameTxt = findViewById(R.id.name);
-        this.locationSpinner = findViewById(R.id.locationSpinner);
-        this.shortDescription = findViewById(R.id.shortDescription);
-        this.fullDescription = findViewById(R.id.fullDescription);
+        LocationsLocal locationManager = LocationsLocal.getInstance();
+        CurrUserLocal userManager = CurrUserLocal.getInstance();
+        TextView nameTxt = findViewById(R.id.name);
+        Spinner locationSpinner = findViewById(R.id.locationSpinner);
+        TextView shortDescription = findViewById(R.id.shortDescription);
+        TextView fullDescription = findViewById(R.id.fullDescription);
         this.value = findViewById(R.id.value);
-        this.categorySpinner = findViewById(R.id.categorySpinner);
-        this.comment = findViewById(R.id.comment);
-        this.takePhoto = findViewById(R.id.takePhotoBtn);
+        Spinner categorySpinner = findViewById(R.id.categorySpinner);
+        TextView comment = findViewById(R.id.comment);
+        Button takePhoto = findViewById(R.id.takePhotoBtn);
         this.photoView = findViewById(R.id.photo);
-        this.mStorageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
         //Disable button if user has no camera
         if (!hasCamera()) {

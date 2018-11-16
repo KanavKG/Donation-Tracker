@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.Objects;
 
 import team58.cs2340.donationtracker.models.Location;
-import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.models.Role;
 import team58.cs2340.donationtracker.R;

@@ -112,6 +112,7 @@ public class LocationPageActivity extends AppCompatActivity {
 
         locationDetails = findViewById(R.id.locationDetailsBtn);
         locationDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Intent detailsIntent = new Intent(
                         LocationPageActivity.this, LocationDetailsActivity.class);
