@@ -58,26 +58,35 @@ public class LocationPageActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
-                                Donation donation = new Donation(d.getDate("timestamp"), d.getString("name"),
-                                        d.getString("location"), Double.parseDouble(d.getString("value")), d.getString("shortDescription"),
-                                        d.getString("fullDescription"), Category.fromString(d.getString("category")), d.getString("comment"));
+                                Donation donation = new Donation(Objects.requireNonNull(d.getDate("timestamp")),
+                                        d.getString("name"), d.getString("location"), Double.parseDouble(
+                                                d.getString("value")), d.getString("shortDescription"),
+                                        d.getString("fullDescription"), Category.fromString(d.getString(
+                                                "category")), d.getString("comment"));
                                 donationsAtLocation.add(donation);
-                                ListAdapter locationAdapter = new DonationListAdapter(LocationPageActivity.this, donationsAtLocation);
+                                ListAdapter locationAdapter = new DonationListAdapter(
+                                        LocationPageActivity.this, donationsAtLocation);
                                 donationListView.setAdapter(locationAdapter);
 
-                                donationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                donationListView.setOnItemClickListener(
+                                        new AdapterView.OnItemClickListener() {
                                     @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Intent donationDetailsintent = new Intent(getApplicationContext(), DonationDetailsActivity.class);
-                                        Log.d("donation clicked:", donationsAtLocation.get(position).getName());
-                                        donationDetailsintent.putExtra("donation", donationsAtLocation.get(position));
+                                    public void onItemClick(AdapterView<?> parent, View view,
+                                                            int position, long id) {
+                                        Intent donationDetailsintent = new Intent(
+                                                getApplicationContext(), DonationDetailsActivity.class);
+                                        Log.d("donation clicked:", donationsAtLocation.get(
+                                                position).getName());
+                                        donationDetailsintent.putExtra("donation",
+                                                donationsAtLocation.get(position));
                                         donationDetailsintent.putExtra("location", location);
                                         startActivity(donationDetailsintent);
                                     }
                                 });
                             }
                         } else {
-                            Toast.makeText(LocationPageActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
+                            Toast.makeText(LocationPageActivity.this,
+                                    Objects.requireNonNull(task.getException()).getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -91,7 +100,8 @@ public class LocationPageActivity extends AppCompatActivity {
             addItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent addItemIntent = new Intent(LocationPageActivity.this, AddDonationActivity.class);
+                    Intent addItemIntent = new Intent(
+                            LocationPageActivity.this, AddDonationActivity.class);
                     addItemIntent.putExtra("location", location);
                     startActivity(addItemIntent);
                 }
@@ -103,7 +113,8 @@ public class LocationPageActivity extends AppCompatActivity {
         locationDetails = findViewById(R.id.locationDetailsBtn);
         locationDetails.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent detailsIntent = new Intent(LocationPageActivity.this, LocationDetailsActivity.class);
+                Intent detailsIntent = new Intent(
+                        LocationPageActivity.this, LocationDetailsActivity.class);
                 detailsIntent.putExtra("location", location);
                 startActivity(detailsIntent);
             }

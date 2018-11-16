@@ -19,7 +19,8 @@ public class CategoryTest {
 
     @Test
     public void testAppliances() {
-        assertEquals("Correct output for Appliances",Category.APPLIANCES, Category.fromString("Appliances"));
+        assertEquals("Correct output for Appliances",
+                Category.APPLIANCES, Category.fromString("Appliances"));
     }
 
     @Test
@@ -29,17 +30,20 @@ public class CategoryTest {
 
     @Test
     public void testBagsAndAccessories() {
-        assertEquals("Correct output for Bags and Accessories",Category.BAGSANDACCESSORIES, Category.fromString("Bags and Accessories"));
+        assertEquals("Correct output for Bags and Accessories",
+                Category.BAGSANDACCESSORIES, Category.fromString("Bags and Accessories"));
     }
 
     @Test
     public void testBooksAndMusic() {
-        assertEquals("Correct output for Books and Music",Category.BOOKSANDMUSIC, Category.fromString("Books and Music"));
+        assertEquals("Correct output for Books and Music",
+                Category.BOOKSANDMUSIC, Category.fromString("Books and Music"));
     }
 
     @Test
     public void testClothing() {
-        assertEquals("Correct output for Clothing",Category.CLOTHING, Category.fromString("Clothing"));
+        assertEquals("Correct output for Clothing",
+                Category.CLOTHING, Category.fromString("Clothing"));
     }
 
     @Test
@@ -54,22 +58,26 @@ public class CategoryTest {
 
     @Test
     public void testFurniture() {
-        assertEquals("Correct output for Furniture",Category.FURNITURE, Category.fromString("Furniture"));
+        assertEquals("Correct output for Furniture",
+                Category.FURNITURE, Category.fromString("Furniture"));
     }
 
     @Test
     public void testMoviesAndGames() {
-        assertEquals("Correct output for Movies and Games",Category.MOVIESANDGAMES, Category.fromString("Movies and Games"));
+        assertEquals("Correct output for Movies and Games",
+                Category.MOVIESANDGAMES, Category.fromString("Movies and Games"));
     }
 
     @Test
     public void testSportsAndOutdoors() {
-        assertEquals("Correct output for Sports and Outdoors",Category.SPORTSANDOUTDOORS, Category.fromString("Sports and Outdoors"));
+        assertEquals("Correct output for Sports and Outdoors",
+                Category.SPORTSANDOUTDOORS, Category.fromString("Sports and Outdoors"));
     }
 
     @Test
     public void testToys() {
-        assertEquals("Correct output for Toys",Category.TOYS, Category.fromString("Toys"));
+        assertEquals("Correct output for Toys",
+                Category.TOYS, Category.fromString("Toys"));
     }
 
 }

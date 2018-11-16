@@ -80,35 +80,43 @@ public class LoginActivity extends AppCompatActivity {
                     password.requestFocus();
                     return;
                 }
-                mAuth.signInWithEmailAndPassword(useremail, userpass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                mAuth.signInWithEmailAndPassword(useremail, userpass).
+                        addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Sign in successful! :)",
                                     Toast.LENGTH_SHORT).show();
                             db.collection("users")
-                                    .whereEqualTo("UID", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+                                    .whereEqualTo("UID", Objects.requireNonNull(
+                                            FirebaseAuth.getInstance().getCurrentUser()).getUid())
                                     .get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                             if (task.isSuccessful()) {
-                                                for (DocumentSnapshot d : Objects.requireNonNull(task.getResult())) {
-                                                    if ("Location Employee".equals(d.getString("role"))) {
-                                                        userManager.setCurrentUser(new User(d.getString("first"), d.getString("last"),
-                                                                Role.fromString(d.getString("role")), d.getString("location")));
+                                                for (DocumentSnapshot d : Objects.requireNonNull(
+                                                        task.getResult())) {
+                                                    if ("Location Employee".equals(
+                                                            d.getString("role"))) {
+                                                        userManager.setCurrentUser(new User(d.getString(
+                                                                "first"), d.getString("last"),
+                                                                Role.fromString(d.getString("role")),
+                                                                d.getString("location")));
                                                     } else {
                                                         userManager.setCurrentUser(new User());
                                                     }
                                                 }
                                             } else {
-                                                Toast.makeText(LoginActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
+                                                Toast.makeText(LoginActivity.this, Objects.requireNonNull(
+                                                        task.getException()).getMessage(),
                                                         Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
                             userManager.setCurrentUser(new User());
-                            Intent intent = new Intent(LoginActivity.this, HomeScreenActivity.class);
+                            Intent intent = new Intent(LoginActivity.this,
+                                    HomeScreenActivity.class);
                             startActivity(intent);
                         } else {
                             Toast.makeText(LoginActivity.this, task.getException().getMessage(),

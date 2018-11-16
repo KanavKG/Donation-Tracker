@@ -34,7 +34,8 @@ import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.models.Role;
 import team58.cs2340.donationtracker.R;
 
-public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class RegisterActivity extends AppCompatActivity
+        implements AdapterView.OnItemSelectedListener {
 
     private TextView firstName;
     private TextView lastName;
@@ -62,11 +63,13 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         password = findViewById(R.id.password);
         confirmPassword = findViewById(R.id.confirmPassword);
 
-        ArrayAdapter<Role> roleAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, Role.values());
+        ArrayAdapter<Role> roleAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, Role.values());
         roleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roleSpinner.setAdapter(roleAdapter);
 
-        ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationManager.getLocations());
+        ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, locationManager.getLocations());
         locationSpinner.setAdapter(locationAdapter);
 
         roleSpinner.setOnItemSelectedListener(this);
@@ -144,7 +147,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
                             //FirebaseUser user = mAuth.getCurrentUser();
                             Map<String, Object> user = new HashMap<>();
-                            user.put("UID", Objects.requireNonNull(mAuth.getCurrentUser()).getUid());
+                            user.put("UID", Objects.requireNonNull(
+                                    mAuth.getCurrentUser()).getUid());
                             user.put("first", userfirst);
                             user.put("last", userlast);
                             user.put("role", ((Role) roleSpinner.getSelectedItem()).toString());
@@ -155,17 +159,20 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
                             db.collection("users")
                                     .add(user)
-                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    .addOnSuccessListener(
+                                            new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
-                                            Toast.makeText(RegisterActivity.this, "Added user to database.",
+                                            Toast.makeText(RegisterActivity.this,
+                                                    "Added user to database.",
                                                     Toast.LENGTH_SHORT).show();
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(RegisterActivity.this, "Failed to add user to database.",
+                                            Toast.makeText(RegisterActivity.this,
+                                                    "Failed to add user to database.",
                                                     Toast.LENGTH_SHORT).show();
                                         }
                                     });
@@ -174,10 +181,12 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                             startActivity(intent);
                         } else {
                             if(task.getException() instanceof FirebaseAuthUserCollisionException) {
-                                Toast.makeText(RegisterActivity.this, "An account with that email already exists",
+                                Toast.makeText(RegisterActivity.this,
+                                        "An account with that email already exists",
                                         Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(RegisterActivity.this, Objects.requireNonNull(task.getException()).getMessage(),
+                                Toast.makeText(RegisterActivity.this, Objects.requireNonNull(
+                                        task.getException()).getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             }
 
