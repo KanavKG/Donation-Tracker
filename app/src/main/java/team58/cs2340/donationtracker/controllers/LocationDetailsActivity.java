@@ -51,8 +51,10 @@ public class LocationDetailsActivity extends AppCompatActivity implements OnMapR
 
         locationTitle.setText(location.getName());
         locationType.setText(location.getType().toString());
-        locationAddress.setText("Address: " + location.getStreetAddress());
-        locationPhone.setText("Phone Number: " + location.getPhoneNumber());
+        String address = "Address: " + location.getStreetAddress();
+        locationAddress.setText(address);
+        String phoneNumber = "Phone Number: " + location.getPhoneNumber();
+        locationPhone.setText(phoneNumber);
         locationWebsite.setClickable(true);
         locationWebsite.setMovementMethod(LinkMovementMethod.getInstance());
         locationWebsite.setText(Html.fromHtml("Website: " + "<a href='" + location.getWebsite() + "'>" + location.getWebsite() + "</a>"));
