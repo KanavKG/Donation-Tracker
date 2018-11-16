@@ -126,7 +126,7 @@ public class EditDonationActivity extends AppCompatActivity {
         }
     }
 
-    public boolean hasCamera() {
+    private boolean hasCamera() {
         return getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY);
     }
 

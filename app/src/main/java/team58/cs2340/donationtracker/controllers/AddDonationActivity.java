@@ -209,7 +209,7 @@ public class AddDonationActivity extends AppCompatActivity {
      * Function to check if the device has a camera
      * @return boolean value of existence of camera
      */
-    public boolean hasCamera() {
+    private boolean hasCamera() {
         return getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY);
     }
 
