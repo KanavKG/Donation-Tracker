@@ -32,18 +32,10 @@ public class LoginActivityTest {
     private final String validUsername = "probator@test.app";
     private final String validPassword = "password";
 
-    private final String invalidUsername = "saahilyechuri";
-    private final String shortPassword = "12345";
-
-    private final String fakeUsername = "fake@unreal.scam";
-    private final String fakePassword = "drowssap";
-
-    private final String unsuccessfulToastMessage = "Login unsuccessful! :(";
-
     private final int TIMEOUT = 2000;
 
     @Rule
-    public ActivityTestRule<LoginActivity> mActivityRule
+    public final ActivityTestRule<LoginActivity> mActivityRule
             = new ActivityTestRule<>(LoginActivity.class);
 
     /**
@@ -83,6 +75,7 @@ public class LoginActivityTest {
      */
     @Test
     public void invalidUsername() {
+        String invalidUsername = "saahilyechuri";
         onView(withId(R.id.email))
                 .perform(typeText(invalidUsername));
         onView(withId(R.id.password))
@@ -99,6 +92,7 @@ public class LoginActivityTest {
     public void shortPassword() {
         onView(withId(R.id.email))
                 .perform(typeText(validUsername));
+        String shortPassword = "12345";
         onView(withId(R.id.password))
                 .perform(typeText(shortPassword));
         onView(withId(R.id.login))
@@ -108,11 +102,14 @@ public class LoginActivityTest {
 
     /**
      * Tests unauthentic (fake) login credentials
+     * @throws InterruptedException
      */
     @Test
     public void unsuccessfulLogin() throws InterruptedException {
+        String fakeUsername = "fake@unreal.scam";
         onView(withId(R.id.email))
                 .perform(typeText(fakeUsername));
+        String fakePassword = "drowssap";
         onView(withId(R.id.password))
                 .perform(typeText(fakePassword));
         onView(withId(R.id.login))
@@ -120,6 +117,7 @@ public class LoginActivityTest {
         Thread.sleep(TIMEOUT);
 
         LoginActivity activity = mActivityRule.getActivity();
+        String unsuccessfulToastMessage = "Login unsuccessful! :(";
         onView(withText(unsuccessfulToastMessage)).
                 inRoot(withDecorView(not(is(activity.getWindow().getDecorView())))).
                 check(matches(isDisplayed()));

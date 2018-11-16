@@ -34,13 +34,13 @@ class DonationListAdapter extends ArrayAdapter<Donation> {
         Category cat = Objects.requireNonNull(getItem(position)).getCategory();
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        convertView = inflater.inflate(mResource, parent, false);
+        View convertView1 = inflater.inflate(mResource, parent, false);
 
-        TextView nameTxt = convertView.findViewById(R.id.donationNameText);
-        TextView valueTxt = convertView.findViewById(R.id.donationValueText);
-        TextView descTxt = convertView.findViewById(R.id.donationDescText);
-        TextView catTxt = convertView.findViewById(R.id.categoryText);
-        ImageView donImg = convertView.findViewById(R.id.donationImg);
+        TextView nameTxt = convertView1.findViewById(R.id.donationNameText);
+        TextView valueTxt = convertView1.findViewById(R.id.donationValueText);
+        TextView descTxt = convertView1.findViewById(R.id.donationDescText);
+        TextView catTxt = convertView1.findViewById(R.id.categoryText);
+        ImageView donImg = convertView1.findViewById(R.id.donationImg);
 
         nameTxt.setText(name);
         String val = "$" + value;
@@ -83,6 +83,6 @@ class DonationListAdapter extends ArrayAdapter<Donation> {
                 break;
         }
 
-        return convertView;
+        return convertView1;
     }
 }

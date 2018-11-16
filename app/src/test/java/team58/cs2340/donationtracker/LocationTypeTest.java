@@ -3,7 +3,7 @@ package team58.cs2340.donationtracker;
 import org.junit.Test;
 
 import team58.cs2340.donationtracker.models.LocationType;
-import team58.cs2340.donationtracker.models.Role;
+
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 
