@@ -1,6 +1,8 @@
 package team58.cs2340.donationtracker;
 
 import org.junit.Test;
+
+import team58.cs2340.donationtracker.models.LocationType;
 import team58.cs2340.donationtracker.models.Role;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
@@ -15,7 +17,7 @@ public class LocationTypeTest {
      */
     @Test
     public void testNull() {
-        assertNull("Null string fails", Role.fromString(null));
+        assertNull("Null string fails", LocationType.fromString(null));
     }
 
     /**
@@ -23,32 +25,31 @@ public class LocationTypeTest {
      */
     @Test
     public void testInvalid() {
-        assertNull("Invalid string fails", Role.fromString("cabbage"));
+        assertNull("Invalid string fails", LocationType.fromString("nowhere"));
     }
 
     /**
-     * Tests User input to fromString
+     * Tests dropoff input to fromString
      */
     @Test
-    public void testUser() {
-        assertEquals("Correct output for User", Role.USER, Role.fromString("User"));
+    public void testDropOff() {
+        assertEquals("Correct output for Drop off", LocationType.DROPOFF, LocationType.fromString("Drop Off"));
     }
 
     /**
-     * Tests Location Employee input to fromString
+     * Tests Store input to fromString
      */
     @Test
-    public void testLocationEmployee() {
-        assertEquals("Correct output for Location Employee", Role.LOCATIONEMPLOYEE,
-                Role.fromString("Location Employee"));
+    public void testStore() {
+        assertEquals("Correct output for Store", LocationType.STORE,
+                LocationType.fromString("Store"));
     }
 
     /**
-     * Tests Admin input to fromString
+     * Tests Warehouse input to fromString
      */
     @Test
-    public void testAdmin() {
-        assertEquals("Correct output for Admin", Role.ADMIN, Role.fromString("Admin"));
+    public void testWarehouse() {
+        assertEquals("Correct output for Warehouse", LocationType.WAREHOUSE, LocationType.fromString("Warehouse"));
     }
 }
-
