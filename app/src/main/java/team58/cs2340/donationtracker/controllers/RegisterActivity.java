@@ -74,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         locationSpinner.setVisibility(View.GONE);
 
         FirebaseApp.initializeApp(this);
-        FirebaseInstanceId.getInstance().getToken();
+        FirebaseInstanceId.getInstance();
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
