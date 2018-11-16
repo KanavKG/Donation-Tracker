@@ -47,28 +47,40 @@ class DonationListAdapter extends ArrayAdapter<Donation> {
         valueTxt.setText(val);
         descTxt.setText(desc);
         catTxt.setText(cat.toString());
-        if (cat == Category.APPLIANCES) {
-            donImg.setImageResource(R.drawable.ic_1appliances);
-        } else if (cat == Category.BABY) {
-            donImg.setImageResource(R.drawable.ic_1baby);
-        } else if (cat == Category.BAGSANDACCESSORIES) {
-            donImg.setImageResource(R.drawable.ic_1bags);
-        } else if (cat == Category.BOOKSANDMUSIC) {
-            donImg.setImageResource(R.drawable.ic_1books);
-        } else if (cat == Category.CLOTHING) {
-            donImg.setImageResource(R.drawable.ic_1clothing);
-        } else if (cat == Category.ELECTRONICS) {
-            donImg.setImageResource(R.drawable.ic_1electronics);
-        } else if (cat == Category.FOOD) {
-            donImg.setImageResource(R.drawable.ic_1food);
-        } else if (cat == Category.FURNITURE) {
-            donImg.setImageResource(R.drawable.ic_1furniture);
-        } else if (cat == Category.MOVIESANDGAMES) {
-            donImg.setImageResource(R.drawable.ic_1movie);
-        } else if (cat == Category.SPORTSANDOUTDOORS) {
-            donImg.setImageResource(R.drawable.ic_1sports);
-        } else if (cat == Category.TOYS) {
-            donImg.setImageResource(R.drawable.ic_1toys);
+        switch (cat) {
+            case APPLIANCES:
+                donImg.setImageResource(R.drawable.ic_1appliances);
+                break;
+            case BABY:
+                donImg.setImageResource(R.drawable.ic_1baby);
+                break;
+            case BAGSANDACCESSORIES:
+                donImg.setImageResource(R.drawable.ic_1bags);
+                break;
+            case BOOKSANDMUSIC:
+                donImg.setImageResource(R.drawable.ic_1books);
+                break;
+            case CLOTHING:
+                donImg.setImageResource(R.drawable.ic_1clothing);
+                break;
+            case ELECTRONICS:
+                donImg.setImageResource(R.drawable.ic_1electronics);
+                break;
+            case FOOD:
+                donImg.setImageResource(R.drawable.ic_1food);
+                break;
+            case FURNITURE:
+                donImg.setImageResource(R.drawable.ic_1furniture);
+                break;
+            case MOVIESANDGAMES:
+                donImg.setImageResource(R.drawable.ic_1movie);
+                break;
+            case SPORTSANDOUTDOORS:
+                donImg.setImageResource(R.drawable.ic_1sports);
+                break;
+            case TOYS:
+                donImg.setImageResource(R.drawable.ic_1toys);
+                break;
         }
 
         return convertView;
