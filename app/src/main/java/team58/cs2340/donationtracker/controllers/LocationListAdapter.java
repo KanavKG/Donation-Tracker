@@ -33,8 +33,8 @@ class LocationListAdapter extends ArrayAdapter<Location> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
-        TextView nameTxt = (TextView) convertView.findViewById(R.id.locationNameText);
-        TextView cityTxt = (TextView) convertView.findViewById(R.id.locationCityText);
+        TextView nameTxt = convertView.findViewById(R.id.locationNameText);
+        TextView cityTxt = convertView.findViewById(R.id.locationCityText);
 
         nameTxt.setText(name);
         cityTxt.setText(city);

@@ -36,11 +36,11 @@ class DonationListAdapter extends ArrayAdapter<Donation> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
-        TextView nameTxt = (TextView) convertView.findViewById(R.id.donationNameText);
-        TextView valueTxt = (TextView) convertView.findViewById(R.id.donationValueText);
-        TextView descTxt = (TextView) convertView.findViewById(R.id.donationDescText);
-        TextView catTxt = (TextView) convertView.findViewById(R.id.categoryText);
-        ImageView donImg = (ImageView) convertView.findViewById(R.id.donationImg);
+        TextView nameTxt = convertView.findViewById(R.id.donationNameText);
+        TextView valueTxt = convertView.findViewById(R.id.donationValueText);
+        TextView descTxt = convertView.findViewById(R.id.donationDescText);
+        TextView catTxt = convertView.findViewById(R.id.categoryText);
+        ImageView donImg = convertView.findViewById(R.id.donationImg);
 
         nameTxt.setText(name);
         String val = "$" + value;

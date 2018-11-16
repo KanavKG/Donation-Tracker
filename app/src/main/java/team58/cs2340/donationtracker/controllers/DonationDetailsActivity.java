@@ -53,7 +53,7 @@ public class DonationDetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final Donation donation  = (Donation) intent.getSerializableExtra("donation");
-        final Serializable locationExtra  = (Location) intent.getSerializableExtra("location");
+        final Serializable locationExtra  = intent.getSerializableExtra("location");
 
         //assert userManager.getCurrentUser() != null;
         if (((userManager.getCurrentUserRole() == Role.LOCATIONEMPLOYEE) && userManager.
