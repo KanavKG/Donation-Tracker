@@ -25,7 +25,6 @@ import team58.cs2340.donationtracker.models.Category;
 import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.models.Donation;
 import team58.cs2340.donationtracker.R;
-import team58.cs2340.donationtracker.models.Location;
 import team58.cs2340.donationtracker.models.Role;
 
 /**

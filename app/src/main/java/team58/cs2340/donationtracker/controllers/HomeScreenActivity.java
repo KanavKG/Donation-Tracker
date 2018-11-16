@@ -10,9 +10,6 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.ArrayList;
-
-import team58.cs2340.donationtracker.models.Location;
 import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.models.CurrUserLocal;
 import team58.cs2340.donationtracker.R;
