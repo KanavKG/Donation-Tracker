@@ -6,7 +6,7 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 
 /**
- * Class for category tests
+ * Tests functionality of fromString in Category class
  */
 public class CategoryTest {
 
