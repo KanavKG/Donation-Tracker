@@ -3,6 +3,9 @@ package team58.cs2340.donationtracker.models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * final class for locations
+ */
 public final class LocationsLocal {
 
     private static final LocationsLocal instance = new LocationsLocal();

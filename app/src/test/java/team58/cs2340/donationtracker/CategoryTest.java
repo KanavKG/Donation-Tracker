@@ -5,6 +5,9 @@ import team58.cs2340.donationtracker.models.Category;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 
+/**
+ * Class for category tests
+ */
 public class CategoryTest {
 
     @Test

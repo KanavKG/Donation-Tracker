@@ -6,6 +6,9 @@ import com.google.firebase.firestore.ServerTimestamp;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Donation class to create donation objects
+ */
 public class Donation implements Serializable{
 
     @ServerTimestamp private Date timeStamp;
@@ -18,8 +21,22 @@ public class Donation implements Serializable{
     private String comment;
     private Bitmap photo;
 
+    /**
+     * Empty constructor for donations
+     */
     public Donation() { }
 
+    /**
+     * Constructor to create a donation object
+     * @param timeStamp current time
+     * @param name name of item
+     * @param location location of item
+     * @param value value of item
+     * @param shortDescription of item
+     * @param fullDescription of item
+     * @param category of item
+     * @param comment any comments
+     */
     public Donation( Date timeStamp, String name, String location, double value,
                     String shortDescription, String fullDescription,
                      Category category, String comment) {
@@ -34,6 +51,16 @@ public class Donation implements Serializable{
         //this.photo = photo;
     }
 
+    /**
+     * Constructor to create a donation without date information
+     * @param name name of item
+     * @param location location of item
+     * @param value value of item
+     * @param shortDescription of item
+     * @param fullDescription of item
+     * @param category of item
+     * @param comment any comments
+     */
     public Donation(String name, String location, double value, String shortDescription,
                     String fullDescription, Category category, String comment) {
         this(new Date(), name, location, value, shortDescription,

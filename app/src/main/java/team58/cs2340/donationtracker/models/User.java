@@ -29,6 +29,9 @@ public class User {
         this(firstName, lastName, role, null);
     }
 
+    /**
+     * Empty user constructor for login activity
+     */
     public User() {
 
     }

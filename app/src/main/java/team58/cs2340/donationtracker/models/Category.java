@@ -1,5 +1,8 @@
 package team58.cs2340.donationtracker.models;
 
+/**
+ * Category enum
+ */
 public enum Category {
     APPLIANCES("Appliances"),
     BABY("Baby"),

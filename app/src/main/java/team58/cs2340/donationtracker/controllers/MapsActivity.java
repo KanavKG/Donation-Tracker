@@ -32,6 +32,9 @@ import team58.cs2340.donationtracker.models.Location;
 import team58.cs2340.donationtracker.models.LocationsLocal;
 import team58.cs2340.donationtracker.R;
 
+/**
+ * Class for Google maps activity
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private static final int mapPadding = 200;
