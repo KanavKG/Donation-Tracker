@@ -24,7 +24,7 @@ import team58.cs2340.donationtracker.R;
 public class WelcomeScreenActivity extends AppCompatActivity {
 
     private LocationsLocal locationManager;
-    FirebaseFirestore db;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

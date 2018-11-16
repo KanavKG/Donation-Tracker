@@ -34,7 +34,7 @@ import team58.cs2340.donationtracker.R;
 public class LocationPageActivity extends AppCompatActivity {
     private Location location;
     private final ArrayList<Donation> donationsAtLocation = new ArrayList<>();
-    ListView donationListView;
+    private ListView donationListView;
     CurrUserLocal userManager;
 
     @Override
