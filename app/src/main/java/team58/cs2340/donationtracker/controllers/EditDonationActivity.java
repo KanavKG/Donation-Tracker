@@ -19,18 +19,25 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import team58.cs2340.donationtracker.R;
 import team58.cs2340.donationtracker.models.Category;
@@ -44,9 +51,22 @@ import team58.cs2340.donationtracker.models.LocationsLocal;
  */
 public class EditDonationActivity extends AppCompatActivity {
 
+    private TextView nameTxt;
+    private Spinner locationSpinner;
     private TextView value;
+    private TextView shortDescription;
+    private TextView fullDescription;
+    private Spinner categorySpinner;
+    private TextView comment;
+    boolean photoTaken = false;
+
+    Bitmap currDonationImage;
+    StorageReference mStorageRef;
 
     private String mPhotoPath;
+    StorageReference pathReference;
+    String nmID;
+    FirebaseFirestore db;
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView photoView;
@@ -57,17 +77,17 @@ public class EditDonationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_donation);
         LocationsLocal locationManager = LocationsLocal.getInstance();
         CurrUserLocal userManager = CurrUserLocal.getInstance();
-        TextView nameTxt = findViewById(R.id.name);
-        Spinner locationSpinner = findViewById(R.id.locationSpinner);
-        TextView shortDescription = findViewById(R.id.shortDescription);
-        TextView fullDescription = findViewById(R.id.fullDescription);
+        this.nameTxt = findViewById(R.id.name);
+        this.locationSpinner = findViewById(R.id.locationSpinner);
+        this.shortDescription = findViewById(R.id.shortDescription);
+        this.fullDescription = findViewById(R.id.fullDescription);
         this.value = findViewById(R.id.value);
-        Spinner categorySpinner = findViewById(R.id.categorySpinner);
-        TextView comment = findViewById(R.id.comment);
+        this.categorySpinner = findViewById(R.id.categorySpinner);
+        this.comment = findViewById(R.id.comment);
         Button takePhoto = findViewById(R.id.takePhotoBtn);
         this.photoView = findViewById(R.id.photo);
-        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+        db = FirebaseFirestore.getInstance();
 
         //Disable button if user has no camera
         if (!hasCamera()) {
@@ -77,7 +97,7 @@ public class EditDonationActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Donation donation  = (Donation) intent.getSerializableExtra("donation");
-        Location location = (Location) intent.getSerializableExtra("location");
+        final Location location = (Location) intent.getSerializableExtra("location");
 
         ArrayAdapter<Location> locationAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, locationManager.getLocations());
@@ -90,11 +110,10 @@ public class EditDonationActivity extends AppCompatActivity {
         int catSpinnerPos = categoryArrayAdapter.getPosition(donation.getCategory());
         categorySpinner.setSelection(catSpinnerPos);
 
-        String imgName = donation.getName();
-        imgName.replaceAll("\\s+","");
+        nmID = donation.getName().replaceAll("\\s+","") +
+                "_" + donation.getLocation().replaceAll("\\s+","");
 
-        StorageReference pathReference = mStorageRef.child("donationImages/" + imgName);
-        //DocumentReference donationRef  = db.collection("donations").document(UID);
+        pathReference = mStorageRef.child("donationImages/" + nmID);
 
         try {
             final File localFile = File.createTempFile("donationImages", "jpg");
@@ -102,7 +121,7 @@ public class EditDonationActivity extends AppCompatActivity {
                     new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap currDonationImage = BitmapFactory
+                    currDonationImage = BitmapFactory
                             .decodeFile(localFile.getAbsolutePath());
                     photoView.setImageBitmap(currDonationImage);
                 }
@@ -184,10 +203,177 @@ public class EditDonationActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if((requestCode == REQUEST_IMAGE_CAPTURE) && (resultCode == RESULT_OK)) {
             File imgFile = new  File(mPhotoPath);
+            photoTaken = true;
             if(imgFile.exists())            {
                 photoView.setImageURI(Uri.fromFile(imgFile));
             }
         }
+    }
+
+    public void onDeleteClicked(View view) {
+        final Location location = (Location) locationSpinner.getSelectedItem();
+        db.collection("donations").document(nmID)
+                .delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(EditDonationActivity.this,
+                                "Donation deleted!",
+                                Toast.LENGTH_SHORT).show();
+                        Intent backtoLocationPageIntent = new Intent(
+                                EditDonationActivity.this,
+                                LocationPageActivity.class);
+                        backtoLocationPageIntent.putExtra("location", location);
+                        startActivity(backtoLocationPageIntent);
+                    }
+                });
+    }
+
+    public void onEditClicked(View view) {
+        final String name = this.nameTxt.getText().toString();
+        final Location location = (Location) locationSpinner.getSelectedItem();
+        final Double value = Donation.getValue(this.value.getText().toString());
+        final String shortDescription = this.shortDescription.getText().toString();
+        final String fullDescription = this.fullDescription.getText().toString();
+        final Category category = (Category) categorySpinner.getSelectedItem();
+        String comment = this.comment.getText().toString();
+        final Date[] donationTS = new Date[1];
+
+        final String nmIDUpdated = name.replaceAll("\\s+","") +
+                "_" + location.getName().replaceAll("\\s+","");
+
+        if (name.isEmpty()) {
+            nameTxt.setError("Item name is required!");
+            nameTxt.requestFocus();
+            return;
+        }
+        if (this.value.getText().toString().isEmpty()) {
+            this.value.setError("Value cannot be empty!");
+            this.value.requestFocus();
+            return;
+        }
+        if (shortDescription.isEmpty()) {
+            this.shortDescription.setError("Short description is required!");
+            this.shortDescription.requestFocus();
+            return;
+        }
+        if (fullDescription.isEmpty()) {
+            this.fullDescription.setError("Full description is required!");
+            this.fullDescription.requestFocus();
+            return;
+        }
+        if (comment.isEmpty()) {
+            comment = "";
+        }
+
+        final String finalComment = comment;
+        db.collection("donations")
+                .document(nmID)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        donationTS[0] = document.getDate("timestamp");
+                        db.collection("donations").document(nmID).delete();
+                        final Map<String, Object> donationUpdated = new HashMap<>();
+                        donationUpdated.put("name", name);
+                        donationUpdated.put("location", location.getName());
+                        donationUpdated.put("value", Double.toString(value));
+                        donationUpdated.put("shortDescription", shortDescription);
+                        donationUpdated.put("fullDescription", fullDescription);
+                        donationUpdated.put("category", category.toString());
+                        donationUpdated.put("comment", finalComment);
+                        donationUpdated.put("timestamp", donationTS[0]);
+
+                        final StorageReference pathReferenceUpdated = mStorageRef.child("donationImages/" + nmIDUpdated);
+
+                        db.collection("donations")
+                                .document(nmIDUpdated)
+                                .set(donationUpdated)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(EditDonationActivity.this,
+                                                "Updated donation in database!",
+                                                Toast.LENGTH_SHORT).show();
+                                        if (hasCamera() && photoTaken) {
+                                            File photoFile = new File(mPhotoPath);
+                                            Uri photoUri = Uri.fromFile(photoFile);
+                                            pathReference.delete();
+                                            StorageReference filePath = pathReferenceUpdated;
+                                            filePath.putFile(photoUri).addOnSuccessListener(
+                                                    new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                        @Override
+                                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                            Toast.makeText(EditDonationActivity.this,
+                                                                    "Updated image in storage.",
+                                                                    Toast.LENGTH_SHORT).show();
+                                                            Intent backtoLocationPageIntent =
+                                                                    new Intent(EditDonationActivity.this,
+                                                                            LocationPageActivity.class);
+                                                            backtoLocationPageIntent.putExtra("location", location);
+                                                            startActivity(backtoLocationPageIntent);
+                                                        }
+                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(EditDonationActivity.this,
+                                                            "Failed to update image in storage.",
+                                                            Toast.LENGTH_SHORT).show();
+                                                    Intent backtoLocationPageIntent = new Intent(
+                                                            EditDonationActivity.this,
+                                                            LocationPageActivity.class);
+                                                    backtoLocationPageIntent.putExtra("location", location);
+                                                    startActivity(backtoLocationPageIntent);
+                                                }
+                                            });
+                                        } else if (!nmID.equals(nmIDUpdated)) {
+                                            pathReference.getDownloadUrl()
+                                                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                        @Override
+                                                        public void onSuccess(Uri uri) {
+                                                            pathReferenceUpdated.putFile(uri);
+                                                            pathReference.delete();
+                                                        }
+                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(EditDonationActivity.this,
+                                                            "Failed to retrieve donation image!",
+                                                            Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        } else {
+                                            Intent backtoLocationPageIntent = new Intent(
+                                                    EditDonationActivity.this,
+                                                    LocationPageActivity.class);
+                                            backtoLocationPageIntent.putExtra("location", location);
+                                            startActivity(backtoLocationPageIntent);
+                                        }
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(EditDonationActivity.this,
+                                                "Failed to update donation in database.",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    } else {
+                        Toast.makeText(EditDonationActivity.this,
+                                "The donation you are seeking to edit does not exist!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(EditDonationActivity.this,
+                            "Failed to retrieve the donation you are seeking to edit!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     /**

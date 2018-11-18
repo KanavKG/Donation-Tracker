@@ -159,7 +159,8 @@ public class AddDonationActivity extends AppCompatActivity {
 
 
 
-        final String nmID = name.replaceAll("\\s+","") + "_" + location.getName().replaceAll("\\s+","");
+        final String nmID = name.replaceAll("\\s+","") +
+                "_" + location.getName().replaceAll("\\s+","");
 
         db.collection("donations")
                 .document(nmID)

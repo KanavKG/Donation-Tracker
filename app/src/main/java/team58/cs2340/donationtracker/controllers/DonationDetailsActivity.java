@@ -91,10 +91,10 @@ public class DonationDetailsActivity extends AppCompatActivity {
         String time = "Time Stamp: " + donation.getTimeStamp();
         timeStamp.setText(time);
 
-        String imgName = donation.getName();
-        imgName.replaceAll("\\s+","");
+        final String nmID = donation.getName().replaceAll("\\s+","") +
+                "_" + donation.getLocation().replaceAll("\\s+","");
 
-        StorageReference pathReference = mStorageRef.child("donationImages/" + imgName);
+        StorageReference pathReference = mStorageRef.child("donationImages/" + nmID);
 
         try {
             final File localFile = File.createTempFile("donationImages", "jpg");
