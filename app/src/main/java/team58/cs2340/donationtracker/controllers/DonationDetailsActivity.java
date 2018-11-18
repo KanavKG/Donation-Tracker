@@ -91,8 +91,8 @@ public class DonationDetailsActivity extends AppCompatActivity {
         String time = "Time Stamp: " + donation.getTimeStamp();
         timeStamp.setText(time);
 
-        final String nmID = donation.getName().replaceAll("\\s+","") +
-                "_" + donation.getLocation().replaceAll("\\s+","");
+        final String nmID = donation.getName().replaceAll("[&\\s+]","") +
+                "_" + donation.getLocation().replaceAll("[&\\s+]","");
 
         StorageReference pathReference = mStorageRef.child("donationImages/" + nmID);
 

@@ -110,8 +110,8 @@ public class EditDonationActivity extends AppCompatActivity {
         int catSpinnerPos = categoryArrayAdapter.getPosition(donation.getCategory());
         categorySpinner.setSelection(catSpinnerPos);
 
-        nmID = donation.getName().replaceAll("\\s+","") +
-                "_" + donation.getLocation().replaceAll("\\s+","");
+        nmID = donation.getName().replaceAll("[&\\s+]","") +
+                "_" + donation.getLocation().replaceAll("[&\\s+]","");
 
         pathReference = mStorageRef.child("donationImages/" + nmID);
 
@@ -239,8 +239,8 @@ public class EditDonationActivity extends AppCompatActivity {
         String comment = this.comment.getText().toString();
         final Date[] donationTS = new Date[1];
 
-        final String nmIDUpdated = name.replaceAll("\\s+","") +
-                "_" + location.getName().replaceAll("\\s+","");
+        final String nmIDUpdated = name.replaceAll("[&\\s+]","") +
+                "_" + location.getName().replaceAll("[&\\s+]","");
 
         if (name.isEmpty()) {
             nameTxt.setError("Item name is required!");
@@ -336,6 +336,11 @@ public class EditDonationActivity extends AppCompatActivity {
                                                         public void onSuccess(Uri uri) {
                                                             pathReferenceUpdated.putFile(uri);
                                                             pathReference.delete();
+                                                            Intent backtoLocationPageIntent = new Intent(
+                                                                    EditDonationActivity.this,
+                                                                    LocationPageActivity.class);
+                                                            backtoLocationPageIntent.putExtra("location", location);
+                                                            startActivity(backtoLocationPageIntent);
                                                         }
                                                     }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
