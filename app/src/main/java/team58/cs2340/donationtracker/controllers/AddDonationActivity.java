@@ -157,7 +157,68 @@ public class AddDonationActivity extends AppCompatActivity {
         donation.put("comment", comment);
         donation.put("timestamp", FieldValue.serverTimestamp());
 
+
+
+        final String nmID = name.replaceAll("\\s+","") + "_" + location.getName().replaceAll("\\s+","");
+
         db.collection("donations")
+                .document(nmID)
+                .set(donation)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(AddDonationActivity.this,
+                                "Added donation to database.",
+                                Toast.LENGTH_SHORT).show();
+                        if (hasCamera()) {
+                            File photoFile = new File(mPhotoPath);
+                            Uri photoUri = Uri.fromFile(photoFile);
+                            StorageReference filePath =mStorage.child("donationImages").child(nmID);
+                            filePath.putFile(photoUri).addOnSuccessListener(
+                                    new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            Toast.makeText(AddDonationActivity.this,
+                                                    "Added image to storage.",
+                                                    Toast.LENGTH_SHORT).show();
+                                            Intent backtoLocationPageIntent =
+                                                    new Intent(AddDonationActivity.this,
+                                                            LocationPageActivity.class);
+                                            backtoLocationPageIntent.putExtra("location", location);
+                                            startActivity(backtoLocationPageIntent);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(AddDonationActivity.this,
+                                            "Failed to add image to storage.",
+                                            Toast.LENGTH_SHORT).show();
+                                    Intent backtoLocationPageIntent = new Intent(
+                                            AddDonationActivity.this,
+                                            LocationPageActivity.class);
+                                    backtoLocationPageIntent.putExtra("location", location);
+                                    startActivity(backtoLocationPageIntent);
+                                }
+                            });
+                        } else {
+                            Intent backtoLocationPageIntent = new Intent(
+                                    AddDonationActivity.this,
+                                    LocationPageActivity.class);
+                            backtoLocationPageIntent.putExtra("location", location);
+                            startActivity(backtoLocationPageIntent);
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AddDonationActivity.this,
+                                "Failed to add donation to database.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        /*db.collection("donations")
                 .add(donation)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -168,8 +229,7 @@ public class AddDonationActivity extends AppCompatActivity {
                         if (hasCamera()) {
                             File photoFile = new File(mPhotoPath);
                             Uri photoUri = Uri.fromFile(photoFile);
-                            name.replaceAll("\\s+","");
-                            StorageReference filePath =mStorage.child("donationImages").child(name);
+                            StorageReference filePath =mStorage.child("donationImages").child(nmID);
                             filePath.putFile(photoUri).addOnSuccessListener(
                                     new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
@@ -212,7 +272,7 @@ public class AddDonationActivity extends AppCompatActivity {
                                 "Failed to add donation to database.",
                                 Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
     }
 
     /**

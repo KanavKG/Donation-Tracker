@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -65,6 +67,7 @@ public class EditDonationActivity extends AppCompatActivity {
         Button takePhoto = findViewById(R.id.takePhotoBtn);
         this.photoView = findViewById(R.id.photo);
         StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         //Disable button if user has no camera
         if (!hasCamera()) {
@@ -91,6 +94,7 @@ public class EditDonationActivity extends AppCompatActivity {
         imgName.replaceAll("\\s+","");
 
         StorageReference pathReference = mStorageRef.child("donationImages/" + imgName);
+        //DocumentReference donationRef  = db.collection("donations").document(UID);
 
         try {
             final File localFile = File.createTempFile("donationImages", "jpg");

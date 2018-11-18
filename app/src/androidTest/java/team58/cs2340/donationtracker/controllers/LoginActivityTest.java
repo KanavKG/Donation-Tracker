@@ -35,7 +35,7 @@ public class LoginActivityTest {
     private final int TIMEOUT = 2000;
 
     @Rule
-    private final ActivityTestRule<LoginActivity> mActivityRule
+    public final ActivityTestRule<LoginActivity> mActivityRule
             = new ActivityTestRule<>(LoginActivity.class);
 
     /**
