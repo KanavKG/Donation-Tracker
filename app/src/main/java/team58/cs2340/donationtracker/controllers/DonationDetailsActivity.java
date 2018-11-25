@@ -102,7 +102,9 @@ public class DonationDetailsActivity extends AppCompatActivity {
                     new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    donationImage = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = 8;
+                    donationImage = BitmapFactory.decodeFile(localFile.getAbsolutePath(), options);
                     photoView.setImageBitmap(donationImage);
                 }
             }).addOnFailureListener(new OnFailureListener() {

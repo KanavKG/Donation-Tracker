@@ -334,13 +334,28 @@ public class EditDonationActivity extends AppCompatActivity {
                                                     .addOnSuccessListener(new OnSuccessListener<Uri>() {
                                                         @Override
                                                         public void onSuccess(Uri uri) {
-                                                            pathReferenceUpdated.putFile(uri);
-                                                            pathReference.delete();
-                                                            Intent backtoLocationPageIntent = new Intent(
-                                                                    EditDonationActivity.this,
-                                                                    LocationPageActivity.class);
-                                                            backtoLocationPageIntent.putExtra("location", location);
-                                                            startActivity(backtoLocationPageIntent);
+                                                            pathReferenceUpdated.putFile(uri)
+                                                                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                                        @Override
+                                                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                                            pathReference.delete();
+                                                                            Intent backtoLocationPageIntent = new Intent(
+                                                                                    EditDonationActivity.this,
+                                                                                    LocationPageActivity.class);
+                                                                            backtoLocationPageIntent.putExtra("location", location);
+                                                                            startActivity(backtoLocationPageIntent);
+                                                                        }
+                                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    pathReference.delete();
+                                                                    Intent backtoLocationPageIntent = new Intent(
+                                                                            EditDonationActivity.this,
+                                                                            LocationPageActivity.class);
+                                                                    backtoLocationPageIntent.putExtra("location", location);
+                                                                    startActivity(backtoLocationPageIntent);
+                                                                }
+                                                            });
                                                         }
                                                     }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
