@@ -78,6 +78,7 @@ public class EditDonationActivity extends AppCompatActivity {
         LocationsLocal locationManager = LocationsLocal.getInstance();
         CurrUserLocal userManager = CurrUserLocal.getInstance();
         this.nameTxt = findViewById(R.id.name);
+        nameTxt.setEnabled(false);
         this.locationSpinner = findViewById(R.id.locationSpinner);
         this.shortDescription = findViewById(R.id.shortDescription);
         this.fullDescription = findViewById(R.id.fullDescription);
@@ -220,6 +221,7 @@ public class EditDonationActivity extends AppCompatActivity {
                         Toast.makeText(EditDonationActivity.this,
                                 "Donation deleted!",
                                 Toast.LENGTH_SHORT).show();
+                        pathReference.delete();
                         Intent backtoLocationPageIntent = new Intent(
                                 EditDonationActivity.this,
                                 LocationPageActivity.class);
@@ -230,7 +232,6 @@ public class EditDonationActivity extends AppCompatActivity {
     }
 
     public void onEditClicked(View view) {
-        final String name = this.nameTxt.getText().toString();
         final Location location = (Location) locationSpinner.getSelectedItem();
         final Double value = Donation.getValue(this.value.getText().toString());
         final String shortDescription = this.shortDescription.getText().toString();
@@ -239,14 +240,6 @@ public class EditDonationActivity extends AppCompatActivity {
         String comment = this.comment.getText().toString();
         final Date[] donationTS = new Date[1];
 
-        final String nmIDUpdated = name.replaceAll("[&\\s+]","") +
-                "_" + location.getName().replaceAll("[&\\s+]","");
-
-        if (name.isEmpty()) {
-            nameTxt.setError("Item name is required!");
-            nameTxt.requestFocus();
-            return;
-        }
         if (this.value.getText().toString().isEmpty()) {
             this.value.setError("Value cannot be empty!");
             this.value.requestFocus();
@@ -278,7 +271,7 @@ public class EditDonationActivity extends AppCompatActivity {
                         donationTS[0] = document.getDate("timestamp");
                         db.collection("donations").document(nmID).delete();
                         final Map<String, Object> donationUpdated = new HashMap<>();
-                        donationUpdated.put("name", name);
+                        donationUpdated.put("name", nameTxt.getText().toString());
                         donationUpdated.put("location", location.getName());
                         donationUpdated.put("value", Double.toString(value));
                         donationUpdated.put("shortDescription", shortDescription);
@@ -287,10 +280,8 @@ public class EditDonationActivity extends AppCompatActivity {
                         donationUpdated.put("comment", finalComment);
                         donationUpdated.put("timestamp", donationTS[0]);
 
-                        final StorageReference pathReferenceUpdated = mStorageRef.child("donationImages/" + nmIDUpdated);
-
                         db.collection("donations")
-                                .document(nmIDUpdated)
+                                .document(nmID)
                                 .set(donationUpdated)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -301,8 +292,7 @@ public class EditDonationActivity extends AppCompatActivity {
                                         if (hasCamera() && photoTaken) {
                                             File photoFile = new File(mPhotoPath);
                                             Uri photoUri = Uri.fromFile(photoFile);
-                                            pathReference.delete();
-                                            StorageReference filePath = pathReferenceUpdated;
+                                            StorageReference filePath = pathReference;
                                             filePath.putFile(photoUri).addOnSuccessListener(
                                                     new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                                         @Override
@@ -327,42 +317,6 @@ public class EditDonationActivity extends AppCompatActivity {
                                                             LocationPageActivity.class);
                                                     backtoLocationPageIntent.putExtra("location", location);
                                                     startActivity(backtoLocationPageIntent);
-                                                }
-                                            });
-                                        } else if (!nmID.equals(nmIDUpdated)) {
-                                            pathReference.getDownloadUrl()
-                                                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                                        @Override
-                                                        public void onSuccess(Uri uri) {
-                                                            pathReferenceUpdated.putFile(uri)
-                                                                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                                                        @Override
-                                                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                                            pathReference.delete();
-                                                                            Intent backtoLocationPageIntent = new Intent(
-                                                                                    EditDonationActivity.this,
-                                                                                    LocationPageActivity.class);
-                                                                            backtoLocationPageIntent.putExtra("location", location);
-                                                                            startActivity(backtoLocationPageIntent);
-                                                                        }
-                                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                                @Override
-                                                                public void onFailure(@NonNull Exception e) {
-                                                                    pathReference.delete();
-                                                                    Intent backtoLocationPageIntent = new Intent(
-                                                                            EditDonationActivity.this,
-                                                                            LocationPageActivity.class);
-                                                                    backtoLocationPageIntent.putExtra("location", location);
-                                                                    startActivity(backtoLocationPageIntent);
-                                                                }
-                                                            });
-                                                        }
-                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(EditDonationActivity.this,
-                                                            "Failed to retrieve donation image!",
-                                                            Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                         } else {
