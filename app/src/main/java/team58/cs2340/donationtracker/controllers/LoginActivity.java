@@ -10,9 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -57,8 +60,9 @@ public class LoginActivity extends AppCompatActivity {
         switch (id) {
             case R.id.login:
                 v.clearFocus();
-                String useremail = email.getText().toString().trim();
-                String userpass = password.getText().toString().trim();
+                final String useremail = email.getText().toString().trim();
+                final String userpass = password.getText().toString().trim();
+                final int[] unsuccessfulLoginAttempts = new int[1];
 
                 if (useremail.isEmpty()) {
                     email.setError("Email is required!");
@@ -83,55 +87,85 @@ public class LoginActivity extends AppCompatActivity {
                     password.requestFocus();
                     return;
                 }
-                mAuth.signInWithEmailAndPassword(useremail, userpass).
-                        addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this,"Sign in successful! :)",
-                                    Toast.LENGTH_SHORT).show();
-                            db.collection("users")
-                                    .whereEqualTo("UID", Objects.requireNonNull(
-                                            FirebaseAuth.getInstance().getCurrentUser()).getUid())
-                                    .get()
-                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            if (task.isSuccessful()) {
-                                                for (DocumentSnapshot d : Objects.requireNonNull(
-                                                        task.getResult())) {
-                                                    if ("Location Employee".equals(
-                                                            d.getString("role"))) {
-                                                        userManager.setCurrentUser(
-                                                                new User(d.getString(
-                                                                "first"),
-                                                                        d.getString("last"),
-                                                                Role.fromString(
-                                                                        d.getString("role")),
-                                                                d.getString("location")));
-                                                    } else {
-                                                        userManager.setCurrentUser(new User());
+
+                final DocumentReference userRef = db.collection(
+                        "users").document(useremail);
+
+                userRef.get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot d = task.getResult();
+                                    if ("Location Employee".equals(
+                                            d.getString("role"))) {
+                                        userManager.setCurrentUser(
+                                                new User(d.getString(
+                                                        "first"),
+                                                        d.getString("last"),
+                                                        Role.fromString(
+                                                                d.getString("role")),
+                                                        d.getString("location")));
+                                    } else {
+                                        userManager.setCurrentUser(new User());
+                                    }
+                                    unsuccessfulLoginAttempts[0] = Objects.requireNonNull(d.getLong(
+                                            "unsuccessfulLoginAttempts")).intValue();
+                                    if (unsuccessfulLoginAttempts[0] > 2) {
+                                        Toast.makeText(LoginActivity.this,
+                                                "Too many incorrect attempts! \n Account locked :(",
+                                                Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        mAuth.signInWithEmailAndPassword(useremail, userpass).
+                                                addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                                        if (task.isSuccessful()) {
+                                                            Toast.makeText(LoginActivity.this,"Sign in successful! :)",
+                                                                    Toast.LENGTH_SHORT).show();
+                                                            userManager.setCurrentUser(new User());
+                                                            Intent intent = new Intent(LoginActivity.this,
+                                                                    HomeScreenActivity.class);
+                                                            startActivity(intent);
+                                                        } else {
+                                                            userRef.update("unsuccessfulLoginAttempts",
+                                                                    unsuccessfulLoginAttempts[0] + 1)
+                                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                        @Override
+                                                                        public void onSuccess(Void aVoid) {
+                                                                            if (unsuccessfulLoginAttempts[0] == 0) {
+                                                                                Toast.makeText(LoginActivity.this,
+                                                                                        "Login unsuccessful! :( \n You have 2" +
+                                                                                                " more tries!",
+                                                                                        Toast.LENGTH_SHORT).show();
+                                                                            } else if (unsuccessfulLoginAttempts[0] == 1) {
+                                                                                Toast.makeText(LoginActivity.this,
+                                                                                        "Login unsuccessful! :( \n You have 1" +
+                                                                                                " more try!",
+                                                                                        Toast.LENGTH_SHORT).show();
+                                                                            }
+                                                                        }
+                                                                    })
+                                                                    .addOnFailureListener(new OnFailureListener() {
+                                                                        @Override
+                                                                        public void onFailure(@NonNull Exception e) {
+                                                                            Toast.makeText(LoginActivity.this,
+                                                                                    e.getMessage(),
+                                                                                    Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    });
+                                                        }
                                                     }
-                                                }
-                                            } else {
-                                                Toast.makeText(LoginActivity.this,
-                                                        Objects.requireNonNull(
-                                                        task.getException()).getMessage(),
-                                                        Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-                            userManager.setCurrentUser(new User());
-                            Intent intent = new Intent(LoginActivity.this,
-                                    HomeScreenActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(LoginActivity.this,
-                                    "Login unsuccessful! :(",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                                                });
+                                    }
+                                } else {
+                                    Toast.makeText(LoginActivity.this,
+                                            Objects.requireNonNull(
+                                                    task.getException()).getMessage(),
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                 break;
         }
     }

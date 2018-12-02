@@ -33,7 +33,6 @@ public class User {
      * Empty user constructor for login activity
      */
     public User() {
-
     }
 
     /**

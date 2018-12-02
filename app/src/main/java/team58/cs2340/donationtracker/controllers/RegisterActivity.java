@@ -95,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity
         final Location location = (roleSpinner.getSelectedItem() == Role.LOCATIONEMPLOYEE) ?
                 (Location) locationSpinner.getSelectedItem() : null;
 
-        String useremail = email.getText().toString().trim();
+        final String useremail = email.getText().toString().trim();
         String userpass = password.getText().toString().trim();
 
         if (useremail.isEmpty()) {
@@ -159,17 +159,37 @@ public class RegisterActivity extends AppCompatActivity
                             user.put("first", userfirst);
                             user.put("last", userlast);
                             user.put("role", roleSpinner.getSelectedItem().toString());
+                            user.put("unsuccessfulLoginAttempts", 0);
                             if (roleSpinner.getSelectedItem() == Role.LOCATIONEMPLOYEE) {
                                 assert location != null;
                                 user.put("location", location.getName());
                             }
 
-                            db.collection("users")
+                            /*db.collection("users")
                                     .add(user)
                                     .addOnSuccessListener(
                                             new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
+                                            Toast.makeText(RegisterActivity.this,
+                                                    "Added user to database.",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(RegisterActivity.this,
+                                                    "Failed to add user to database.",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    });*/
+                            db.collection("users")
+                                    .document(useremail)
+                                    .set(user)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
                                             Toast.makeText(RegisterActivity.this,
                                                     "Added user to database.",
                                                     Toast.LENGTH_SHORT).show();
