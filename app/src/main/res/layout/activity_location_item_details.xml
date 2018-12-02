@@ -29,7 +29,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="189dp"
+        android:layout_height="221dp"
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="251dp"
@@ -69,12 +69,14 @@
         android:layout_marginBottom="355dp" />
 
     <Button
-        android:id="@+id/editBtn"
+        android:id="@+id/directions"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="4dp"
-        android:text="Edit" />
+        android:layout_height="35dp"
+        android:layout_alignBottom="@+id/mapFrag"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-309dp"
+        android:background="@color/colorPrimary"
+        android:text="Directions"
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
+
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,20 @@ public class LoginActivity extends AppCompatActivity {
         this.mAuth = FirebaseAuth.getInstance();
         this.userManager = CurrUserLocal.getInstance();
         this.db = FirebaseFirestore.getInstance();
+
+        Button guestBtn = findViewById(R.id.guest);
+
+        guestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginActivity.this,"Sign in successful! :)",
+                        Toast.LENGTH_SHORT).show();
+                userManager.setCurrentUser(new User());
+                Intent intent = new Intent(LoginActivity.this,
+                        HomeScreenActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

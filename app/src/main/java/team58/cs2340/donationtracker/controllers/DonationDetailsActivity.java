@@ -3,6 +3,7 @@ package team58.cs2340.donationtracker.controllers;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.LightingColorFilter;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,6 +54,8 @@ public class DonationDetailsActivity extends AppCompatActivity {
         StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
         TextView catTxt = findViewById(R.id.category);
 
+        final Button request = findViewById(R.id.request);
+
         Intent intent = getIntent();
         final Donation donation  = (Donation) intent.getSerializableExtra("donation");
         final Serializable locationExtra  = intent.getSerializableExtra("location");
@@ -73,6 +76,21 @@ public class DonationDetailsActivity extends AppCompatActivity {
             });
         } else {
             editBtn.setVisibility(View.GONE);
+        }
+
+        if (((userManager.getCurrentUserRole() != Role.USER))) {
+            request.setVisibility(View.VISIBLE);
+            request.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    request.setText("Requested");
+                    request.getBackground()
+                            .setColorFilter(new LightingColorFilter(
+                                    0xFFFFFFFF, 0xFFAA0000));
+                }
+            });
+        } else {
+            request.setVisibility(View.GONE);
         }
 
         final Category cat = donation.getCategory();
