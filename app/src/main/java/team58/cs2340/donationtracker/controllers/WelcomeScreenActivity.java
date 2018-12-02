@@ -33,6 +33,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         locationManager = LocationsLocal.getInstance();
         db = FirebaseFirestore.getInstance();
         readLocationData();
+
     }
 
     /**

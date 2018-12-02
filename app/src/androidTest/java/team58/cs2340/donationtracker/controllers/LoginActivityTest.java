@@ -29,7 +29,7 @@ import team58.cs2340.donationtracker.R;
  * @author Saahil Yechuri
  */
 public class LoginActivityTest {
-    private final String validUsername = "probator@test.app";
+    private final String validUsername = "testuser@test.app";
     private final String validPassword = "password";
 
     private final int TIMEOUT = 2000;

@@ -35,6 +35,8 @@ public class DonationDetailsActivity extends AppCompatActivity {
 
     private ImageView photoView;
     private Bitmap donationImage;
+    private Donation donation;
+    private int iconID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,7 @@ public class DonationDetailsActivity extends AppCompatActivity {
         final Button request = findViewById(R.id.request);
 
         Intent intent = getIntent();
-        final Donation donation  = (Donation) intent.getSerializableExtra("donation");
+        donation  = (Donation) intent.getSerializableExtra("donation");
         final Serializable locationExtra  = intent.getSerializableExtra("location");
 
         //assert userManager.getCurrentUser() != null;
@@ -130,43 +132,46 @@ public class DonationDetailsActivity extends AppCompatActivity {
                 public void onFailure(@NonNull Exception e) {
                     switch (cat) {
                         case APPLIANCES:
-                            photoView.setImageResource(R.drawable.ic_1appliances);
+                            iconID = R.drawable.ic_1appliances;
                             break;
                         case BABY:
-                            photoView.setImageResource(R.drawable.ic_1baby);
+                            iconID = R.drawable.ic_1baby;
                             break;
                         case BAGSANDACCESSORIES:
-                            photoView.setImageResource(R.drawable.ic_1bags);
+                            iconID = R.drawable.ic_1bags;
                             break;
                         case BOOKSANDMUSIC:
-                            photoView.setImageResource(R.drawable.ic_1books);
+                            iconID = R.drawable.ic_1books;
                             break;
                         case CLOTHING:
-                            photoView.setImageResource(R.drawable.ic_1clothing);
+                            iconID = R.drawable.ic_1clothing;
                             break;
                         case ELECTRONICS:
-                            photoView.setImageResource(R.drawable.ic_1electronics);
+                            iconID = R.drawable.ic_1electronics;
                             break;
                         case FOOD:
-                            photoView.setImageResource(R.drawable.ic_1food);
+                            iconID = R.drawable.ic_1food;
                             break;
                         case FURNITURE:
-                            photoView.setImageResource(R.drawable.ic_1furniture);
+                            iconID = R.drawable.ic_1furniture;
                             break;
                         case MOVIESANDGAMES:
-                            photoView.setImageResource(R.drawable.ic_1movie);
+                            iconID = R.drawable.ic_1movie;
                             break;
                         case SPORTSANDOUTDOORS:
                             photoView.setImageResource(R.drawable.ic_1sports);
                             break;
                         case TOYS:
-                            photoView.setImageResource(R.drawable.ic_1toys);
+                            iconID = R.drawable.ic_1toys;
                             break;
                     }
+                    photoView.setImageResource(iconID);
                 }
             });
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }
+
