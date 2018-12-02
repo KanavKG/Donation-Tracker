@@ -74,7 +74,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
                                         d.getString("streetAddress"),
                                         d.getString("city"), d.getString("state"),
                                         d.getString("zip"),
-                                        LocationType.fromString(d.getString("type")),
+                                        LocationType.Companion.fromString(d.getString("type")),
                                         d.getString("phone"),
                                         d.getString("website"));
                                 if(!locationManager.getLocations().contains(loc)) {

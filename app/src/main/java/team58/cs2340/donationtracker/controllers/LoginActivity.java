@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 new User(d.getString(
                                                         "first"),
                                                         d.getString("last"),
-                                                        Role.fromString(
+                                                        Role.Companion.fromString(
                                                                 d.getString("role")),
                                                         d.getString("location")));
                                     } else {

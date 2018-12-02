@@ -16,7 +16,7 @@ public class RoleTest {
      */
     @Test
     public void testNull() {
-        assertNull("Null string fails", Role.fromString(null));
+        assertNull("Null string fails", Role.Companion.fromString(null));
     }
 
     /**
@@ -24,7 +24,7 @@ public class RoleTest {
      */
     @Test
     public void testInvalid() {
-        assertNull("Invalid string fails", Role.fromString("cabbage"));
+        assertNull("Invalid string fails", Role.Companion.fromString("cabbage"));
     }
 
     /**
@@ -32,7 +32,7 @@ public class RoleTest {
      */
     @Test
     public void testUser() {
-        assertEquals("Correct output for User", Role.USER, Role.fromString("User"));
+        assertEquals("Correct output for User", Role.USER, Role.Companion.fromString("User"));
     }
 
     /**
@@ -41,7 +41,7 @@ public class RoleTest {
     @Test
     public void testLocationEmployee() {
         assertEquals("Correct output for Location Employee", Role.LOCATIONEMPLOYEE,
-                Role.fromString("Location Employee"));
+                Role.Companion.fromString("Location Employee"));
     }
 
     /**
@@ -49,7 +49,7 @@ public class RoleTest {
      */
     @Test
     public void testAdmin() {
-        assertEquals("Correct output for Admin", Role.ADMIN, Role.fromString("Admin"));
+        assertEquals("Correct output for Admin", Role.ADMIN, Role.Companion.fromString("Admin"));
     }
 
 }

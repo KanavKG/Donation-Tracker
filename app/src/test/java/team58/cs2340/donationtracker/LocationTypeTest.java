@@ -19,7 +19,7 @@ public class LocationTypeTest {
      */
     @Test
     public void testNull() {
-        assertNull("Null string fails", LocationType.fromString(null));
+        assertNull("Null string fails", LocationType.Companion.fromString(null));
     }
 
     /**
@@ -27,7 +27,7 @@ public class LocationTypeTest {
      */
     @Test
     public void testInvalid() {
-        assertNull("Invalid string fails", LocationType.fromString("nowhere"));
+        assertNull("Invalid string fails", LocationType.Companion.fromString("nowhere"));
     }
 
     /**
@@ -35,7 +35,7 @@ public class LocationTypeTest {
      */
     @Test
     public void testDropOff() {
-        assertEquals("Correct output for Drop off", LocationType.DROPOFF, LocationType.fromString("Drop Off"));
+        assertEquals("Correct output for Drop off", LocationType.DROPOFF, LocationType.Companion.fromString("Drop Off"));
     }
 
     /**
@@ -44,7 +44,7 @@ public class LocationTypeTest {
     @Test
     public void testStore() {
         assertEquals("Correct output for Store", LocationType.STORE,
-                LocationType.fromString("Store"));
+                LocationType.Companion.fromString("Store"));
     }
 
     /**
@@ -52,6 +52,6 @@ public class LocationTypeTest {
      */
     @Test
     public void testWarehouse() {
-        assertEquals("Correct output for Warehouse", LocationType.WAREHOUSE, LocationType.fromString("Warehouse"));
+        assertEquals("Correct output for Warehouse", LocationType.WAREHOUSE, LocationType.Companion.fromString("Warehouse"));
     }
 }
