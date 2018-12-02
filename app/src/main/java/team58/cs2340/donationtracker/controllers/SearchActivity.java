@@ -109,7 +109,7 @@ public class SearchActivity extends AppCompatActivity {
                                                 Double.parseDouble(d.getString("value")),
                                                 d.getString("shortDescription"),
                                                 d.getString("fullDescription"),
-                                                Category.fromString(d.getString("category")),
+                                                Category.Companion.fromString(d.getString("category")),
                                                 d.getString("comment"));
                                         donationsQueryResults.add(donation);
                                     }
@@ -176,7 +176,7 @@ public class SearchActivity extends AppCompatActivity {
                                                 Double.parseDouble(d.getString("value")),
                                                 d.getString("shortDescription"),
                                                 d.getString("fullDescription"),
-                                                Category.fromString(d.getString("category")),
+                                                Category.Companion.fromString(d.getString("category")),
                                                 d.getString("comment"));
                                         donationsQueryResults.add(donation);
                                     }
@@ -243,7 +243,7 @@ public class SearchActivity extends AppCompatActivity {
                                                 Double.parseDouble(d.getString("value")),
                                                 d.getString("shortDescription"),
                                                 d.getString("fullDescription"),
-                                                Category.fromString(d.getString("category")),
+                                                Category.Companion.fromString(d.getString("category")),
                                                 d.getString("comment"));
                                         donationsQueryResults.add(donation);
                                     }
@@ -311,7 +311,7 @@ public class SearchActivity extends AppCompatActivity {
                                                 Double.parseDouble(d.getString("value")),
                                                 d.getString("shortDescription"),
                                                 d.getString("fullDescription"),
-                                                Category.fromString(d.getString("category")),
+                                                Category.Companion.fromString(d.getString("category")),
                                                 d.getString("comment"));
                                         donationsQueryResults.add(donation);
                                     }

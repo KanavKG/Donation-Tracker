@@ -50,6 +50,35 @@ public class LocationPageActivity extends AppCompatActivity {
 
         donationListView = findViewById(R.id.donationList);
 
+        Button addItem = findViewById(R.id.addItemBtn);
+        assert userManager.getCurrentUser() != null;
+        if (((userManager.getCurrentUserRole() == Role.LOCATIONEMPLOYEE) && userManager.
+                getCurrentUser().getLocation().equals(location.getName()))) {
+            addItem.setVisibility(View.VISIBLE);
+            addItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent addItemIntent = new Intent(
+                            LocationPageActivity.this, AddDonationActivity.class);
+                    addItemIntent.putExtra("location", location);
+                    startActivity(addItemIntent);
+                }
+            });
+        } else {
+            addItem.setVisibility(View.GONE);
+        }
+
+        Button locationDetails = findViewById(R.id.locationDetailsBtn);
+        locationDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent detailsIntent = new Intent(
+                        LocationPageActivity.this, LocationDetailsActivity.class);
+                detailsIntent.putExtra("location", location);
+                startActivity(detailsIntent);
+            }
+        });
+
         db.collection("donations")
                 .whereEqualTo("location", location.getName())
                 .get()
@@ -65,7 +94,7 @@ public class LocationPageActivity extends AppCompatActivity {
                                                 d.getString("value")),
                                         d.getString("shortDescription"),
                                         d.getString("fullDescription"),
-                                        Category.fromString(d.getString(
+                                        Category.Companion.fromString(d.getString(
                                                 "category")), d.getString("comment"));
                                 donationsAtLocation.add(donation);
                                 ListAdapter locationAdapter = new DonationListAdapter(
@@ -96,36 +125,6 @@ public class LocationPageActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-        Button addItem = findViewById(R.id.addItemBtn);
-        assert userManager.getCurrentUser() != null;
-        if (((userManager.getCurrentUserRole() == Role.LOCATIONEMPLOYEE) && userManager.
-                getCurrentUser().getLocation().equals(location.getName()))) {
-            addItem.setVisibility(View.VISIBLE);
-            addItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent addItemIntent = new Intent(
-                            LocationPageActivity.this, AddDonationActivity.class);
-                    addItemIntent.putExtra("location", location);
-                    startActivity(addItemIntent);
-                }
-            });
-        } else {
-            addItem.setVisibility(View.GONE);
-        }
-
-        Button locationDetails = findViewById(R.id.locationDetailsBtn);
-        locationDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent detailsIntent = new Intent(
-                        LocationPageActivity.this, LocationDetailsActivity.class);
-                detailsIntent.putExtra("location", location);
-                startActivity(detailsIntent);
-            }
-        });
-
     }
 
     @Override

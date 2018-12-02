@@ -138,7 +138,6 @@ public class LoginActivity extends AppCompatActivity {
                                                         if (task.isSuccessful()) {
                                                             Toast.makeText(LoginActivity.this,"Sign in successful! :)",
                                                                     Toast.LENGTH_SHORT).show();
-                                                            userManager.setCurrentUser(new User());
                                                             Intent intent = new Intent(LoginActivity.this,
                                                                     HomeScreenActivity.class);
                                                             startActivity(intent);

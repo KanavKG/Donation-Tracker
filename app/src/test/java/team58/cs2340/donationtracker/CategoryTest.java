@@ -16,7 +16,7 @@ public class CategoryTest {
      */
     @Test
     public void testNull() {
-        assertNull("Null string fails", Category.fromString(null));
+        assertNull("Null string fails", Category.Companion.fromString(null));
     }
 
     /**
@@ -24,7 +24,7 @@ public class CategoryTest {
      */
     @Test
     public void testInvalid() {
-        assertNull("Invalid string fails", Category.fromString("potato"));
+        assertNull("Invalid string fails", Category.Companion.fromString("potato"));
     }
 
     /**
@@ -33,7 +33,7 @@ public class CategoryTest {
     @Test
     public void testAppliances() {
         assertEquals("Correct output for Appliances",
-                Category.APPLIANCES, Category.fromString("Appliances"));
+                Category.APPLIANCES, Category.Companion.fromString("Appliances"));
     }
 
     /**
@@ -41,7 +41,7 @@ public class CategoryTest {
      */
     @Test
     public void testBaby() {
-        assertEquals("Correct output for Baby",Category.BABY, Category.fromString("Baby"));
+        assertEquals("Correct output for Baby",Category.BABY, Category.Companion.fromString("Baby"));
     }
 
     /**
@@ -50,7 +50,7 @@ public class CategoryTest {
     @Test
     public void testBagsAndAccessories() {
         assertEquals("Correct output for Bags and Accessories",
-                Category.BAGSANDACCESSORIES, Category.fromString("Bags and Accessories"));
+                Category.BAGSANDACCESSORIES, Category.Companion.fromString("Bags and Accessories"));
     }
 
     /**
@@ -59,7 +59,7 @@ public class CategoryTest {
     @Test
     public void testBooksAndMusic() {
         assertEquals("Correct output for Books and Music",
-                Category.BOOKSANDMUSIC, Category.fromString("Books and Music"));
+                Category.BOOKSANDMUSIC, Category.Companion.fromString("Books and Music"));
     }
 
     /**
@@ -68,7 +68,7 @@ public class CategoryTest {
     @Test
     public void testClothing() {
         assertEquals("Correct output for Clothing",
-                Category.CLOTHING, Category.fromString("Clothing"));
+                Category.CLOTHING, Category.Companion.fromString("Clothing"));
     }
 
     /**
@@ -76,7 +76,7 @@ public class CategoryTest {
      */
     @Test
     public void testElectronics() {
-        assertEquals("Empty string fails",Category.ELECTRONICS, Category.fromString("Electronics"));
+        assertEquals("Empty string fails",Category.ELECTRONICS, Category.Companion.fromString("Electronics"));
     }
 
     /**
@@ -84,7 +84,7 @@ public class CategoryTest {
      */
     @Test
     public void testFood() {
-        assertEquals("Correct output for Food",Category.FOOD, Category.fromString("Food"));
+        assertEquals("Correct output for Food",Category.FOOD, Category.Companion.fromString("Food"));
     }
 
     /**
@@ -93,7 +93,7 @@ public class CategoryTest {
     @Test
     public void testFurniture() {
         assertEquals("Correct output for Furniture",
-                Category.FURNITURE, Category.fromString("Furniture"));
+                Category.FURNITURE, Category.Companion.fromString("Furniture"));
     }
 
     /**
@@ -102,7 +102,7 @@ public class CategoryTest {
     @Test
     public void testMoviesAndGames() {
         assertEquals("Correct output for Movies and Games",
-                Category.MOVIESANDGAMES, Category.fromString("Movies and Games"));
+                Category.MOVIESANDGAMES, Category.Companion.fromString("Movies and Games"));
     }
 
     /**
@@ -111,7 +111,7 @@ public class CategoryTest {
     @Test
     public void testSportsAndOutdoors() {
         assertEquals("Correct output for Sports and Outdoors",
-                Category.SPORTSANDOUTDOORS, Category.fromString("Sports and Outdoors"));
+                Category.SPORTSANDOUTDOORS, Category.Companion.fromString("Sports and Outdoors"));
     }
 
     /**
@@ -120,7 +120,7 @@ public class CategoryTest {
     @Test
     public void testToys() {
         assertEquals("Correct output for Toys",
-                Category.TOYS, Category.fromString("Toys"));
+                Category.TOYS, Category.Companion.fromString("Toys"));
     }
 
 }

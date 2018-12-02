@@ -80,7 +80,7 @@ public class DonationDetailsActivity extends AppCompatActivity {
             editBtn.setVisibility(View.GONE);
         }
 
-        if (((userManager.getCurrentUserRole() != Role.USER))) {
+        if (((userManager.getCurrentUserRole() == Role.USER))) {
             request.setVisibility(View.VISIBLE);
             request.setOnClickListener(new View.OnClickListener() {
                 @Override
