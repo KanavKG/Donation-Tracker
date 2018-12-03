@@ -10,6 +10,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,6 +33,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import team58.cs2340.donationtracker.models.Role;
@@ -38,10 +52,15 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private CurrUserLocal userManager;
     private FirebaseFirestore db;
+    private GoogleSignInClient mGoogleSignInClient;
+    private static final int RC_SIGN_IN = 0;
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_login);
 
         this.email = findViewById(R.id.email);
@@ -49,8 +68,54 @@ public class LoginActivity extends AppCompatActivity {
         this.mAuth = FirebaseAuth.getInstance();
         this.userManager = CurrUserLocal.getInstance();
         this.db = FirebaseFirestore.getInstance();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        callbackManager = CallbackManager.Factory.create();
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+        List<String> permissionNeeds = Arrays.asList("user_photos", "email",
+                "user_birthday", "public_profile");
+        loginButton.setReadPermissions(permissionNeeds);
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>()
+        {
+            @Override
+            public void onSuccess(LoginResult loginResult)
+            {
+                Toast.makeText(LoginActivity.this,"Sign in successful! :)"
+                        , Toast.LENGTH_SHORT).show();
+                userManager.setCurrentUser(new User());
+                Intent intent = new Intent(LoginActivity.this,
+                        HomeScreenActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancel()
+            {
+                Toast.makeText(LoginActivity.this,
+                        "Cancelled Login",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(FacebookException exception)
+            {
+                Toast.makeText(LoginActivity.this,
+                        "Login unsuccessful! :(",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Button guestBtn = findViewById(R.id.guest);
+        SignInButton gSignInButton = findViewById(R.id.sign_in_button);
+        gSignInButton.setSize(SignInButton.SIZE_STANDARD);
+        gSignInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
 
         guestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,14 +177,15 @@ public class LoginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if (task.isSuccessful()) {
                                     DocumentSnapshot d = task.getResult();
+                                    assert d != null;
                                     if ("Location Employee".equals(
                                             d.getString("role"))) {
                                         userManager.setCurrentUser(
-                                                new User(d.getString(
-                                                        "first"),
-                                                        d.getString("last"),
-                                                        Role.Companion.fromString(
-                                                                d.getString("role")),
+                                                new User(Objects.requireNonNull(d.getString(
+                                                        "first")),
+                                                        Objects.requireNonNull(d.getString("last")),
+                                                        Objects.requireNonNull(Role.Companion.fromString(
+                                                                Objects.requireNonNull(d.getString("role")))),
                                                         d.getString("location")));
                                     } else {
                                         userManager.setCurrentUser(new User());
@@ -181,6 +247,44 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
                 break;
+        }
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+
+            Toast.makeText(LoginActivity.this,"Signed in as "
+                            + account.getEmail() + " :)", Toast.LENGTH_SHORT).show();
+            userManager.setCurrentUser(new User());
+            Intent intent = new Intent(LoginActivity.this,
+                    HomeScreenActivity.class);
+            startActivity(intent);
+
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Toast.makeText(LoginActivity.this,
+                    "Login unsuccessful! :(",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
