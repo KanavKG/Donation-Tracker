@@ -68,6 +68,15 @@ public class LoginActivity extends AppCompatActivity {
         this.mAuth = FirebaseAuth.getInstance();
         this.userManager = CurrUserLocal.getInstance();
         this.db = FirebaseFirestore.getInstance();
+
+        TextView resetPass = findViewById(R.id.forgotPasswordTxt);
+        resetPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,
+                        PasswordResetActivity.class));
+            }
+        });
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
