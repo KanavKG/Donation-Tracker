@@ -97,6 +97,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".controllers.PasswordResetActivity" />
+        <activity android:name=".controllers.FeedbackActivity" />
     </application>
 
 </manifest>
